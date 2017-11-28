@@ -3,6 +3,10 @@ a {
     color: inherit;
 }
 
+h1 {
+    color: #fff;
+}
+
 body {
     margin: 0;
     font-family: 'Tangerine', serif;
