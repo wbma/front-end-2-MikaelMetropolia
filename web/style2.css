@@ -3,10 +3,6 @@ a {
     color: inherit;
 }
 
-h1 {
-    color: #fff;
-}
-
 body {
     margin: 0;
     font-family: 'Tangerine', serif;
@@ -185,8 +181,17 @@ ul.sub-menu {
     background: rgba(85, 85, 85,.6);
 }
 
+.start-box {
+    position: relative;
+    left: 5%;
+    top: 20px;
+    border-radius: 25px;
+    background-color: #000;
+    background: rgba(85, 85, 85,.6);
+}
+
 .signup {
-    width: 50%;
+    width: 50%:
     height: 500px;
     position: relative;
 }
@@ -248,7 +253,7 @@ input[type=submit] {
     position: absolute;
     right: 25.2%;
     font-size: 28px;
-    width: 40px;
+    width: 140px;
     border: 1px solid white;
     background-color: transparent;
     color: white;
@@ -265,20 +270,49 @@ input[type=submit] {
 
 #wrapperhome {
     display: flex;
-
 }
+
+#wrapperstart {
+     display: flex;
+ }
+
 
 #loginleft{
     flex: 0 0 50%;
     height: 700px;
 }
+
 #signupright{
     flex: 1;
 }
 
 #hometextbox {
+    margin-left: 0;
+    padding-left: 0;
     flex: 0 0 80%;
     height: 650px;
+}
+
+#start-text-box {
+    flex-flow: column;
+    flex: 0 0 90%;
+    height: 650px;
+}
+
+#start-box-1 {
+    margin: 15px 0 0 15px;
+    height: 7%;
+    font-size: 35px;
+    color: white;
+}
+#start-box-2 {
+    height: 90%;
+    border: 1px solid white;
+    text-align: center;
+    color: #fff;
+    font-size: 50px;
+    overflow: hidden;
+
 }
 
 #hometextbox h1 {
@@ -303,34 +337,59 @@ input[type=submit] {
   text-shadow: 4px 4px 3px rgba(0,0,0,0.1);
 }
 
-
-
-
-
-
-
-
-
-
-@media only screen  and (max-width : 1840px) {
-    nav li {
-        margin-left: 40px;
-    }
-
-    #firstnav::before {
-        content: '';
-        display: block;
-        height: 1px;
-        background-color: #fff;
-        position: absolute;
-        width: 276%;
-        top: 51px;
-    }
+#start-navi-bar {
+    flex: 0 0 auto;
+    margin-left: 5%;
+    width: 70%;
+    height: 10%;
+    margin-top: 20px;
+    background: rgba(85, 85, 85,.6);
+    border: 0.2em solid gba(85, 85, 85,.6);
+    border-radius: 0.5em 0.5em 0.5em 0.5em;
 }
 
-@media only screen  and (max-width : 1662px) {
-  .logo {
-    left: 250px;
-  }
+.learn-piano {
+    display: inline-block;
+    font-size: 30px;
+    color: #fff;
+    padding-right: 5%;
+    margin-top: 0%;
+    cursor: pointer;
 }
 
+.learn-piano:nth-child(n+1) {
+    padding-right: 3%;
+    padding-left: 3%;
+}
+
+.learn-piano > p {
+    margin-bottom: 5%;
+    margin-top: 4%;
+}
+
+.learn-piano:hover {
+    background: #242830;
+}
+
+.learn-piano:hover:nth-child(1) {
+    border-radius: 0.3em 0 0 0.3em;
+    background: #242830;
+}
+
+
+
+
+
+
+
+@media only screen  and (min-width : 1285px) {
+#start-navi-bar {
+    width: 900px;
+}
+
+.learn-piano:nth-child(n+1) {
+    padding-right: 5%;
+    padding-left: 5%;
+}
+
+}

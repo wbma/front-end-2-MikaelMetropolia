@@ -1,0 +1,363 @@
+a {
+    text-decoration:none;
+    color: inherit;
+}
+
+body {
+    margin: 0;
+    font-family: 'Tangerine', serif;
+    font-weight: 400;
+    background-image: url("loginbackground.jpg");
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.nav-wrapper {
+    display: flex;
+    background-color: #000;
+}
+
+.nav-button  {
+   flex: 0 0 8%;
+   height: 100px;
+}
+
+.nav-button > li > img  {
+    min-width: 0;
+}
+
+.banner  {
+   flex: 0 0 30%;
+   height: 100px;
+}
+
+.banner img  {
+    margin-top: 20px;
+}
+
+#search-bar  {
+   margin-left: 1%;
+   flex: 0 0 50%;
+   height: 100px;
+   white-space: nowrap;
+   overflow: hidden;
+}
+
+#search-bar > input,
+#search-bar > button {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.log-in-icon  {
+   color: #fff;
+   flex: 0 0 10%;
+   height: 100px;
+}
+
+.log-in-icon > a > img {
+    margin-top: 13%;
+}
+
+ul.sub-menu {
+    font: 400 100px/1.2 'Merienda One', Helvetica, sans-serif;
+    color: rgba(0,0,0,0.7);
+    text-shadow: 3px 3px 3px #fff;
+    z-index: 1;
+    font-size: 35px;
+    color: #fff;
+    list-style-type: none;
+    position: absolute;
+    background-color: #000;
+    width: 250px;
+    padding-left: 0px;
+    margin-left: -100px;
+    margin-top: 100px;
+    display: none;
+}
+
+
+.sub-menu li {
+    border-top: 1px solid #fff;
+    padding-left: 0px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.subsubmenu {
+    list-style-type: none;
+    display: none;
+}
+
+.subsubmenu li {
+    font-size: 40px;
+    border-top: none;
+    padding-left: 25px;
+    background-color: #000;
+    margin-left: 100%;
+    width: 300px;
+}
+
+#beginner {
+    margin-top: -110px;
+}
+
+#difficulty:hover .subsubmenu {
+    display: inline;
+}
+
+#difficulty {
+    height: 40px;
+}
+
+#sub-menu-last {
+    border-bottom: 1px solid #fff;
+}
+
+.nav-button:hover .sub-menu {
+    display: inline;
+}
+
+
+
+.search-box-wrapper {
+    display: inline-flex;
+    font-size: 30px;
+}
+
+.search-box-input {
+    white-space: nowrap;
+    overflow: hidden;
+    min-width: 0;
+    width: 20em;
+    font-size: inherit;
+    border: 0.2em solid #4e535b;
+    border-radius: 0.5em 0 0 0.5em;
+    padding: 0.2em 0.5em;
+    outline: 0;
+    background-color: #4e535b;
+}
+
+.search-box-input:hover,
+.search-box-input:focus {
+    border-color: #4e535b;
+}
+
+.search-box-button {
+    font-size: inherit;
+    border: 0.2em solid #4e535b;
+    border-radius: 0 0.5em 0.5em 0;
+    background-color: #4e535b;
+    border-left: 0;
+    padding: 0.04em 0.15em 0.2em 0.75em;
+    color: #ddd;
+    font-weight: bold;
+    outline: 0;
+    cursor: pointer;
+}
+
+.search-box-button:hover,
+.search-box-button:focus {
+    border-color: #4e535b;
+    background-color: #4e535b;
+}
+
+.login {
+    width: 50%;
+    height: 500px;
+    border-right: 1px solid white;
+    position: relative;
+    margin: 0 auto;
+    }
+
+.home {
+    position: relative;
+    left: 10%;
+    top: 50px;
+    border-radius: 25px;
+    background-color: #000;
+    background: rgba(85, 85, 85,.6);
+}
+
+.signup {
+    width: 50%:
+    height: 500px;
+    position: relative;
+}
+
+.container a:hover {
+    background-color: grey;
+}
+
+.sign {
+      border: 1px solid white;
+      padding: 12px;
+}
+
+#loginleft {
+    text-align: center;
+}
+
+#signupright {
+    text-align: center;
+}
+
+.login h1 {
+    position: relative;
+    right: 18.3%;
+    color: #fff;
+    text-decoration: none;
+    font-size: 50px;
+    margin-top: 100px;
+    margin-bottom: 5px;
+ }
+
+ .signup h1 {
+     position: relative;
+     right: 17%;
+     color: #fff;
+     text-decoration: none;
+     font-size: 50px;
+     margin-top: 100px;
+     margin-bottom: 5px;
+  }
+
+.inputfield {
+    position: relative;
+    font-family: 'Tangerine', serif;
+    color: #000;
+    font-size: 30px;
+    width: 50%;
+    height: 50px;
+    padding: 12px 20px;
+    margin: 10px 0;
+    display: inline-block;
+    border: transparent;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+input[type=submit] {
+    position: absolute;
+    right: 25.2%;
+    font-size: 28px;
+    width: 40px;
+    border: 1px solid white;
+    background-color: transparent;
+    color: white;
+    padding: 14px 20px;
+    margin: 10px 0;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: 'Tangerine', serif;
+}
+
+#wrapper {
+    display: flex;
+}
+
+#wrapperhome {
+    display: flex;
+
+}
+
+#loginleft{
+    flex: 0 0 50%;
+    height: 700px;
+}
+
+#signupright{
+    flex: 1;
+}
+
+#hometextbox {
+    flex: 0 0 80%;
+    height: 650px;
+}
+
+#hometextbox h1 {
+    text-align: center;
+    font-size: 60px;
+    color: white;
+    font-weight: 100;
+    margin-top: 50px;
+}
+
+#hometextbox h2 {
+    text-align: center;
+    font-size: 40px;
+    color: white;
+    font-weight: 100;
+    margin-top: 40px;
+}
+
+#hometextbox h1, h2 {
+  font: 400 130px/0.8 'Great Vibes', Helvetica, sans-serif;
+  color: #fff;
+  text-shadow: 4px 4px 3px rgba(0,0,0,0.1);
+}
+
+
+
+#start-wrapper {
+    display: flex;
+}
+
+#start-navi-bar {
+    margin-left: 5%;
+    flex: 0 1 auto;
+    height: 40px;
+    margin-top: 40px;
+    background: rgba(85, 85, 85,.6);
+    border: 0.2em solid gba(85, 85, 85,.6);
+    border-radius: 0.5em 0.5em 0.5em 0.5em;
+}
+
+
+#start-navi-bar > ul {
+    margin-top: 5px;
+}
+
+#start-navi-bar > ul > li {
+    display: inline-block;
+    font-size: 30px;
+    color: #fff;
+    text-align: left;
+    padding-right: 10%;
+}
+
+#start-navi-bar > ul > li:hover {
+    background: rgba(85, 85, 85,.2);
+}
+
+
+
+
+
+
+
+@media only screen  and (max-width : 1840px) {
+    nav li {
+        margin-left: 40px;
+    }
+
+    #firstnav::before {
+        content: '';
+        display: block;
+        height: 1px;
+        background-color: #fff;
+        position: absolute;
+        width: 276%;
+        top: 51px;
+    }
+}
+
+@media only screen  and (max-width : 1662px) {
+  .logo {
+    left: 250px;
+  }
+}
+
