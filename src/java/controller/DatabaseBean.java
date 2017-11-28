@@ -4,6 +4,7 @@ package controller;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import model.User;
 
@@ -17,10 +18,7 @@ public class DatabaseBean {
     @PersistenceContext
     private EntityManager em; // mediates between RestfulDbService and DatabaseBean (what about 'User'? doesn't it use that as well?)
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
-    
-    public List<User> getAll() {
+    public List<User> getAllUsers() {
 
         return em.createNamedQuery("User.findAll").getResultList();
     }
@@ -30,17 +28,37 @@ public class DatabaseBean {
        return (User)em.createNamedQuery("User.findById").setParameter("id", id).getResultList().get(0);
    }
     
-    public User insert(User u) {
+    public User insertToDb(User u) {
        
-        em.persist(u); // insert user object into database
+        em.persist(u); // insert user object into database (auto-picks the correct table based on object type ??)
         return u;
     }
     
-    public void update(User u){
+    public void updateDbEntry(User u){
         
         em.merge(u); // replace existing user entry in the db with the updated one (?)
     }
     
+    // delete user from the database (hopefully...)
+    public void deleteFromDb(User u) {
+        
+        em.createNamedQuery("User.deleteUser").setParameter("id", u.getId()).getResultList().get(0);
+    }
     
+    // checks whether a user with a certain stat (name, email, etc) exists in the User database and returns it
+    // NOTE: use a big initial letter in 'stat' for this to work!
+    public User findByX(String stat, String arg) {
     
-}
+        User u = null;
+        
+        try {
+            u = (User)em.createNamedQuery("User.findBy"+stat).setParameter(stat.toLowerCase(), arg).getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+        
+            return u;
+        
+    } // end findByX()
+      
+} // end class

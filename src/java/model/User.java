@@ -28,7 +28,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email")
     , @NamedQuery(name = "User.findByAlias", query = "SELECT u FROM User u WHERE u.alias = :alias")
     , @NamedQuery(name = "User.findByPw", query = "SELECT u FROM User u WHERE u.pw = :pw")
-    , @NamedQuery(name = "User.findByAdmin", query = "SELECT u FROM User u WHERE u.admin = :admin")})
+    , @NamedQuery(name = "User.findByAdmin", query = "SELECT u FROM User u WHERE u.admin = :admin")
+    , @NamedQuery(name = "User.deleteUser", query = "DELETE FROM User u WHERE u.id = :id")})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -61,19 +62,14 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(Integer id) {
-        this.id = id;
-    }
-
-    public User(Integer id, String email, String alias, String pw, int admin) {
-        this.id = id;
+    public User(String email, String alias, String pw, int admin) {
         this.email = email;
         this.alias = alias;
         this.pw = pw;
         this.admin = admin;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -132,7 +128,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "model.User[ id=" + id + " ]";
+        return "model.User[ id=" + id + " ]\n" + "model.User[ email=" + email + " ]\n" + "model.User[ alias=" + alias + " ]\n" + "model.User[ pw=" + pw + " ]\n";
     }
     
-}
+} // end class
