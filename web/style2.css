@@ -11,7 +11,7 @@ body {
     margin: 0;
     font-family: 'Tangerine', serif;
     font-weight: 400;
-    background-image: url("resources/loginbackground.jpg");
+    background-image: url("loginbackground.jpg");
     background-repeat: no-repeat;
     background-position: right top;
     background-attachment: fixed;
