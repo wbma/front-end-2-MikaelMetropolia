@@ -24,8 +24,13 @@ public class DatabaseBean {
     }
     
    public User findById(int id) {
-   
-       return (User)em.createNamedQuery("User.findById").setParameter("id", id).getResultList().get(0);
+      
+       try { 
+            User u = (User)em.createNamedQuery("User.findById").setParameter("id", id).getSingleResult();
+            return u;
+        } catch (NoResultException e) {
+            return null;
+        }
    }
     
     public User insertToDb(User u) {
@@ -48,17 +53,13 @@ public class DatabaseBean {
     // checks whether a user with a certain stat (name, email, etc) exists in the User database and returns it
     // NOTE: use a big initial letter in 'stat' for this to work!
     public User findByX(String stat, String arg) {
-    
-        User u = null;
         
         try {
-            u = (User)em.createNamedQuery("User.findBy"+stat).setParameter(stat.toLowerCase(), arg).getSingleResult();
+            User u = (User)em.createNamedQuery("User.findBy"+stat).setParameter(stat.toLowerCase(), arg).getSingleResult();         
+            return u;
         } catch (NoResultException e) {
             return null;
-        }
-        
-            return u;
-        
+        }    
     } // end findByX()
       
 } // end class

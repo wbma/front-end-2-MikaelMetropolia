@@ -37,7 +37,7 @@ public class RestfulDbService {
     }
     
     // ===========================================================================================================================
-    // USER-RELATED METHODS
+    // USER-TABLE METHODS
     
     // get all User database entries
     @GET
@@ -90,10 +90,11 @@ public class RestfulDbService {
         
         if (notNull(u) && (u.getPw().equals(pw))) {
             
-            // TODO: send the result somewhere. New stateful SessionBean ?? currentUser = u; ??
             // TODO: since you are now logged in, alter the login/register page to contain only 'logout' button
             userBean.setCurrentUser(u);
-            return u; // correct username and pw    
+            return u; // correct username and pw  
+            // OR: return Response.ok().entity(u).build(); <-- catch this in fetch on the client?? or just a String that says 'logged in'?? then alter the site based on login status?
+            // return "ok"; //  @Produces(MediaType.TEXT_PLAIN) ?? 
         } 
         else if (notNull(u) && !(u.getPw().equals(pw))) {
         
@@ -111,7 +112,7 @@ public class RestfulDbService {
     @Produces(MediaType.APPLICATION_JSON)
     public void removeOwnUser(@FormParam("removeOwnUser") int id) { // how do we call it without parameters? Without them, only 'POST' can be specified
         
-        // TODO: logout. HOW ??
+        // TODO: logout. HOW ?? via return value caught in fetch ??
         // TODO: send a msg to the user that they've removed their account   
         dbBean.deleteFromDb(userBean.getCurrentUser()); // delete user from db
         userBean.setCurrentUser(null); // remove user from session 'memory'.... hopefully
@@ -120,7 +121,7 @@ public class RestfulDbService {
     @POST
     @Path("RemoveAnyUser")
     @Produces(MediaType.APPLICATION_JSON)
-    public void removeAnyUser(@FormParam("removeThisUser") String alias) {
+    public void removeAnyUser(@FormParam("userToRemove") String alias) {
            
         dbBean.deleteFromDb(dbBean.findByX("Alias", alias)); // delete user from db
         // TODO: restrict deletion rights by admin status (superadmin can delete anyone, admins only regular users)
@@ -128,8 +129,8 @@ public class RestfulDbService {
         if (alias.equals(userBean.getCurrentUser().getAlias())) { // if it's own user
 
             userBean.setCurrentUser(null); // remove user from session 'memory'.... hopefully
-            // TODO: logout if it's your own user. HOW ??
-            // TODO: send a msg to the user that they've removed their account (if it's their own acc)
+            // TODO: logout if it's your own user. HOW ?? via return value caught in fetch ??
+            // TODO: send a msg to the user that they've removed their account (if it's their own acc). trigger baed on Json caught in fetch ??
         }
     }
     
@@ -216,7 +217,7 @@ public class RestfulDbService {
         User u = dbBean.findByX("Alias", alias);    
         u.setAdmin(0);
         dbBean.updateDbEntry(u); // update the db with the change
-        return u;
+        return u; // does it automatically turn the User into a json object ???
     }
     
     // This shouldn't be needed... It's more of an internal operation to find users by id.
@@ -230,6 +231,15 @@ public class RestfulDbService {
         return u;
     }
     
+    // ===========================================================================================================================
+    // COMPOSITION-TABLE methods
+    
+    
+    
+    
+    
+    
+    
     
     // ===========================================================================================================================
     // HELPER METHODS (etc)
@@ -241,4 +251,4 @@ public class RestfulDbService {
     }
     
     
-}
+} // end class
