@@ -57,8 +57,47 @@ body {
    height: 100px;
 }
 
-.log-in-icon > a > img {
+.log-in-icon > a > .log-in-img {
     margin-top: 13%;
+}
+
+.log-in-icon > .img-circle {
+    border-radius: 50%;
+    margin-top: 13%;
+    width: 70%;
+    height: 70%;
+    margin: 15px 10px 10px 10px;
+    cursor: pointer;
+}
+
+ul .pepe-menu {
+   padding-left: 10px;
+   margin-top: 0px;
+}
+
+ #pepe-menu-id {
+    display: none;
+}
+
+.pepe-menu li {
+    position: relative;
+    height: 40px;
+    width: 100%
+    color: #fff;
+    list-style-type: none;
+    font-size: 30px;
+    text-align: center;
+    background-color: #000;
+    border: 1px solid #fff;
+    z-index: 2;
+}
+
+.pepe-menu li:nth-child(n+2) {
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    border-top: 0px;
+
 }
 
 ul.sub-menu {
@@ -191,7 +230,7 @@ ul.sub-menu {
 }
 
 .signup {
-    width: 50%;
+    width: 50%:
     height: 500px;
     position: relative;
 }
@@ -276,6 +315,10 @@ input[type=submit] {
      display: flex;
  }
 
+ #profile-wrapper {
+      display: flex;
+  }
+
 
 #loginleft{
     flex: 0 0 50%;
@@ -349,6 +392,7 @@ input[type=submit] {
 }
 
 .learn-piano {
+    user-select: none;
     display: inline-block;
     font-size: 30px;
     color: #fff;
@@ -376,6 +420,73 @@ input[type=submit] {
     background: #242830;
 }
 
+.right {
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 6px;
+    margin-bottom: 2px;
+    transform:rotate(-45deg);
+}
+
+#uploads,
+#uploads2,
+#uploads3,
+#uploads4 {
+    user-select: none;
+    cursor: pointer;
+}
+
+#profile-features > li {
+    font-size: 35px;
+    color: #fff;
+    list-style-type: none;
+    margin-top: 50px;
+    border-bottom: 1px solid #fff;
+}
+
+.compositions-submenu {
+    display: none;
+}
+.compositions-submenu > li {
+    user-select: auto;
+    list-style-type: none;
+    padding-top: 5px;
+}
+
+#left-side {
+    flex: 0 0 35%;
+    height: 700px;
+}
+
+#right-side {
+    flex: 0 0 65%;
+    height: 700px;
+}
+
+#left-side > h1 {
+    text-align: center;
+    color: #fff;
+    font-size: 50px;
+}
+
+#left-side > img {
+    width: 50%;
+    height: 30%;
+    margin-left: 25%;
+    border: 2px solid #fff;
+}
+
+#left-side > p {
+    display: inline-block;
+    font-weight: 100;
+    margin-left: 25%;
+    color: #fff;
+    font-size: 30px;
+    border-bottom: 2px solid #fff;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
 
 
 
