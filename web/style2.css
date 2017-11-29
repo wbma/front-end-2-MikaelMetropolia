@@ -68,6 +68,7 @@ body {
     height: 70%;
     margin: 15px 10px 10px 10px;
     cursor: pointer;
+    border: 2px solid #ffd700;
 }
 
 ul .pepe-menu {
@@ -82,7 +83,7 @@ ul .pepe-menu {
 .pepe-menu li {
     position: relative;
     height: 40px;
-    width: 100%
+    width: 100%;
     color: #fff;
     list-style-type: none;
     font-size: 30px;
@@ -90,6 +91,10 @@ ul .pepe-menu {
     background-color: #000;
     border: 1px solid #fff;
     z-index: 2;
+}
+
+.pepe-menu li:hover {
+    background-color: #28364c;
 }
 
 .pepe-menu li:nth-child(n+2) {
@@ -230,7 +235,7 @@ ul.sub-menu {
 }
 
 .signup {
-    width: 50%:
+    width: 50%;
     height: 500px;
     position: relative;
 }
@@ -272,7 +277,7 @@ ul.sub-menu {
      margin-bottom: 5px;
   }
 
-.inputfield {
+#wrapper .inputfield {
     position: relative;
     font-family: 'Tangerine', serif;
     color: #000;
@@ -288,7 +293,8 @@ ul.sub-menu {
     background: rgba(255, 255, 255, 0.2);
 }
 
-input[type=submit] {
+.signup input[type=submit],
+.login input[type=submit] {
     position: absolute;
     right: 25.2%;
     font-size: 28px;
@@ -303,22 +309,48 @@ input[type=submit] {
     font-family: 'Tangerine', serif;
 }
 
-#wrapper {
+#wrapper,
+#wrapperhome,
+#wrapperstart,
+#profile-wrapper,
+#wrapper-upload {
     display: flex;
 }
 
-#wrapperhome {
+#upload-box{
     display: flex;
+    flex-wrap: wrap;
+    margin-left: 12.5%;
+    flex: 0 0 75%;
+    height: 700px;
 }
 
-#wrapperstart {
-     display: flex;
+#upload-left{
+    flex: 0 0 50%;
+    height: 80%;
  }
 
- #profile-wrapper {
-      display: flex;
+#upload-right{
+    flex: 0 0 50%;
+    height: 80%;
   }
 
+#upload-title{
+    flex: 0 0 100%;
+    height: 20%;
+    font-weight: 100;
+    text-align: center;
+}
+
+#upload-header{
+    display: inline-block;
+    border-bottom: 2px solid #fff;
+    margin-top: 50px;
+    color: #fff;
+    font-size: 50px;
+    font-weight: 100;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
 
 #loginleft{
     flex: 0 0 50%;
@@ -487,10 +519,73 @@ input[type=submit] {
     margin-top: 1%;
     margin-bottom: 1%;
 }
+.upload-form input[type=submit] {
+    position: absolute;
+    font-size: 28px;
+    width: 140px;
+    border: 2px solid white;
+    background-color: transparent;
+    color: white;
+    padding: 14px 20px;
+    margin: 10px 0;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: 'Tangerine', serif;
+    right: 14%;
+}
+.upload-form input[type=submit]:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+#upload-left .inputfield,
+#upload-right .inputfield {
+    font-family: 'Tangerine', serif;
+    color: #000;
+    font-size: 30px;
+    padding: 12px 20px;
+    margin: 20px 0;
+    margin-left: 5%;
+    margin-right: 5%;
+    display: inline-block;
+    border: transparent;
+    border-radius: 8px;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.2);
+    width: 90%;
+}
+#sheet-form {
+    width: 70%;
+    font-family: 'Tangerine', serif;
+    color: #000;
+    font-size: 30px;
+    padding: 12px 20px;
+    margin: 20px 0;
+    margin-left: 5%;
+    margin-right: 2%;
+    display: inline-block;
+    border: transparent;
+    border-radius: 8px;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.2);
+}
 
 
+#hint {
+    color: #fff;
+    text-align: right;
+    font-size: 30px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+    font: 100 40px/0.8 'Great Vibes', Helvetica, sans-serif;
+    color: rgba(200,200,200,0.9);
+    text-shadow: 1px 1px 1px #fff;
+    margin-right: 10%;
+}
 
-
+.upload-file {
+    width: 15%;
+    padding-right: 4%;
+}
 
 
 @media only screen  and (min-width : 1285px) {
@@ -502,5 +597,14 @@ input[type=submit] {
     padding-right: 5%;
     padding-left: 5%;
 }
+}
 
+@media only screen  and (max-width : 813px) {
+#upload-box {
+    height: 900px;
+}
+}
+
+.logo {
+    
 }
