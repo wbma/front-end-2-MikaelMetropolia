@@ -21,7 +21,7 @@ var dropElement4 = document.getElementById('dropdown4');
 var myElement = document.querySelector("#pepe-menu-id");
 
 var button3 = document.getElementById("uploads");
-var button4 = document.getElementById("uploads2");
+const button4 = document.getElementById("uploads2");
 var button5 = document.getElementById("uploads3");
 var button6 = document.getElementById("uploads4");
 var pepeButton = document.getElementById("pepe");
@@ -42,7 +42,7 @@ button3.onclick = function () {
     }
 }
 
-button4.onclick = function () {
+button4.addEventListener('click', () => {
     if (right2 == 'rotate(-45deg)' || right2 == 'matrix(0.707107, -0.707107, 0.707107, 0.707107, 0, 0)' ) {
         element2.style.transform = "rotate(45deg)";
         dropElement2.style.display = "inline";
@@ -54,21 +54,25 @@ button4.onclick = function () {
         right2 = 'rotate(-45deg)';
         console.log('Arrow up');
     }
-}
+});
 
-button5.onclick = function () {
-    if (right3 == 'rotate(-45deg)' || right3 == 'matrix(0.707107, -0.707107, 0.707107, 0.707107, 0, 0)' ) {
-        element3.style.transform = "rotate(45deg)";
-        dropElement3.style.display = "inline";
-        right3 = 'rotate(45deg)';
+const piilotaValikko =  (nuoli, element, dropElement) => {
+    if (nuoli == 'rotate(-45deg)' || nuoli == 'matrix(0.707107, -0.707107, 0.707107, 0.707107, 0, 0)' ) {
+        element.style.transform = "rotate(45deg)";
+        dropElement.style.display = "inline";
+        nuoli = 'rotate(45deg)';
         console.log('Arrow down');
     } else {
-        element3.style.transform = "rotate(-45deg)";
-        dropElement3.style.display = "none";
-        right3 = 'rotate(-45deg)';
+        element.style.transform = "rotate(-45deg)";
+        dropElement.style.display = "none";
+        nuoli = 'rotate(-45deg)';
         console.log('Arrow up');
     }
 }
+
+button5.addEventListener('click', () => {
+    piilotaValikko(right3, element3, dropElement3);
+});
 
 button6.onclick = function () {
     if (right4 == 'rotate(-45deg)' || right3 == 'matrix(0.707107, -0.707107, 0.707107, 0.707107, 0, 0)' ) {
