@@ -32,8 +32,37 @@
         <div id="search-bar" class="search-box-wrapper"><input type="text" class="search-box-input">
             <button class="search-box-button"> &#128269;</button>
         </div>
-        <div class="log-in-icon"><a href="LogInPage.html"><img src="loginpic.PNG" class="log-in-img"></a></div>
+        <div class="log-in-icon"><img src="pepe.png" class="img-circle" id="pepe"></a>
+        <span class="pepe-menu" id="pepe-menu-id">
+            <li><a href="profile.html">My profile</a></li>
+            <li><a href="settings.html">Settings</a></li>
+            <li><a href="upload.html">Upload</a></li>
+            <li><a href="">Log out</a></li>
+        </span>
+        </div>
     </div>
 </header>
+
+<div id="profile-wrapper">
+    <div id="left-side">
+    <h1> 420PePeTh3Fr0g666</h1>
+    <img src="pepe.png" id="profile-img">
+        <p id="add-photo"> Update photo</p>
+        <p id="remove-photo"> Delete photo</p>
+    </div>
+    <div id="right-side-settings-wrapper">
+        <div id="right-side-settings-header">
+           <h1> Settings</h1>
+        </div>
+        <div id="right-side-settings">
+            <input type="text" class="inputfield" name="Composition-name" placeholder="Email"> <br>
+            <input type="password" class="inputfield" name="Author" placeholder="Username"> <br>
+            <input type="text" class="inputfield" name="loginUsername" placeholder="Password"> <br>
+            <input type="text" class="inputfield" name="loginUsername" placeholder="Confirm password"> <br>
+            <input type="submit" value="Save" id="save-settings"> <input type="submit" value="Cancel" id="cancel-settings">
+        </div>
+    </div>
+</div>
+<script src="settings.js"></script>
 </body>
 </html>
