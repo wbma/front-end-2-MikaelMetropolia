@@ -28,34 +28,22 @@ var pepeButton = document.getElementById("pepe");
 
 myElement.style.display = 'none';
 
-button3.onclick = function () {
-    if (right1 == 'rotate(-45deg)' || right1 == 'matrix(0.707107, -0.707107, 0.707107, 0.707107, 0, 0)' ) {
-        element.style.transform = "rotate(45deg)";
-        dropElement.style.display = "inline";
-        right1 = 'rotate(45deg)';
-        console.log('Arrow down');
-    } else {
-        element.style.transform = "rotate(-45deg)";
-        dropElement.style.display = "none";
-        right1 = 'rotate(-45deg)';
-        console.log('Arrow up');
-    }
-}
+const buttonElement = document.getElementById("test-button");
+const compList = document.getElementById('image-wrapper');
 
-button4.addEventListener('click', () => {
-    if (right2 == 'rotate(-45deg)' || right2 == 'matrix(0.707107, -0.707107, 0.707107, 0.707107, 0, 0)' ) {
-        element2.style.transform = "rotate(45deg)";
-        dropElement2.style.display = "inline";
-        right2 = 'rotate(45deg)';
-        console.log('Arrow down');
-    } else {
-        element2.style.transform = "rotate(-45deg)";
-        dropElement2.style.display = "none";
-        right2 = 'rotate(-45deg)';
-        console.log('Arrow up');
-    }
+buttonElement.addEventListener('click', () => {
+    addNewComposition ();
+}
 });
 
+const addNewComposition = () => {
+compList.innerHTML += ' <div class="composition">
+                               <div class="play-comp-title">Anh. 115 Minuet <br> J.S.Bach </div>
+                               <div class="play-comp-image"><img src="play-button.png"></div>
+                           </div>
+                       </div> ';
+
+}
 const piilotaValikko =  (nuoli, element, dropElement) => {
     if (nuoli == 'rotate(-45deg)' || nuoli == 'matrix(0.707107, -0.707107, 0.707107, 0.707107, 0, 0)' ) {
         element.style.transform = "rotate(45deg)";
@@ -73,6 +61,39 @@ const piilotaValikko =  (nuoli, element, dropElement) => {
 button5.addEventListener('click', () => {
     piilotaValikko(right3, element3, dropElement3);
 });
+
+
+
+button4.addEventListener('click', () => {
+    if (right2 == 'rotate(-45deg)' || right2 == 'matrix(0.707107, -0.707107, 0.707107, 0.707107, 0, 0)' ) {
+        element2.style.transform = "rotate(45deg)";
+        dropElement2.style.display = "inline";
+        right2 = 'rotate(45deg)';
+        console.log('Arrow down');
+    } else {
+        element2.style.transform = "rotate(-45deg)";
+        dropElement2.style.display = "none";
+        right2 = 'rotate(-45deg)';
+        console.log('Arrow up');
+    }
+});
+
+
+
+button3.onclick = function () {
+    if (right1 == 'rotate(-45deg)' || right1 == 'matrix(0.707107, -0.707107, 0.707107, 0.707107, 0, 0)' ) {
+        element.style.transform = "rotate(45deg)";
+        dropElement.style.display = "inline";
+        right1 = 'rotate(45deg)';
+        console.log('Arrow down');
+    } else {
+        element.style.transform = "rotate(-45deg)";
+        dropElement.style.display = "none";
+        right1 = 'rotate(-45deg)';
+        console.log('Arrow up');
+    }
+}
+
 
 button6.onclick = function () {
     if (right4 == 'rotate(-45deg)' || right3 == 'matrix(0.707107, -0.707107, 0.707107, 0.707107, 0, 0)' ) {
