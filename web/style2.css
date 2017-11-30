@@ -604,3 +604,9 @@ ul.sub-menu {
     height: 900px;
 }
 }
+
+@media only screen  and (max-width : 813px) {
+#upload-box {
+    height: 900px;
+}
+}
