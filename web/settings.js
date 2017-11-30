@@ -1,3 +1,4 @@
+'use strict';
 const myElement = document.querySelector("#pepe-menu-id");
 const pepeButton = document.getElementById("pepe");
 const pepeProfileImg = document.getElementById("profile-img");

@@ -1,3 +1,5 @@
+'use strict';
+
 const buttonElement2 = document.getElementById("test-button-level-2");
 const compList2 = document.getElementById('image-wrapper-2');
 

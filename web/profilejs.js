@@ -1,3 +1,5 @@
+'use strict';
+
 const element = document.getElementById('arrow1'),
 style = window.getComputedStyle(element),
 right1 = style.getPropertyValue('transform');
