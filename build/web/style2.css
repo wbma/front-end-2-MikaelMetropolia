@@ -328,12 +328,12 @@ ul.sub-menu {
 #upload-left{
     flex: 0 0 50%;
     height: 80%;
- }
+}
 
 #upload-right{
     flex: 0 0 50%;
     height: 80%;
-  }
+}
 
 #upload-title{
     flex: 0 0 100%;
@@ -603,8 +603,4 @@ ul.sub-menu {
 #upload-box {
     height: 900px;
 }
-}
-
-.logo {
-    
 }
