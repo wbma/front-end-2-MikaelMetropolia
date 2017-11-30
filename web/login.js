@@ -2,6 +2,10 @@
 
 const loginForm = document.querySelector('#loginForm');
 const signUpForm = document.querySelector('#signUpForm');
+const loginAliasInput = document.querySelector('#loginName');
+const loginPwInput = document.querySelector('#loginPw');
+
+
 
 loginForm.addEventListener("submit", function(evt) {
         evt.preventDefault();
@@ -17,12 +21,16 @@ signUpForm.addEventListener("submit", function(evt) {
 
 function login() {
     
-    const settings = { 
+    //const data = '{ "loginUsername":' + loginAliasInput.value +', "loginPassword":' + loginPwInput.value + '}';
+
+    const request = { 
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded'},
         method: 'POST',
-        credentials: 'same-origin'
+        credentials: 'same-origin',
+        body: `loginUsername=${loginAliasInput.value}&loginPassword=${loginPwInput.value}`
     };
     
-    fetch('DB/RestfulDbService/LogIn', settings).then((response) => {
+    fetch('DB/RestfulDbService/LogIn', request).then((response) => {
         return response.json();
         // TODO: need to catch a possible network error here...
     }).then((myJson) => {
