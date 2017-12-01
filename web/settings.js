@@ -11,7 +11,7 @@ const addButton = document.getElementById("add-photo");
 const saveButton = document.getElementById("save-settings");
 
 myElement.style.display = 'none';
-
+console.log(usernameInput.value);
 pepeButton.onclick = function () {
     if (myElement.style.display == 'none') {
         myElement.style.display = 'inline';
@@ -31,7 +31,7 @@ addButton.addEventListener('click', () => {
 });
 
 saveButton.addEventListener('click', () => {
-    if (usernameInput.value.length < 20) {
+    if (usernameInput.value.length < 20 && usernameInput.value != "") {
     const name = usernameInput.value;
     usernameDisplay.innerText = name;
     usernameInput.value = "";

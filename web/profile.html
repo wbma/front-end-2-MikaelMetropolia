@@ -14,17 +14,23 @@
 <header>
     <div class="nav-wrapper">
         <div class="nav-button">
-            <img src="dropdownmenuiconrofl.png" width="100" height="100">
-            <ul class="sub-menu">
-                <li><a href="Start.html">Where to start?</a></li>
-                <li><a href="profile.html"> Profile </a></li>
-                <li id="difficulty"> Difficulties
-                    <ul class="subsubmenu">
-                        <li id="beginner"><a href="Beginner.html">-Beginner</a></li>
-                        <li><a href="Intermediate.html">-Intermediate</a></li>
-                        <li><a href="Advanced.html">-Advanced</a></li>
+            <img src="dropdownmenuiconrofl.png" width="100" height="100" id="menu-button">
+            <ul class="sub-menu" id="main-menu">
+                <li><a id="sub-menu-button-1"> <i class="right" id="right"></i> Where to start? </a>
+                    <ul class="start-sub-menu" id="start-sub-menu-1">
+                        <a href="Start.html"><li class="sub-menu-1">- Piano keyboard</li></a>
+                        <a href="Start.html"><li class="sub-menu-1">- Music sheet 1</li></a>
+                        <a href="Start.html"><li class="sub-menu-1">- Music sheet 2</li></a>
                     </ul>
                 </li>
+                <li><a id="sub-menu-button-2"><i class="right" id="right2"></i> Compositions </a>
+                    <ul class="start-sub-menu" id="start-sub-menu-2">
+                        <a href="Beginner.html"> <li class="sub-menu-1">- Beginner</li></a>
+                        <a href="Intermediate.html"> <li class="sub-menu-1">- Intermediate</li></a>
+                        <a href="Advanced.html"><li class="sub-menu-1">- Advanced</li></a>
+                    </ul>
+                </li>
+                <li><a href="profile.html"> Profile </a></li>
                 <li id="sub-menu-last"><a href=""> TBD</a></li>
             </ul>
         </div>
@@ -33,7 +39,7 @@
             <button class="search-box-button"> &#128269;</button>
         </div>
         <div class="log-in-icon"><img src="pepe.png" class="img-circle" id="pepe"></a>
-        <span class="pepe-menu" id="pepe-menu-id">
+            <span class="pepe-menu" id="pepe-menu-id">
             <li><a href="profile.html">My profile</a></li>
             <li><a href="settings.html">Settings</a></li>
             <li><a href="upload.html">Upload</a></li>
@@ -52,28 +58,28 @@
     </div>
     <div id="right-side">
         <ul id="profile-features">
-            <li><span id="uploads"><i class="right" id="arrow1"></i> Uploads </span>
+            <li><span id="uploads"><i class="right" id="arrow5"></i> Uploads </span>
                 <ul class="compositions-submenu" id="dropdown">
                     <li> Song name          date time   edit delete </li>
                     <li> Song name          date time   edit delete </li>
                     <li> Song name          date time   edit delete </li>
                 </ul>
             </li>
-            <li><span id="uploads2"><i class="right" id="arrow2"></i> Favorites </span>
+            <li><span id="uploads2"><i class="right" id="arrow6"></i> Favorites </span>
                 <ul class="compositions-submenu" id="dropdown2">
                     <li> Song name          date time   edit delete </li>
                     <li> Song name          date time   edit delete </li>
                     <li> Song name          date time   edit delete </li>
                 </ul>
             </li>
-            <li><span id="uploads3"><i class="right" id="arrow3"></i> Likes</span>
+            <li><span id="uploads3"><i class="right" id="arrow7"></i> Likes</span>
                 <ul class="compositions-submenu" id="dropdown3">
                     <li> Song name          date time   edit delete </li>
                     <li> Song name          date time   edit delete </li>
                     <li> Song name          date time   edit delete </li>
                 </ul>
             </li>
-            <li><span id="uploads4"><i class="right" id="arrow4"></i> Uploads</span>
+            <li><span id="uploads4"><i class="right" id="arrow8"></i> Uploads</span>
                 <ul class="compositions-submenu" id="dropdown4">
                     <li> Song name          date time   edit delete </li>
                     <li> Song name          date time   edit delete </li>
@@ -85,5 +91,8 @@
     </div>
 </div>
 <script src="profilejs.js"></script>
+<script src="navbar.js"></script>
 </body>
 </html>
+
+

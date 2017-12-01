@@ -1,20 +1,19 @@
 'use strict';
-
-const element = document.getElementById('arrow1'),
+const element = document.getElementById('arrow5'),
 style = window.getComputedStyle(element),
-right1 = style.getPropertyValue('transform');
+right5 = style.getPropertyValue('transform');
 
-const element2 = document.getElementById('arrow2'),
+const element2 = document.getElementById('arrow6'),
 style2 = window.getComputedStyle(element2),
-right2 = style.getPropertyValue('transform');
+right6 = style.getPropertyValue('transform');
 
-const element3 = document.getElementById('arrow3'),
+const element3 = document.getElementById('arrow7'),
 style3 = window.getComputedStyle(element3),
-right3 = style.getPropertyValue('transform');
+right7 = style.getPropertyValue('transform');
 
-const element4 = document.getElementById('arrow4'),
+const element4 = document.getElementById('arrow8'),
 style4 = window.getComputedStyle(element4),
-right4 = style.getPropertyValue('transform');
+right8 = style.getPropertyValue('transform');
 
 const dropElement = document.getElementById('dropdown');
 const dropElement2 = document.getElementById('dropdown2');
@@ -31,45 +30,18 @@ const pepeButton = document.getElementById("pepe");
 myElement.style.display = 'none';
 
 button3.addEventListener('click', () => {
-    hideMenu(right1, element, dropElement);
+    hideMenu(right5, element, dropElement);
 });
 button4.addEventListener('click', () => {
-    hideMenu(right2, element2, dropElement2);
+    hideMenu(right6, element2, dropElement2);
 });
 button5.addEventListener('click', () => {
-    hideMenu(right3, element3, dropElement3);
+    hideMenu(right7, element3, dropElement3);
 });
 button6.addEventListener('click', () => {
-    hideMenu(right4, element4, dropElement4);
+    hideMenu(right8, element4, dropElement4);
 });
 
-/*
-hideMenu(right4, element4, dropElement4);
-
-var arrowState1 = 0;
-var arrowState2 = 0;
-var arrowState3 = 0;
-var arrowState4 = 0;
-
-const hideMenu =  (arrow, element, dropElement, arrowState) => {
-    console.log(arrowState);
-    if (arrowState === 0) {
-        element.style.transform = "rotate(45deg)";
-        dropElement.style.display = "inline";
-        arrowState++;
-        console.log('Arrow down');
-        console.log(arrowState);
-    } else {
-        element.style.transform = "rotate(-45deg)";
-        dropElement.style.display = "none";
-        arrowState--;
-        arrow = 'rotate(-45deg)';
-        console.log('Arrow up');
-        console.log(arrowState);
-    }
-    console.log(arrowState);
-};
-*/
 pepeButton.onclick = function () {
     if (myElement.style.display == 'none') {
         myElement.style.display = 'inline';
@@ -78,25 +50,20 @@ pepeButton.onclick = function () {
     }
 };
 
-
-
 const hideMenu =  (arrow, element, dropElement) => {
-console.log(arrow);
+        arrow = window.getComputedStyle(element).getPropertyValue('transform');
     if (arrow == 'rotate(-45deg)' || arrow == 'matrix(0.707107, -0.707107, 0.707107, 0.707107, 0, 0)') {
         element.style.transform = "rotate(45deg)";
         arrow = 'rotate (45deg)';
         dropElement.style.display = "inline";
-        console.log('Arrow down');
-        console.log(arrow);
     } else {
         element.style.transform = "rotate(-45deg)";
         dropElement.style.display = "none";
         arrow = 'rotate(-45deg)';
-        console.log('Arrow up');
-        console.log(arrow);
     }
-    console.log(arrow);
 };
+
+
 
 
 

@@ -14,6 +14,56 @@ body {
     background-size: cover;
 }
 
+.sub-menu {
+    display: table-cell;
+    position: relative;
+    -webkit-animation: slideIn 1s;
+    animation: slideIn 1s;
+    font: 400 100px/1.2 'Courier New', Helvetica, sans-serif;
+    color: rgba(0,0,0,0.7);
+    text-shadow: 3px 3px 3px #fff;
+    z-index: 1;
+    font-size: 30px;
+    color: #fff;
+    list-style-type: none;
+    position: absolute;
+    background-color: #000;
+    width: 350px;
+    padding-left: 0px;
+    margin-left: -100px;
+    margin-top: 100px;
+    display: none;
+    height: 100%;
+    padding-top: 1%;
+}
+
+
+
+.sub-menu li {
+
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+    padding-left: 30px;
+    padding-top: 5%;
+    padding-bottom: 5px;
+    cursor: pointer;
+    user-select: none;
+}
+
+
+
+.sub-menu-1:hover {
+    background-color: #4e535b;
+}
+
+.sub-menu-1 {
+    display: table-cell;
+    font-size: 20px;
+    list-style: none;
+    display: inline-block;
+    width: 89.2%;
+}
+
 .nav-wrapper {
     display: flex;
     background-color: #000;
@@ -24,9 +74,6 @@ body {
    height: 100px;
 }
 
-.nav-button > li > img  {
-    min-width: 0;
-}
 
 .banner  {
    flex: 0 0 30%;
@@ -107,69 +154,9 @@ ul .pepe-menu {
 
 }
 
-ul.sub-menu {
-    -webkit-animation: slideIn 1s;
-    animation: slideIn 1s;
-    font: 400 100px/1.2 'Merienda One', Helvetica, sans-serif;
-    color: rgba(0,0,0,0.7);
-    text-shadow: 3px 3px 3px #fff;
-    z-index: 1;
-    font-size: 35px;
-    color: #fff;
-    list-style-type: none;
-    position: absolute;
-    background-color: #000;
-    width: 250px;
-    padding-left: 0px;
-    margin-left: -100px;
-    margin-top: 100px;
-    display: none;
+#menu-button {
+    cursor: pointer;
 }
-
-
-.sub-menu li {
-    border-top: 1px solid #fff;
-    padding-left: 0px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-
-.subsubmenu {
-    list-style-type: none;
-    display: none;
-}
-
-.subsubmenu li {
-    -webkit-animation: fadeIn 1s;
-    animation: fadeIn 1s;
-    font-size: 40px;
-    border-top: none;
-    padding-left: 25px;
-    background-color: #000;
-    margin-left: 100%;
-    width: 300px;
-}
-
-#beginner {
-    margin-top: -110px;
-}
-
-#difficulty:hover .subsubmenu {
-    display: inline;
-}
-
-#difficulty {
-    height: 40px;
-}
-
-#sub-menu-last {
-    border-bottom: 1px solid #fff;
-}
-
-.nav-button:hover .sub-menu {
-    display: inline;
-}
-
 
 
 .search-box-wrapper {
@@ -425,7 +412,7 @@ ul.sub-menu {
     height: 10%;
     margin-top: 20px;
     background: rgba(85, 85, 85,.6);
-    border: 0.2em solid gba(85, 85, 85,.6);
+    border: 0.2em solid rgba(85, 85, 85,.6);
     border-radius: 0.5em 0.5em 0.5em 0.5em;
 }
 
@@ -459,7 +446,7 @@ ul.sub-menu {
 }
 
 .right {
-    border: solid white;
+    border: solid #fff;
     border-width: 0 3px 3px 0;
     display: inline-block;
     padding: 6px;
@@ -764,15 +751,14 @@ ul.sub-menu {
     cursor: pointer;
 }
 
-/* Add animation (fade in the popup) */
 @-webkit-keyframes fadeIn {
-    from {opacity: 0; height: 0;}
-    to {opacity: 1; height: 40;}
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
 
 @keyframes fadeIn {
-    from {opacity: 0; height: 0;}
-    to {opacity: 1; height: 40;}
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
 
 @-webkit-keyframes slideIn {
@@ -784,11 +770,6 @@ ul.sub-menu {
     from {opacity: 0; margin-left: -350px;}
     to {opacity: 1; margin-left: -100px;}
 }
-
-
-
-
-
 
 
 
