@@ -12,7 +12,7 @@ import javax.ws.rs.core.Application;
  *
  * @author Ville L
  */
-@javax.ws.rs.ApplicationPath("DB")
+@javax.ws.rs.ApplicationPath("App")
 public class ApplicationConfig extends Application {
 
     @Override
@@ -29,7 +29,11 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(controller.RestfulDbService.class);
+        resources.add(controller.AdminService.class);
+        resources.add(controller.CommentService.class);
+        resources.add(controller.CompService.class);
+        resources.add(controller.LoginService.class);
+        resources.add(controller.ProfileService.class);
     }
     
 }
