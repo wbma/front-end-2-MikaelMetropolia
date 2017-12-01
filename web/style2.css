@@ -81,6 +81,8 @@ ul .pepe-menu {
 }
 
 .pepe-menu li {
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
     position: relative;
     height: 40px;
     width: 100%;
@@ -106,6 +108,8 @@ ul .pepe-menu {
 }
 
 ul.sub-menu {
+    -webkit-animation: slideIn 1s;
+    animation: slideIn 1s;
     font: 400 100px/1.2 'Merienda One', Helvetica, sans-serif;
     color: rgba(0,0,0,0.7);
     text-shadow: 3px 3px 3px #fff;
@@ -136,6 +140,8 @@ ul.sub-menu {
 }
 
 .subsubmenu li {
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
     font-size: 40px;
     border-top: none;
     padding-left: 25px;
@@ -496,6 +502,46 @@ ul.sub-menu {
     height: 700px;
 }
 
+#right-side-settings-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 0 0 65%;
+    height: 700px;
+}
+
+
+#right-side-settings-header {
+    flex: 0 0 100%;
+    height: 150px;
+    text-align: center;
+    font-weight: 100;
+}
+
+#right-side-settings {
+    flex: 0 0 100%;
+    height: 550px;
+    text-align: center;
+    font-weight: 100;
+}
+
+#right-side-settings-header > h1 {
+    display: inline-block;
+    border-bottom: 2px solid #fff;
+    margin-top: 3%;
+    color: #fff;
+    font-size: 50px;
+    font-weight: 100;
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+#remove-photo {
+    cursor: pointer;
+}
+
+#add-photo {
+    cursor: pointer;
+}
+
 #left-side > h1 {
     text-align: center;
     color: #fff;
@@ -519,7 +565,8 @@ ul.sub-menu {
     margin-top: 1%;
     margin-bottom: 1%;
 }
-.upload-form input[type=submit] {
+.upload-form input[type=submit],
+#right-side-settings input[type=submit]{
     position: absolute;
     font-size: 28px;
     width: 140px;
@@ -531,14 +578,37 @@ ul.sub-menu {
     cursor: pointer;
     text-decoration: none;
     font-family: 'Tangerine', serif;
+}
+
+.upload-form input[type=submit] {
     right: 14%;
 }
-.upload-form input[type=submit]:hover {
+
+#right-side-settings input[type=submit]{
+    position: relative;
+    margin-top: 50px;
+
+}
+#save-settings {
+    position: absolute;
+    left: -10%;
+}
+
+#cancel-settings {
+    left: 10%;
+    margin: 20px;
+}
+
+
+.upload-form input[type=submit]:hover,
+#right-side-settings input[type=submit]:hover {
     background: rgba(255, 255, 255, 0.4);
 }
 
+
 #upload-left .inputfield,
-#upload-right .inputfield {
+#upload-right .inputfield,
+#right-side-settings .inputfield{
     font-family: 'Tangerine', serif;
     color: #000;
     font-size: 30px;
@@ -589,10 +659,12 @@ ul.sub-menu {
 }
 
 
-#image-wrapper {
+#image-wrapper-1,
+#image-wrapper-2,
+#image-wrapper-3
+{
     display: flex;
     flex-wrap: wrap;
-    border: 1px solid #fff;
 }
 
 #title-wrapper {
@@ -600,17 +672,27 @@ ul.sub-menu {
 }
 
 
-#title-comp {
+.title-comp {
     flex: 0 0 100%;
     height: 125px;
-    border: 1px solid #fff;
     text-align: center;
 }
 
-#title-comp > h1 {
+.title-comp > h1 {
+    user-select: none;
     color: #CD7F32;
     font: 400 70px/0.8 'Great Vibes', Helvetica, sans-serif;
     text-shadow: 1px 1px 1px #CD7F32;
+}
+
+#level-2-title {
+    color: #C0C0C0;
+    text-shadow: 1px 1px 1px #C0C0C0;
+}
+
+#level-3-title {
+    color: #ffd700;
+    text-shadow: 1px 1px 1px #ffd700;
 }
 
 .composition {
@@ -619,7 +701,6 @@ ul.sub-menu {
     margin-left: 4%;
     flex: 0 0 20%;
     height: 225px;
-    border: 1px solid #fff;
 }
 
 .fileContainer {
@@ -653,10 +734,12 @@ ul.sub-menu {
     cursor: pointer;
 }
 
-.play-comp-title {
+.play-comp-title-level-1,
+.play-comp-title-level-2,
+.play-comp-title-level-3
+ {
     flex: 0 0 100%;
     height: 35%;
-    border: 1px solid #fff;
     text-align: center;
     color: #000;
     font-size: 28px;
@@ -665,10 +748,47 @@ ul.sub-menu {
     font-family: 'Allan';
 }
 
+.play-comp-title-level-2  {
+   background: #C0C0C0;
+}
+
+.play-comp-title-level-3  {
+   background: #ffd700;
+}
+
+
+
 .play-comp-image > img {
     width: 100%;
     height: 146.25px;
+    cursor: pointer;
 }
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0; height: 0;}
+    to {opacity: 1; height: 40;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; height: 0;}
+    to {opacity: 1; height: 40;}
+}
+
+@-webkit-keyframes slideIn {
+    from {opacity: 0; margin-left: -350px;}
+    to {opacity: 1; margin-left: -100px;}
+}
+
+@keyframes slideIn {
+    from {opacity: 0; margin-left: -350px;}
+    to {opacity: 1; margin-left: -100px;}
+}
+
+
+
+
+
 
 
 
