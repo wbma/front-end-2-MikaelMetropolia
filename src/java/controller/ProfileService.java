@@ -33,68 +33,50 @@ public class ProfileService {
     
     public ProfileService() {
     }
-       
-    @POST
-    @Path("ChangeAlias")
-    @Produces(MediaType.APPLICATION_JSON)
-    public JSONObject changeAlias(@FormParam("newAlias") String newName) {
-        
-        // TODO: validate the new name
-        // TODO: admin should be able to change anyone's alias, not just their own
-        
-        int ownId = 1; // PLACEHOLDER! Needs to come from the request header!
-        
-        User u = uBean.findById(ownId); 
-        u.setAlias(newName); // set the new name for the database-stored user...
-        uBean.updateDbEntry(u); // ... and update the db with the change
-        
-         JSONObject j = new JSONObject();
-         putJson(j, "status", "loggedInNewAlias");
-         putJson(j, "alias", newName);
-         return j;
-    } // end changeAlias()
     
     @POST
-    @Path("ChangeEmail")
+    @Path("AlterUserStats")
     @Produces(MediaType.APPLICATION_JSON)
-    public JSONObject changeEmail(@FormParam("newEmail") String newEmail) {
-        
-        // TODO: validate the new email
-        // TODO: admin should be able to change anyone's email, not just their own
-        
-        int ownId = 1; // PLACEHOLDER! Needs to come from the request header!
-        
-        User u = uBean.findById(ownId); 
-        u.setEmail(newEmail); // set the new email for the database-stored user...
-        uBean.updateDbEntry(u); // ... and update the db with the change
-        
-        JSONObject j = new JSONObject();
-        putJson(j, "status", "loggedInNewEmail");
-        putJson(j, "email", newEmail);         
-        return j;
-    } // end changeEmail()
+    public JSONObject alterUserStats(
+            @FormParam("newAlias") String newName, 
+            @FormParam("newEmail") String newEmail, 
+            @FormParam("newPw") String newPw, 
+            @FormParam("newPw2") String newPw2) {
     
-    @POST
-    @Path("ChangePw")
-    @Produces(MediaType.APPLICATION_JSON)
-    public JSONObject changePw(@FormParam("newPassword") String newPw, @FormParam("newPassword2") String newPw2) {
-        
-        // TODO: validate the new password. also check that newPw == newPw2
-        // TODO: admin should be able to change anyone's pw, not just their own
-        
+        // TODO: validate the new stat(s)
+    
         int ownId = 1; // PLACEHOLDER! Needs to come from the request header!
+        User u = uBean.findById(ownId);
+        String alias = "noChange";
+        String email = "noChange";
+        String pw = "noChange";
+                
+        if (!newName.matches("\\s*")) {
+            u.setAlias(newName);
+            uBean.updateDbEntry(u);
+            alias = newName;
+        }
         
-        User u = uBean.findById(ownId); 
-        u.setPw(newPw); // set the new email for the database-stored user...
-        uBean.updateDbEntry(u); // ... and update the db with the change
-        
+        if (!newEmail.matches("\\s*")) {
+            u.setEmail(newEmail); 
+            uBean.updateDbEntry(u); 
+            email = newEmail;
+        }
+                
+        if (!newPw.matches("\\s*")) {
+            u.setPw(newPw);
+            uBean.updateDbEntry(u);
+            pw = newPw;
+        }
+    
         JSONObject j = new JSONObject();
-        putJson(j, "status", "loggedInNewPw");
-        putJson(j, "pw", newPw);         
+        putJson(j, "status", "alteredUserStats");
+        putJson(j, "alias", alias);
+        putJson(j, "email", email);
+        putJson(j, "pw", pw);
         return j;
-        // TODO: send a msg to the user that they've changed their pw
-    } // end changePw()
-      
+    } // end alterUserStats()
+    
     @POST
     @Path("RemoveOwnUser")
     @Produces(MediaType.APPLICATION_JSON)

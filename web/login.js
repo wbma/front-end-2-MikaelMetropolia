@@ -32,14 +32,15 @@ function login() {
         body: `loginUsername=${loginAliasInput.value}&loginPassword=${loginPwInput.value}`
     };
     
-    fetch('App/UserService/LogIn', request).then((response) => {
-        return response.json();
-        // TODO: need to catch a possible network error here...
+    fetch('App/UserService/LogIn', request).then((response) => {   
+        if(response.ok) {
+            return response.json();
+        }
+        throw new Error('Network response was not ok.');
+        
     }).then((myJson) => {
 
         if (myJson.status === 'loggedIn') {
-            
-            console.log("huu! got to loggedin!");
             
             // NOTE: might need to convert the id from int to String !
             document.cookie = "id=" + myJson.id + "; path=/"; // store the user's id in a global cookie for the duration of the session
@@ -49,18 +50,16 @@ function login() {
             // Yet without that, we'll have to do a database operation each time the user enters the profile page, etc.
         }
         else if (myJson.status === 'wrongUsername') {
-            console.log("wrong username, bozo! gratz on your working app, tho!");
-            // TODO: display a msg about wrong username
-        } else if (myJson.status === 'wrongPw') {
             
-            console.log("huu! got to wrongpw!");
+            // TODO: display a msg about wrong username
+        } 
+        else if (myJson.status === 'wrongPw') {
+            
             // TODO: display a msg about wrong password
         }
-        // NOTE: if we get this far, other stuff should never happen, but it's good to have 
-        // the last else-if just to see the underlying status that makes it occur
-
-        console.log("Status: " + myJson.status);
-    }); // end fetch()
+    }).catch(function(error) {
+        console.log('There has been a problem with your fetch operation: ' + error.message);
+}); // end fetch()
 } // end login()
 
 function signup() {
@@ -79,7 +78,6 @@ function signup() {
 
         if (myJson.status === 'loggedIn') {
             
-            console.log("made a new user! woohoo!");
             // NOTE: might need to convert the id from int to String !
             document.cookie = "id=" + myJson.id + "; path=/"; // store the user's id in a global cookie for the duration of the session
             // TODO: display a msg about successfully logging in

@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href="https://fonts.googleapis.com/css?family=Tangerine" rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Great+Vibes' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=Merienda+One' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="style2.css" type="text/css">
-	<title>Front Page</title>
-
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css?family=Tangerine" rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Great+Vibes' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Merienda+One' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="style2.css" type="text/css">
+        <title>Front Page</title>
+    </head>
 	<body>
 	<header>
 		<div class="nav-wrapper">
@@ -57,35 +56,27 @@
 
 			</div>
 			<div id="upload-left">
-				<form action="">
-<<<<<<< HEAD
-					<input type="text" class="inputfield" name="title" placeholder="Composition name"> <br>
-					<input type="password" class="inputfield" name="author" placeholder="Author"> <br>
-					<input type="text" class="inputfield" name="length" placeholder="Duration"> <br>
-                                        <input type="text" class="inputfield" name="year" placeholder="Year of composition"> <br>
-					<input type="text" class="inputfield" name="pages" placeholder="Number of pages"> <br>
-				</form>
+                            <form id="leftForm" action="">
+
+                                <input type="text" class="inputfield" name="title" placeholder="Composition name"> <br>
+                                <input type="password" class="inputfield" name="author" placeholder="Author"> <br>
+                                <input type="text" class="inputfield" name="length" placeholder="Duration"> <br>
+                                <input type="text" class="inputfield" name="pages" placeholder="Number of pages"> <br>
+                            </form>
 			</div>
 			<div id="upload-right">
-                            <form>
+                            <form id="rightForm">                            
+                                <input type="text" class="inputfield" name="year" placeholder="Year of composition"> <br>
 				<input type="text" class="inputfield" name="diff" placeholder="Level"> <br>
 				<input type="password" class="inputfield" name="video" placeholder="Video link"> <br>
 				<input type="text" name="Sheet" id="sheet-form" placeholder="Sheet">
-=======
-					<input type="text" class="inputfield" name="title" placeholder="Composition name"> <br>
-					<input type="password" class="inputfield" name="author" placeholder="Author"> <br>
-					<input type="text" class="inputfield" name="length" placeholder="Duration"> <br>
-                                        <input type="text" class="inputfield" name="year" placeholder="Year of composition"> <br>
-					<input type="text" class="inputfield" name="pages" placeholder="Number of pages"> <br>
-
-				</form>
+                            </form>
 			</div>
 			<div id="upload-right">
 				<input type="text" class="inputfield" name="diff" placeholder="Level"> <br>
 				<input type="password" class="inputfield" name="video" placeholder="Video link"> <br>
 				<input type="text" name="Sheet2" id="sheet-form" placeholder="Sheet">
 
->>>>>>> 774f579befec1def2e499d14ce41f636044b1259
 				<label class="fileContainer">
 					File..
 				<input name="sheet" type="file" class="upload-file">
@@ -95,9 +86,10 @@
 			</div>
 		</div>
 	</div>
-	<script src="upload.js"> </script>
-	<script src="navbar.js"> </script>
-	</body>
+            <script src="upload.js"> </script>
+            <script src="navbar.js"> </script>
+            <script src="comp.js"></script>
+    </body>
 </html>
 
 

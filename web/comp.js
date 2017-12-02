@@ -1,28 +1,51 @@
 'use strict';
 
-// TODO: catch the form fields and prevent regular form action
+const leftForm = document.querySelector('#leftForm');
+const rightForm = document.querySelector('#rightForm');
+
+rightForm.addEventListener("submit", function(evt) {
+        evt.preventDefault();
+        addComp();
+});
  
 function addComp() {
+    
+    const title = leftForm.elements[0].value;
+    const author = leftForm.elements[1].value;
+    const length = leftForm.elements[2].value;
+    const pages = leftForm.elements[3].value;
+    const year = rightForm.elements[0].value;
+    const diff = rightForm.elements[1].value;
+    const video = rightForm.elements[2].value;
+    const sheet = rightForm.elements[3].value;
 
     const request = { 
         headers: { 'Content-Type': 'application/x-www-form-urlencoded',  
         'Cookie': document.cookie}, // not sure if this is how this works...
         method: 'POST',
         credentials: 'same-origin',
-        body: `` // TODO: insert values from the form fields (title, author, etc)
+        body: `title=${title}&author=${author}&length=${length}&pages=${pages}&year=${year}&diff=${diff}&video=${video}&sheet=${sheet}`
+        // NOTE: could be done with a FormData object instead in a much easier way..?
     };
     
     fetch('App/CompService/AddComp', request).then((response) => {
-        return response.json();
-        // TODO: need to catch a possible network error here...
+        if(response.ok) {
+            return response.json();
+        }
+        throw new Error('Network response was not ok.');  
+        
     }).then((myJson) => {
 
         if (myJson.status === 'addedComp') {
             
             // TODO: display a msg about successfully adding a composition
+            // TODO: I'm not sure which screen should open afterwards... If we want to 'go to' the composition (detailed view),
+            // then we need to return more info from the method (addComp() in CompService.java)
         } else {
             
             // TODO: display a msg about failing to add the composition
         }
-    }); // end fetch()
+    }).catch(function(error) {
+        console.log('There has been a problem with your fetch operation: ' + error.message);
+}); // end fetch()
 } // end addComp()
