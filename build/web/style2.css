@@ -32,14 +32,36 @@ body {
     padding-left: 0px;
     margin-left: -100px;
     margin-top: 100px;
-    display: none;
-    height: 100%;
+    margin-bottom: 0px;
+    display: inline;
+    height: 86vh;
     padding-top: 1%;
 }
 
+.sub-menu-closed {
+    display: table-cell;
+    position: relative;
+    -webkit-animation: slideOut 1s;
+    animation: slideOut 1s;
+    font: 400 100px/1.2 'Courier New', Helvetica, sans-serif;
+    color: rgba(0,0,0,0.7);
+    text-shadow: 3px 3px 3px #fff;
+    z-index: 1;
+    font-size: 30px;
+    color: #fff;
+    list-style-type: none;
+    position: absolute;
+    background-color: #000;
+    width: 350px;
+    padding-left: 0px;
+    margin-left: -1337px;
+    margin-top: 100px;
+    display: none;
+    height: 86vh;
+    padding-top: 1%;
+}
 
-
-.sub-menu li {
+#main-menu li {
 
     -webkit-animation: fadeIn 1s;
     animation: fadeIn 1s;
@@ -49,8 +71,6 @@ body {
     cursor: pointer;
     user-select: none;
 }
-
-
 
 .sub-menu-1:hover {
     background-color: #4e535b;
@@ -118,16 +138,15 @@ body {
     border: 2px solid #ffd700;
 }
 
-ul .pepe-menu {
-   padding-left: 10px;
-   margin-top: 0px;
-}
 
  #pepe-menu-id {
     display: none;
+    -webkit-padding-start: 0px;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
 }
 
-.pepe-menu li {
+.pepe-menu > li {
     -webkit-animation: fadeIn 1s;
     animation: fadeIn 1s;
     position: relative;
@@ -142,11 +161,27 @@ ul .pepe-menu {
     z-index: 2;
 }
 
-.pepe-menu li:hover {
+.pepe-menu-closed > li {
+    -webkit-animation: fadeOut 1s;
+    animation: fadeOut 1s;
+    position: relative;
+    height: 40px;
+    width: 100%;
+    color: #fff;
+    list-style-type: none;
+    font-size: 30px;
+    text-align: center;
+    background-color: #000;
+    border: 1px solid #fff;
+    z-index: 2;
+    right: -500%;
+}
+
+#pepe-menu-id li:hover {
     background-color: #28364c;
 }
 
-.pepe-menu li:nth-child(n+2) {
+#pepe-menu-id li:nth-child(n+2) {
     border-left: 1px solid #fff;
     border-right: 1px solid #fff;
     border-bottom: 1px solid #fff;
@@ -769,6 +804,16 @@ ul .pepe-menu {
 @keyframes slideIn {
     from {opacity: 0; margin-left: -350px;}
     to {opacity: 1; margin-left: -100px;}
+}
+
+@-webkit-keyframes slideOut {
+    from {opacity: 1; margin-left: -100px;}
+    to {opacity: 0; margin-left: -350px;}
+}
+
+@keyframes slideOut {
+    from {opacity: 1; margin-left: -100px;}
+    to {opacity: 0; margin-left: -350px;}
 }
 
 

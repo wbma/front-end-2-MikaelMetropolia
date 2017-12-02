@@ -81,14 +81,16 @@ public class Comp implements Serializable {
     @Size(max = 255)
     @Column(name = "VIDEO")
     private String video;
-    @Lob
+    @Size(min = 1, max = 255)
     @Column(name = "SHEET")
-    private byte[] sheet;
+    private String sheet;
     @Basic(optional = false)
     @NotNull
     @Column(name = "ADDTIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date addtime;
+    @Column(name = "COMMS")
+    private int comms;
     
     @ManyToMany(mappedBy = "compCollection") // userids are associated with compids on a 1-to-1 basis(?)
     private Collection<User> userCollection; // userids are associated with compids on a 1-to-1 basis(?)
@@ -103,8 +105,7 @@ public class Comp implements Serializable {
     @ManyToOne(optional = false)
     private User adderid2; // it's a User object that CONTAINS the id... But to use int here produces an error and fails to deploy the app!
     
-    private int adderid; // this may be highly unwise, but 'adderid' is needed for a User type object (fails to deploy with error otherwise)... 
-                          // we should ask Aarne or Patrick about this
+    private int adderid; // this may be highly unwise, but 'adderid' is needed for a User type object (fails to deploy with error otherwise)...
 
     public Comp() {
     }
@@ -113,7 +114,7 @@ public class Comp implements Serializable {
         this.id = id;
     }
 
-    public Comp(String title, String author, Integer length, Integer year, int diff, Integer pages, String video, byte[] sheet, Date addtime, int adderid) {
+    public Comp(String title, String author, Integer length, Integer year, int diff, Integer pages, String video, String sheet, Date addtime, int adderid, int comms) {
         this.title = title;
         this.author = author;
         this.length = length;
@@ -124,6 +125,7 @@ public class Comp implements Serializable {
         this.sheet = sheet;
         this.addtime = addtime;
         this.adderid = adderid;
+        this.comms = comms;
     }
 
     public Integer getId() {
@@ -190,11 +192,11 @@ public class Comp implements Serializable {
         this.video = video;
     }
 
-    public byte[] getSheet() {
+    public String getSheet() {
         return sheet;
     }
 
-    public void setSheet(byte[] sheet) {
+    public void setSheet(String sheet) {
         this.sheet = sheet;
     }
 
@@ -204,6 +206,14 @@ public class Comp implements Serializable {
 
     public void setAddtime(Date addtime) {
         this.addtime = addtime;
+    }
+    
+    public int getComms() {
+        return comms;
+    }
+
+    public void setComms(int comms) {
+        this.comms = comms;
     }
 
     @XmlTransient
@@ -265,5 +275,4 @@ public class Comp implements Serializable {
     public String toString() {
         return "model.Comp[ id=" + id + " ]";
     }
-    
-}
+} // end class

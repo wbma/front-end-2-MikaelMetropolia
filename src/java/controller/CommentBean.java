@@ -47,7 +47,18 @@ public class CommentBean {
     public void deleteFromDb(Comment c) {
         
         em.createNamedQuery("Comment.deleteComment").setParameter("id", c.getId()).getSingleResult();
-    }    
+    }
+
+   // A 'findByX' method that works for ints instead of Strings (analogical to 'findById()' in UserBean.java, but here more int stats are needed)
+   public Comment findByIntX(String stat, int arg) {
+      
+        try {
+            Comment c = (Comment)em.createNamedQuery("Comment.findBy"+stat).setParameter(stat.toLowerCase(), arg).getSingleResult();         
+            return c;
+        } catch (NoResultException e) {
+            return null;
+        }  
+   } // end findByIntX()    
     
    // A method to fetch all comments with a certain int stat (in practice, userId or compId)
    public List<Comment> findAllByIntX(String stat, int arg) {
@@ -59,15 +70,4 @@ public class CommentBean {
             return null;
         }  
    } // end findAllByIntX()
-   
-    // not sure if this is the best place for the method, but it needs to be somewhere and it has a query operation with entityManager, so I put it here
-    public int numberOfCommsOnComp(int compId) {
-    
-       return (int)em.createNamedQuery("Comment.countCommsOnComp").setParameter("compid", compId).getSingleResult();
-    }
-       
-    // TODO: method to calculate number of likes... Not sure how to do this, as the 'Likes' table doesn't exist as its own entity
-   
-   
-   
 } // end class
