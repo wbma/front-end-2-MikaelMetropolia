@@ -18,7 +18,7 @@ headerButton.addEventListener('click', () => {
  if (mainMenu.style.display == 'none') {
         mainMenu.style.display = 'inline-block';
   } else {
-     mainMenu.style.display = 'none';
+     mainMenu.classList.toggle('sub-menu-closed');
      submenu1.style.display = 'none';
      submenu2.style.display = 'none';
      arrowElement.style.transform = 'rotate(-45deg)';

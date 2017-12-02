@@ -54,44 +54,28 @@
 				<h1 id="upload-header">
 					Upload a new composition
 				</h1>
-
 			</div>
 			<div id="upload-left">
 				<form action="">
-<<<<<<< HEAD
 					<input type="text" class="inputfield" name="title" placeholder="Composition name"> <br>
-					<input type="password" class="inputfield" name="author" placeholder="Author"> <br>
+					<input type="text" class="inputfield" name="author" placeholder="Author"> <br>
 					<input type="text" class="inputfield" name="length" placeholder="Duration"> <br>
-                                        <input type="text" class="inputfield" name="year" placeholder="Year of composition"> <br>
+					<input type="text" class="inputfield" name="year" placeholder="Year of composition"> <br>
 					<input type="text" class="inputfield" name="pages" placeholder="Number of pages"> <br>
 				</form>
 			</div>
 			<div id="upload-right">
-                            <form>
+				<form>
 				<input type="text" class="inputfield" name="diff" placeholder="Level"> <br>
-				<input type="password" class="inputfield" name="video" placeholder="Video link"> <br>
+				<input type="text" class="inputfield" name="video" placeholder="Video link"> <br>
 				<input type="text" name="Sheet" id="sheet-form" placeholder="Sheet">
-=======
-					<input type="text" class="inputfield" name="title" placeholder="Composition name"> <br>
-					<input type="password" class="inputfield" name="author" placeholder="Author"> <br>
-					<input type="text" class="inputfield" name="length" placeholder="Duration"> <br>
-                                        <input type="text" class="inputfield" name="year" placeholder="Year of composition"> <br>
-					<input type="text" class="inputfield" name="pages" placeholder="Number of pages"> <br>
-
+					<label class="fileContainer">
+						File..
+						<input name="sheet" type="file" class="upload-file">
+					</label>
+					<p id="hint"> Hint: Only .pdf and image files!</p>
+					<input type="submit" value="Publish"> <br>
 				</form>
-			</div>
-			<div id="upload-right">
-				<input type="text" class="inputfield" name="diff" placeholder="Level"> <br>
-				<input type="password" class="inputfield" name="video" placeholder="Video link"> <br>
-				<input type="text" name="Sheet2" id="sheet-form" placeholder="Sheet">
-
->>>>>>> 774f579befec1def2e499d14ce41f636044b1259
-				<label class="fileContainer">
-					File..
-				<input name="sheet" type="file" class="upload-file">
-				</label>
-				<p id="hint"> Hint: Only .pdf and image files!</p>
-				<input type="submit" value="Publish"> <br>
 			</div>
 		</div>
 	</div>
