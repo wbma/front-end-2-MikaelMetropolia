@@ -69,7 +69,7 @@ public class CompService {
         c.setAdderid(adderId);
         cBean.insertToDb(c);
 
-        return setResponseStatus("addedComp");
+        return setResponseStatus("addedComp"); // NOTE: more may need to be returned, depending on what we want to do after adding the composition
     } // end addComp()
     
     // called when you click on the difficulty tab to display a list of compositions
@@ -113,15 +113,15 @@ public class CompService {
     
     // used for getting your own compositions
     @POST
-    @Path("GetCompsById")
+    @Path("GetCompsByAdderId")
     @Produces(MediaType.APPLICATION_JSON) 
-    public JSONObject getCompsById(@QueryParam("id") int id) {
+    public JSONObject getCompsByAdderId(@QueryParam("adderid") int adderId) {
         
-        List<Comp> comps = cBean.findAllByIntX("Id", id);
+        List<Comp> comps = cBean.findAllByIntX("AdderId", adderId);
         
         JSONObject j =  new JSONObject();
-        putJson(j, "status", "gotCompsById");
-        putJson(j, "adderId", id);
+        putJson(j, "status", "gotCompsByAdderId");
+        putJson(j, "adderId", adderId);
         putJson(j, "compList", comps);
         return j;     
     } // end getCompsById()

@@ -63,11 +63,13 @@
            <h1> Settings</h1>
         </div>
         <div id="right-side-settings">
-            <input class="inputfield" name="Composition-name" placeholder="Email"> <br>
-            <input class="inputfield" id="username-input" name="Author" placeholder="Username"> <br>
-            <input class="inputfield" name="loginUsername" placeholder="Password"> <br>
-            <input class="inputfield" name="loginUsername" placeholder="Confirm password"> <br>
-            <input class="popup" type="submit" value="Save" id="save-settings">
+            <form id="settingsForm">
+                <input class="inputfield" name="newEmail" placeholder="Email"> <br>
+                <input class="inputfield" id="username-input" name="newAlias" placeholder="Username"> <br>
+                <input class="inputfield" name="newPassword" placeholder="Password"> <br>
+                <input class="inputfield" name="newPassword2" placeholder="Confirm password"> <br>
+                <input class="popup" type="submit" value="Save" id="save-settings">
+            </form>
             <span class="popuptext" id="myPopup">A Simple Popup!</span>
             <a href="profile.html"><input type="submit" value="Cancel" id="cancel-settings"></a>
         </div>

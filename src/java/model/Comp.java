@@ -48,6 +48,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Comp.findByPages", query = "SELECT c FROM Comp c WHERE c.pages = :pages")
     , @NamedQuery(name = "Comp.findByVideo", query = "SELECT c FROM Comp c WHERE c.video = :video")
     , @NamedQuery(name = "Comp.findByAddtime", query = "SELECT c FROM Comp c WHERE c.addtime = :addtime")
+    , @NamedQuery(name = "Comp.findByAdderId", query = "SELECT c FROM Comp c WHERE c.adderid = :adderid")
     , @NamedQuery(name = "Comp.deleteComp", query = "DELETE FROM Comp c WHERE c.id = :id")})
 public class Comp implements Serializable {
 
