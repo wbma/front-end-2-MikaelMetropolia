@@ -156,11 +156,12 @@ body {
     width: 100%;
     color: #fff;
     list-style-type: none;
-    font-size: 30px;
+    font-size: 35px;
     text-align: center;
     background-color: #000;
     border: 1px solid #fff;
     z-index: 2;
+    padding-top: 3px;
 }
 
 .pepe-menu-closed > li {
@@ -327,12 +328,12 @@ body {
 .login input[type=submit] {
     position: absolute;
     right: 25.2%;
-    font-size: 28px;
-    width: 140px;
+    font-size: 50px;
+    width: auto;
     border: 1px solid white;
     background-color: transparent;
     color: white;
-    padding: 14px 20px;
+    padding: 3px 10px;
     margin: 10px 0;
     cursor: pointer;
     text-decoration: none;
@@ -345,6 +346,10 @@ body {
 #profile-wrapper,
 #wrapper-upload {
     display: flex;
+}
+
+#wrapperstart {
+     font-family: italic;
 }
 
 #upload-box{
@@ -436,6 +441,7 @@ body {
     display: block;
     margin: 0 auto;
 }
+
 .piano p{
     margin-left: 1em;
     margin-right: 1em;
@@ -478,7 +484,7 @@ body {
 .learn-piano {
     user-select: none;
     display: inline-block;
-    font-size: 30px;
+    font-size: 40px;
     color: #fff;
     padding-right: 5%;
     margin-top: 0%;
@@ -591,7 +597,7 @@ body {
 #left-side > h1 {
     text-align: center;
     color: #fff;
-    font-size: 50px;
+    font-size: 75px;
 }
 
 #left-side > img {
@@ -606,7 +612,7 @@ body {
     font-weight: 100;
     margin-left: 25%;
     color: #fff;
-    font-size: 30px;
+    font-size: 50px;
     border-bottom: 2px solid #fff;
     margin-top: 1%;
     margin-bottom: 1%;
@@ -615,7 +621,7 @@ body {
 #right-side-settings input[type=submit],
 .pop-up input[type=submit] {
     position: absolute;
-    font-size: 28px;
+    font-size: 40px;
     width: 140px;
     border: 2px solid white;
     background-color: transparent;
