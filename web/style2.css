@@ -400,6 +400,7 @@ body {
     flex-flow: column;
     flex: 0 0 90%;
     height: 650px;
+
 }
 
 #start-box-1 {
@@ -411,11 +412,32 @@ body {
 #start-box-2 {
     height: 90%;
     border: 1px solid white;
-    text-align: center;
+    text-justify: auto;
     color: #fff;
-    font-size: 50px;
     overflow: hidden;
 
+}
+.task_tutorials{
+    width: 80%;
+    display: flex;
+    margin: 0 auto;
+    background-color: slategray;
+    opacity: 0.5;
+    border-radius: 25px;
+    text-align: center;
+    color: white;
+}
+
+.tutorial_img{
+    max-width: 60%;
+    max-height: 40%;
+    display: block;
+    margin: 0 auto;
+}
+.piano p{
+    margin-left: 1em;
+    margin-right: 1em;
+    text-indent: 1em;
 }
 
 #hometextbox h1 {
