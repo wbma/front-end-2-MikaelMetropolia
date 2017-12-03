@@ -75,5 +75,5 @@ public class CompBean {
     public void deleteFromDb(Comp c) {
         
         em.createNamedQuery("Comp.deleteComp").setParameter("id", c.getId()).getSingleResult();
-    }
+    }    
 } // end class

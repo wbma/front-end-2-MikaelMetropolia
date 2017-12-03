@@ -16,6 +16,7 @@ import static utils.Utils.notNull;
 import static utils.Utils.setResponseStatus;
 import static utils.Utils.putJson;
 import org.json.JSONObject;
+import static utils.Utils.isEmpty;
 
 /**
  * REST Web Service
@@ -47,7 +48,7 @@ public class CompService {
             @FormParam("diff") int diff, 
             @FormParam("pages") int pages, 
             @FormParam("video") String video, 
-            @FormParam("sheet") byte[] sheet
+            @FormParam("sheet") String sheet
             ) {
     
         // TODO: call some method to validate the data (check for null fields!)...
@@ -67,6 +68,7 @@ public class CompService {
         c.setSheet(sheet);
         c.setAddtime(addTime);
         c.setAdderid(adderId);
+        c.setComms(0);
         cBean.insertToDb(c);
 
         return setResponseStatus("addedComp"); // NOTE: more may need to be returned, depending on what we want to do after adding the composition
@@ -93,7 +95,6 @@ public class CompService {
     public JSONObject getCompById(@QueryParam("id") int id) {
         
         Comp c = cBean.findByIntX("Id", id);
-        int comms = comBean.numberOfCommsOnComp(id); // fetch number of comments on the composition
         
         JSONObject j =  new JSONObject();
         putJson(j, "status", "gotCompById");
@@ -107,7 +108,7 @@ public class CompService {
         putJson(j, "sheet", c.getSheet());
         putJson(j, "addTime", c.getAddtime());
         putJson(j, "adderId", c.getAdderid());
-        putJson(j, "comms", comms);
+        putJson(j, "comms", c.getComms());
         return j;    
     } // end getCompById()
     
@@ -126,6 +127,7 @@ public class CompService {
         return j;     
     } // end getCompsById()
     
+    // TODO: there is an issue with removal due to the Likes and Favorite tables referencing the Comp table; fix this asap!
     @POST
     @Path("RemoveComp")
     @Produces(MediaType.APPLICATION_JSON) 
@@ -156,7 +158,7 @@ public class CompService {
         // this is a very crude and costly operation that quickly gets unworkable...
         // we can fine-tune it if we have the time
         
-        if (str.matches("\\s*")) { // zero or more spaces... not sure if this catches "" or not
+        if (isEmpty(str)) { // empty or contains pure whitespace
             
             return setResponseStatus("emptySearchString"); // unnecessary if we use js on client to prevent the sending of empty searches
         }
@@ -179,7 +181,9 @@ public class CompService {
         return j;
     } // end titleSearch()
 
-    // There are a million billion stats that it's possible to change... This method should take care of all of them except for sheet (bytearray... needs a diff. method)
+    // There are a million billion stats that it's possible to change... This method should take care of all of them
+    // NOTE: this may not work as I thought... how will the statName argument be sent multiple times if you choose to edit 
+    // multiple fields at once ??
     @POST
     @Path("ChangeStat")
     @Produces(MediaType.APPLICATION_JSON)
@@ -235,7 +239,13 @@ public class CompService {
                 
                 c.setVideo(statValue);
                 status = "changedVideo";
-                break;      
+                break;  
+                
+            case "sheet":
+                
+                c.setSheet(statValue);
+                status = "changedSheet";
+                break;               
         }
         
         cBean.updateDbEntry(c);
@@ -246,23 +256,4 @@ public class CompService {
         return j;
         // TODO: send a msg to the user that they've changed the stat
     } // end changeStat()
-    
-    // The bytearray is easier to deal with as its own method
-    @POST
-    @Path("ChangeSheet")
-    @Produces(MediaType.APPLICATION_JSON)
-    public JSONObject changeSheet(@QueryParam("id") int compId, @QueryParam("newSheet") byte[] sheet) {
-    
-        // TODO: validate the argument (maybe... I guess sending it already ensures it's a file/bytearray?)
-        
-        int ownId = 1; // PLACEHOLDER! Needs to come from the request header!      
-        // TODO: check credentials (admin / adder ?)
-        
-        Comp c = cBean.findByIntX("Id", compId); 
-        
-        c.setSheet(sheet);
-        cBean.updateDbEntry(c);
-        
-        return setResponseStatus("newSheet"); // we're not going to pass the blob object back and forth    
-    } // end changeSheet()
 } // end class

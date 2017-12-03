@@ -38,4 +38,17 @@ public class Utils {
             return null;
         }
     } // end putJson()
+    
+    // check whether something is empty or not (zero length or contains pure whitespace)
+    public static boolean isEmpty(String str) {
+        
+        // these must be combinable somehow, but for now I haven't found the way to do it   
+        return (str.matches("\\s+") || str.equals(""));
+    }
+    
+    
+    
+    
+    
+    
 } // end class
