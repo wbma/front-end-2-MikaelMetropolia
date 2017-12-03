@@ -10,60 +10,47 @@
     <title>Front Page</title>
 </head>
 <body>
-<header>
+<nav>
     <div class="nav-wrapper">
         <div class="nav-button">
-            <img src="dropdownmenuiconrofl.png" width="100" height="100" id="menu-button">
+            <img src="dropdownmenuiconrofl.png" alt="Menu icon" width="100" height="100" id="menu-button">
             <ul class="sub-menu" id="main-menu">
                 <li><a id="sub-menu-button-1"> <i class="right" id="right"></i> Where to start? </a>
                     <ul class="start-sub-menu" id="start-sub-menu-1">
-                        <a href="Start.html">
-                            <li class="sub-menu-1">- Piano keyboard</li>
-                        </a>
-                        <a href="Start.html">
-                            <li class="sub-menu-1">- Music sheet 1</li>
-                        </a>
-                        <a href="Start.html">
-                            <li class="sub-menu-1">- Music sheet 2</li>
-                        </a>
+                        <li class="sub-menu-1"><a href="Start.html">- Piano keyboard </a></li>
+                        <li class="sub-menu-1"><a href="Start.html">- Music sheet 1</a></li>
+                        <li class="sub-menu-1"><a href="Start.html">- Music sheet 2</a></li>
                     </ul>
                 </li>
                 <li><a id="sub-menu-button-2"><i class="right" id="right2"></i> Compositions </a>
                     <ul class="start-sub-menu" id="start-sub-menu-2">
-                        <a href="Beginner.html">
-                            <li class="sub-menu-1">- Beginner</li>
-                        </a>
-                        <a href="Intermediate.html">
-                            <li class="sub-menu-1">- Intermediate</li>
-                        </a>
-                        <a href="Advanced.html">
-                            <li class="sub-menu-1">- Advanced</li>
-                        </a>
+                        <li class="sub-menu-1"><a href="Beginner.html"> - Beginner</a></li>
+                        <li class="sub-menu-1"><a href="Intermediate.html"> - Intermediate</a></li>
+                        <li class="sub-menu-1"><a href="Advanced.html"> - Advanced</a></li>
                     </ul>
                 </li>
                 <li><a href="profile.html"> Profile </a></li>
                 <li id="sub-menu-last"><a href=""> TBD</a></li>
             </ul>
         </div>
-        <div class="banner"><a href="index.html"> <img src="LOGO.png" alt="logo" class="logo" width="425" height="50">
-        </a></div>
+        <header class="banner"><a href="index.html"> <img src="LOGO.png" alt="logo" class="logo" width="425" height="50"> </a></header>
         <div id="search-bar" class="search-box-wrapper"><input type="text" class="search-box-input">
             <button class="search-box-button"> &#128269;</button>
         </div>
         <div class="log-in-icon"><a href="LogInPage.html"><img src="loginpic.PNG" class="log-in-img"></a></div>
     </div>
-</header>
+</nav>
 
-<div id="start-navi-bar">
+<nav id="start-navi-bar">
     <div class="learn-piano" id="piano"><p>1. Piano keyboard</p></div>
     <div class="learn-piano" id="sheet-1"><p>2. Music Sheet 1</p></div>
     <div class="learn-piano" id="sheet-2"><p>3. Music Sheet 2</p></div>
-</div>
+</nav>
 
-<div id="wrapperstart">
-    <div id="start-text-box" class="start-box">
-        <div id="start-box-1"> 1. Piano keyboard</div>
-        <div class="piano" id="start-box-2" style="overflow-y: scroll">
+<main id="wrapperstart">
+    <article id="start-text-box" class="start-box">
+        <section id="start-box-1"> 1. Piano keyboard</section>
+        <section class="piano" id="start-box-2" style="overflow-y: scroll">
             <p>For starters, it is useful to familiarize yourself
 with the use of a piano keyboard. Suppose you are sitting at a piano and do not
 know a single note. Here's what you see:</p>
@@ -86,11 +73,11 @@ the same group of notes. Five different black and seven different white keys
 are those twelve tones based on which in music for centuries the melodies and
 harmonies of all those symphonies and songs that you just heard were composed.</p>
 
-            <div class="task_tutorials">
+            <section class="task_tutorials">
                 <p><b>Task 1:</b> If you are
 in front of instrument now, try playing all twelve notes, starting from <i>do</i> (C) of the first octave, moving from
 left to right or vice versa.</p>
-            </div>
+            </section>
 
             <p>You'll notice that the sound of the white keys is no
 different from the sound of the black ones: if you close your eyes and try to
@@ -113,12 +100,12 @@ another. The octave interval is very important, because it can double any <span 
 different fingers of the right hand, you can find it more interesting in some
 places to play them in an octave.</p>
 
-            <div class="task_tutorials">
+            <section class="task_tutorials">
                 <p><b>Task 2:</b> All you
 need to know now is the white key designation: <i>do</i> (C),<i> re</i> (D), <i>mi</i> (E), etc. Press any keys and try to
 name them. You will be surprised how soon you will do it without the slightest
 difficulty.</p>
-                </div>
+                </section>
 
             <p>Now let's define the names for the black keys:</p>
 
@@ -140,9 +127,9 @@ notes <i>do</i>(C) and <i>re</i>(D) is a tone. More about this we will talk in t
                 <p><b>Task 3:</b> Give the name to the black keys yourself and check the correctness of your judgments
     according to the picture.</p>
             </div>
-        </div>
-    </div>
-</div>
+        </section>
+    </article>
+</main>
 
 
 <script src="js.js"></script>
