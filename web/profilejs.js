@@ -29,6 +29,30 @@ const pepeButton = document.getElementById("pepe");
 
 myElement.style.display = 'none';
 
+const popUp = document.querySelector(".pop-up");
+const popUpButton = document.getElementsByClassName('not-a-link');
+const yesButton = document.querySelector(".yes-button");
+const noButton = document.querySelector(".no-button");
+
+for (let i = 0; i < popUpButton.length; i++) {
+    popUpButton[i].addEventListener('click', () => {
+        document.body.setAttribute("style","pointer-events: none;");
+        popUp.style.display = 'flex';
+    })
+}
+
+noButton.addEventListener('click', () => {
+    popUp.style.display = 'none';
+    document.body.setAttribute("style","pointer-events: auto;");
+});
+
+yesButton.addEventListener('click', () => {
+    popUp.style.display = 'none';
+    document.body.setAttribute("style","pointer-events: auto;");
+});
+
+
+
 button3.addEventListener('click', () => {
     hideMenu(right5, element, dropElement);
 });

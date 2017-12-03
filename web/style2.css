@@ -4,6 +4,7 @@ a {
 }
 
 body {
+    pointer-events: auto;
     margin: 0;
     font-family: 'Tangerine', serif;
     font-weight: 400;
@@ -12,6 +13,7 @@ body {
     background-position: right top;
     background-attachment: fixed;
     background-size: cover;
+    color: #fff;
 }
 
 .sub-menu {
@@ -610,7 +612,8 @@ body {
     margin-bottom: 1%;
 }
 .upload-form input[type=submit],
-#right-side-settings input[type=submit]{
+#right-side-settings input[type=submit],
+.pop-up input[type=submit] {
     position: absolute;
     font-size: 28px;
     width: 140px;
@@ -872,7 +875,61 @@ body {
     padding-left: 5%;
 }
 
+.not-a-link {
+    user-select: none;
+    cursor: pointer;
+}
 
+
+/* POP UP CSS */
+
+.pop-up {
+    position: sticky;
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    border: 1px solid #fff;
+    height: 125px;
+    width: 250px;
+    left: 40%;
+    top: 40%;
+    background-color: #000;
+    display: none;
+    pointer-events: auto;
+}
+
+.are-you-sure {
+    flex: 0 0 100%;
+    position: relative;
+    height: 35%;
+    text-align: center;
+    font-size: 40px;
+    color: #fff;
+}
+
+.confirm-box {
+    display: inherit;
+    flex: 0 0 100%;
+    position: relative;
+    height: 65%;
+}
+
+.confirm {
+    flex: 0 0 50%;
+    position: relative;
+    height: 100%;
+}
+
+.pop-up input[type=submit] {
+    width: 60%;
+    padding: 0;
+    margin: 0;
+    margin-top: 15%;
+    margin-left: 20%;
+}
+.pop-up input[type=submit]:hover {
+    background-color: #4e535b;
+}
 
 
 
