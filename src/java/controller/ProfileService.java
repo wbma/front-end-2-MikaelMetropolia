@@ -19,6 +19,11 @@ import model.User;
 import static utils.Utils.setResponseStatus;
 import org.json.JSONObject;
 import static utils.Utils.putJson;
+import static utils.Utils.setResponseStatus;
+import static utils.Validation.validAlias;
+import static utils.Validation.validEmail;
+import static utils.Validation.validPw;
+import static utils.Validation.validUser;
 
 /**
  * REST Web Service
@@ -43,31 +48,31 @@ public class ProfileService {
             @FormParam("newPw") String newPw, 
             @FormParam("newPw2") String newPw2) {
     
-        // TODO: validate the new stat(s)
-    
         int ownId = 1; // PLACEHOLDER! Needs to come from the request header!
         User u = uBean.findById(ownId);
         String alias = "noChange";
         String email = "noChange";
         String pw = "noChange";
-                
-        if (!newName.matches("\\s*")) {
+        
+        if (validAlias(newName)) {
+            
             u.setAlias(newName);
-            uBean.updateDbEntry(u);
             alias = newName;
         }
         
-        if (!newEmail.matches("\\s*")) {
-            u.setEmail(newEmail); 
-            uBean.updateDbEntry(u); 
+        if (validEmail(newEmail)) {
+            
+            u.setEmail(newEmail);  
             email = newEmail;
         }
                 
-        if (!newPw.matches("\\s*")) {
-            u.setPw(newPw);
-            uBean.updateDbEntry(u);
+        if (validPw(newPw) && newPw.equals(newPw2)) {
+            
+            u.setPw(newPw);   
             pw = newPw;
         }
+                        
+        uBean.updateDbEntry(u);
     
         JSONObject j = new JSONObject();
         putJson(j, "status", "alteredUserStats");
@@ -82,7 +87,7 @@ public class ProfileService {
     @Produces(MediaType.APPLICATION_JSON)
     public JSONObject removeOwnUser(@QueryParam("removeOwnUser") int id) { // id should be gotten from the request header...
         
-        uBean.deleteFromDb(uBean.findById(id)); // delete user from db
+        uBean.deleteFromDb(uBean.findById(id));
         
         return setResponseStatus("removedOwnUser");   
         // TODO: logout (via return value caught in fetch on client) 

@@ -17,6 +17,8 @@ import static utils.Utils.setResponseStatus;
 import static utils.Utils.putJson;
 import org.json.JSONObject;
 import static utils.Utils.isEmpty;
+import static utils.Utils.lengthOver;
+import static utils.Validation.validComp;
 
 /**
  * REST Web Service
@@ -51,7 +53,11 @@ public class CompService {
             @FormParam("sheet") String sheet
             ) {
     
-        // TODO: call some method to validate the data (check for null fields!)...
+        if (!validComp(title, author, length, year, diff, pages, video, sheet)) {
+        
+            return setResponseStatus("invalidComp");
+        }
+          
         // TODO: check for duplicate entries... what should be the criteria ??
         
         int adderId = 99; // PLACEHOLDER (needs to come from the request header)
@@ -79,6 +85,8 @@ public class CompService {
     @Path("GetCompsByDiff")
     @Produces(MediaType.APPLICATION_JSON) 
     public JSONObject getCompsByDiff(@QueryParam("diff") int diff) {
+        
+        // NOTE: the value of diff is always valid, due to how it's obtained
         
         List<Comp> comps = cBean.findAllByIntX("Diff", diff);
        
@@ -163,7 +171,7 @@ public class CompService {
             return setResponseStatus("emptySearchString"); // unnecessary if we use js on client to prevent the sending of empty searches
         }
         
-        List<Comp> comps = cBean.getAllComps(); // double overhead because we fetch all comps first w/out conditions... an actual db query with a stricter argument could be used
+        List<Comp> comps = cBean.getAllComps(); // double overhead because we fetch all comps first w/out conditions... an actual db query with a stricter argument could be used instead
         ArrayList<Comp> resultComps = new ArrayList<>();
         int length = comps.size();
         
@@ -185,66 +193,91 @@ public class CompService {
     // NOTE: this may not work as I thought... how will the statName argument be sent multiple times if you choose to edit 
     // multiple fields at once ??
     @POST
-    @Path("ChangeStat")
+    @Path("EditComp")
     @Produces(MediaType.APPLICATION_JSON)
-    public JSONObject changeStat(@QueryParam("id") int compId, @QueryParam("newStat") String statName, @QueryParam("newVal") String statValue) {
+    public JSONObject editComp(@QueryParam("id") int compId, @QueryParam("newStat") String statName, @QueryParam("newVal") String statValue) {
         
-        // TODO: validate the arguments
+        // TODO: remove the overlap between utils.Validation.validComp() and this validation...
         
         int ownId = 1; // PLACEHOLDER! Needs to come from the request header!      
         // TODO: check credentials (admin / adder ?)
         
         Comp c = cBean.findByIntX("Id", compId); 
-        String status = "";
+        String status = "noChange";
         
         switch (statName) {
         
             case "title":
                 
-                c.setTitle(statValue);
-                status = "changedTitle";
+                if (!lengthOver(statValue, 50) && !isEmpty(statValue)) {
+                
+                    c.setTitle(statValue);
+                    status = "changedTitle";
+                }
                 break;
                 
             case "author":
                 
-                c.setAuthor(statValue);
-                status = "changedAuthor";
+                if (!lengthOver(statValue, 50) && !isEmpty(statValue)) {
+                    c.setAuthor(statValue);
+                    status = "changedAuthor";
+                }
                 break;
                 
             case "length":
                 
-                c.setLength(Integer.parseInt(statValue));
-                status = "changedLength";
+                int length = Integer.parseInt(statValue);
+                
+                if (length > 0 && length < 36001) {
+                    c.setLength(length);
+                    status = "changedLength";
+                }
                 break;
                 
             case "year":
                 
-                c.setYear(Integer.parseInt(statValue));
-                status = "changedYear";
+                int year = Integer.parseInt(statValue);
+                
+                if (year > 0 && year < 10000) {
+                    c.setYear(year);
+                    status = "changedYear";
+                }
                 break;            
             
             case "diff":
                 
-                c.setDiff(Integer.parseInt(statValue));
-                status = "changedDiff";
+                int diff = Integer.parseInt(statValue);
+                
+                if (diff == 0 || diff == 1 || diff == 2) {
+                    c.setDiff(diff);
+                    status = "changedDiff";
+                }
                 break;
                 
             case "pages":
                 
-                c.setPages(Integer.parseInt(statValue));
-                status = "changedPages";
+                int pages = Integer.parseInt(statValue);
+                
+                if (pages >= 0 && pages < 21) {
+                    c.setPages(pages);
+                    status = "changedPages";
+                }
                 break;            
             
             case "video":
                 
-                c.setVideo(statValue);
-                status = "changedVideo";
+                if (statValue.matches("^https\\:\\/\\/www\\.youtube\\.com\\/\\S+$")) {              
+                    c.setVideo(statValue);
+                    status = "changedVideo";
+                }
                 break;  
                 
             case "sheet":
                 
-                c.setSheet(statValue);
-                status = "changedSheet";
+                if (!isEmpty(statValue)) {
+                    c.setSheet(statValue);
+                    status = "changedSheet";
+                }
                 break;               
         }
         
