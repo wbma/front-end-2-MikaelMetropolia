@@ -14,6 +14,7 @@ const settingsForm = document.querySelector("#settingsForm");
 
 myElement.style.display = 'none';
 console.log(usernameInput.value);
+
 pepeButton.onclick = function () {
     if (myElement.style.display == 'none') {
         myElement.style.display = 'inline';
@@ -24,6 +25,7 @@ pepeButton.onclick = function () {
 
 removeButton.addEventListener('click', () => {
     pepeProfileImg.src = "default.jpg";
+    console.log(pepeProfileImg.src);
     pepeSquareImg.src = "default.jpg";
 });
 

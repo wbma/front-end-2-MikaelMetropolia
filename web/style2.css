@@ -682,10 +682,7 @@ body {
 }
 
 
-#image-wrapper-1,
-#image-wrapper-2,
-#image-wrapper-3
-{
+#image-wrapper {
     display: flex;
     flex-wrap: wrap;
 }
@@ -723,7 +720,8 @@ body {
     margin-bottom: 5%;
     margin-left: 4%;
     flex: 0 0 20%;
-    height: 225px;
+    height: 287px;
+    border: 1px solid #fff;
 }
 
 .fileContainer {
@@ -761,8 +759,9 @@ body {
 .play-comp-title-level-2,
 .play-comp-title-level-3
  {
+    border: 1px solid #fff;
     flex: 0 0 100%;
-    height: 35%;
+    height: 40%;
     text-align: center;
     color: #000;
     font-size: 28px;
@@ -778,6 +777,83 @@ body {
 .play-comp-title-level-3  {
    background: #ffd700;
 }
+
+.composition {
+    display: flex;
+
+}
+
+.composition-title-level-1,
+.composition-title-level-2,
+.composition-title-level-3 {
+    flex: 0 0 100%;
+    height: 30%;
+    text-align: center;
+    color: #000;
+    font-size: 28px;
+    background: #CD7F32;
+    border-radius: 15px 15px 0 0;
+    font-family: 'Allan';
+}
+
+.composition-title-level-2 {
+    background: #C0C0C0;
+}
+
+.composition-title-level-3 {
+    background: #ffd700;
+}
+
+.composition-image {
+    flex: 0 0 100%;
+    height: 50%;
+}
+
+.composition-image > img {
+    width: 100%;
+    height: 146.25px;
+    cursor: pointer;
+}
+
+.composition-stats {
+    display: flex;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.5);
+    flex: 0 0 100%;
+    height: 20%;
+}
+.stat-img {
+    position: relative;
+    flex: 0 0 20%;
+    height: 100%;
+}
+
+.stat-img > img {
+   max-width: 100%;
+   max-height: 100%;
+}
+
+.stat-text {
+    position: relative;
+    flex: 0 0 13.33%;
+    height: 100%;
+    text-align: left;
+}
+
+.stat-text > p {
+    color: #fff;
+    font-size: 35px;
+    margin-top: 25%;
+}
+
+.composition-stats > img {
+    width: 20%;
+    padding-left: 5%;
+}
+
+
+
+
 
 
 
