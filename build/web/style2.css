@@ -4,6 +4,7 @@ a {
 }
 
 body {
+    pointer-events: auto;
     margin: 0;
     font-family: 'Tangerine', serif;
     font-weight: 400;
@@ -12,6 +13,7 @@ body {
     background-position: right top;
     background-attachment: fixed;
     background-size: cover;
+    color: #fff;
 }
 
 .sub-menu {
@@ -400,6 +402,7 @@ body {
     flex-flow: column;
     flex: 0 0 90%;
     height: 650px;
+
 }
 
 #start-box-1 {
@@ -410,12 +413,33 @@ body {
 }
 #start-box-2 {
     height: 90%;
-    border: 1px solid white;
-    text-align: center;
+    border: 1px;
+    text-justify: auto;
     color: #fff;
-    font-size: 50px;
     overflow: hidden;
 
+}
+.task_tutorials{
+    width: 80%;
+    display: flex;
+    margin: 0 auto;
+    background-color: slategray;
+    opacity: 0.5;
+    border-radius: 25px;
+    text-align: center;
+    color: white;
+}
+
+.tutorial_img{
+    max-width: 60%;
+    max-height: 40%;
+    display: block;
+    margin: 0 auto;
+}
+.piano p{
+    margin-left: 1em;
+    margin-right: 1em;
+    text-indent: 1em;
 }
 
 #hometextbox h1 {
@@ -588,7 +612,8 @@ body {
     margin-bottom: 1%;
 }
 .upload-form input[type=submit],
-#right-side-settings input[type=submit]{
+#right-side-settings input[type=submit],
+.pop-up input[type=submit] {
     position: absolute;
     font-size: 28px;
     width: 140px;
@@ -681,10 +706,7 @@ body {
 }
 
 
-#image-wrapper-1,
-#image-wrapper-2,
-#image-wrapper-3
-{
+#image-wrapper {
     display: flex;
     flex-wrap: wrap;
 }
@@ -722,7 +744,7 @@ body {
     margin-bottom: 5%;
     margin-left: 4%;
     flex: 0 0 20%;
-    height: 225px;
+    height: 287px;
 }
 
 .fileContainer {
@@ -760,8 +782,9 @@ body {
 .play-comp-title-level-2,
 .play-comp-title-level-3
  {
+    border: 1px solid #fff;
     flex: 0 0 100%;
-    height: 35%;
+    height: 40%;
     text-align: center;
     color: #000;
     font-size: 28px;
@@ -778,7 +801,135 @@ body {
    background: #ffd700;
 }
 
+.composition {
+    display: flex;
 
+}
+
+.composition-title-level-1,
+.composition-title-level-2,
+.composition-title-level-3 {
+    flex: 0 0 100%;
+    height: 30%;
+    text-align: center;
+    color: #000;
+    font-size: 28px;
+    background: #CD7F32;
+    border-radius: 15px 15px 0 0;
+    font-family: 'Allan';
+}
+
+.composition-title-level-2 {
+    background: #C0C0C0;
+}
+
+.composition-title-level-3 {
+    background: #ffd700;
+}
+
+.composition-image {
+    flex: 0 0 100%;
+    height: 50%;
+}
+
+.composition-image > img {
+    width: 100%;
+    height: 146.25px;
+    cursor: pointer;
+}
+
+.composition-stats {
+    display: flex;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.5);
+    flex: 0 0 100%;
+    height: 20%;
+    border-radius: 0 0 15px 15px;
+}
+.stat-img {
+    position: relative;
+    flex: 0 0 20%;
+    height: 100%;
+}
+
+.stat-img > img {
+   max-width: 100%;
+   max-height: 100%;
+}
+
+.stat-text {
+    position: relative;
+    flex: 0 0 13.33%;
+    height: 100%;
+    text-align: left;
+}
+
+.stat-text > p {
+    color: #fff;
+    font-size: 35px;
+    margin-top: 25%;
+}
+
+.composition-stats > img {
+    width: 20%;
+    padding-left: 5%;
+}
+
+.not-a-link {
+    user-select: none;
+    cursor: pointer;
+}
+
+
+/* POP UP CSS */
+
+.pop-up {
+    position: sticky;
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    border: 1px solid #fff;
+    height: 125px;
+    width: 250px;
+    left: 40%;
+    top: 40%;
+    background-color: #000;
+    display: none;
+    pointer-events: auto;
+}
+
+.are-you-sure {
+    flex: 0 0 100%;
+    position: relative;
+    height: 35%;
+    text-align: center;
+    font-size: 40px;
+    color: #fff;
+}
+
+.confirm-box {
+    display: inherit;
+    flex: 0 0 100%;
+    position: relative;
+    height: 65%;
+}
+
+.confirm {
+    flex: 0 0 50%;
+    position: relative;
+    height: 100%;
+}
+
+.pop-up input[type=submit] {
+    width: 60%;
+    padding: 0;
+    margin: 0;
+    margin-top: 15%;
+    margin-left: 20%;
+}
+.pop-up input[type=submit]:hover {
+    background-color: #4e535b;
+}
 
 .play-comp-image > img {
     width: 100%;
@@ -818,11 +969,15 @@ body {
 
 
 
-@media only screen  and (min-width : 1285px) {
-#start-navi-bar {
-    width: 900px;
-}
 
+@media only screen  and (max-width : 1315px) {
+.sub-menu {
+    width: 350px;
+    padding-left: 100px;
+    margin-top: -5px;
+}
+}
+@media only screen  and (min-width : 1300px) {
 .learn-piano:nth-child(n+1) {
     padding-right: 5%;
     padding-left: 5%;

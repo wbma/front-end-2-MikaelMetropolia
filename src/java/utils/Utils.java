@@ -10,8 +10,7 @@ import org.json.JSONArray;
  */
 public class Utils {
     
-    
-        // helper method to convert 'findByX()' call result to boolean form
+    // helper method to convert 'findByX()' call result to boolean form
     public static boolean notNull(Object o) {
     
         return !(o == null);
@@ -46,9 +45,13 @@ public class Utils {
         return (str.matches("\\s+") || str.equals(""));
     }
     
+    public static boolean lengthOver(String str, int length) {
     
+        return str.length() > length;
+    }
     
+    public static boolean lengthUnder(String str, int length) {
     
-    
-    
+        return str.length() < length;
+    }
 } // end class

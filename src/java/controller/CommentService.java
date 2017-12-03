@@ -24,10 +24,11 @@ import model.Comp;
 import org.json.JSONObject;
 import static utils.Utils.putJson;
 import static utils.Utils.setResponseStatus;
+import static utils.Validation.validComment;
 
 /**
  * REST Web Service
- *
+ * Service for managing comments and their db operations.
  * @author Ville L
  */
 @Path("CommentService")
@@ -52,8 +53,12 @@ public class CommentService {
             @FormParam("compid") int compid
             ) {
     
-        // TODO: call some method to validate the data (check for null fields!)...
         // TODO: spam check...
+        
+        if (!validComment(content)) {
+        
+            return setResponseStatus("invalidComment");
+        }
         
         int userId = 99; // PLACEHOLDER (needs to come from the request header)
         Date addTime = new Date(System.currentTimeMillis()); // server time when it should be client... meh, who cares.    
@@ -83,8 +88,13 @@ public class CommentService {
     @Produces(MediaType.APPLICATION_JSON) 
     public JSONObject editComment(@QueryParam("id") int commId, @FormParam("content") String newContent) { // the id comes from clicking on the comment to edit
         
-        // TODO: check that you have the right to edit it (admin or adder)
+        // TODO: check that you have the right to edit it (admin or adder)... this should probably be done somewhere else
         // TODO: there could be a time check as well... it could be hard to implement though
+        
+        if (!validComment(newContent)) {
+        
+            return setResponseStatus("invalidComment");
+        }
         
         Comment c = commBean.findByIntX("Id", commId);
      
@@ -114,12 +124,12 @@ public class CommentService {
         return setResponseStatus("removedComment"); 
     } // end removeComp()
     
+    // NOTE: not sure if this method should be part of CompService or this class
     @POST
     @Path("GetAllCommentsOnComp")
     @Produces(MediaType.APPLICATION_JSON) 
     public JSONObject getAllCommsByCompId(@QueryParam("id") int compId) { // the id comes from clicking on the composition
-        
-        
+               
         List<Comment> cList = (List<Comment>)commBean.findByIntX("CompId", compId);
       
         JSONObject j = new JSONObject();
@@ -127,18 +137,4 @@ public class CommentService {
         putJson(j, "commentList", cList);
         return j;
     } // end getAllCommsByCompId()
-    
-    @POST
-    @Path("GetCommentByCompId")
-    @Produces(MediaType.APPLICATION_JSON) 
-    public JSONObject getCommByCompId(@QueryParam("id") int compId) { // the id comes from clicking on the composition
-        
-        
-        List<Comment> cList = (List<Comment>)commBean.findByIntX("CompId", compId);
-      
-        JSONObject j = new JSONObject();
-        putJson(j, "status", "gotCommentsByCompId");
-        putJson(j, "commentList", cList);
-        return j;
-    } // end getCommsByCompId()
 } // end class()

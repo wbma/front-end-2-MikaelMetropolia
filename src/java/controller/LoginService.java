@@ -14,6 +14,7 @@ import static utils.Utils.notNull;
 import static utils.Utils.setResponseStatus;
 import org.json.JSONObject;
 import static utils.Utils.putJson;
+import static utils.Validation.validUser;
 
 /**
  * REST Web Service.
@@ -47,22 +48,20 @@ public class LoginService {
             @FormParam("username") String name, 
             @FormParam("password") String pw, 
             @FormParam("password2") String pw2) {
-    
-        // TODO: call some method to validate the data (email format, pw == pw2, etc)
+          
+        if (!validUser(name, email, pw, pw2)) { // method from utils.Validation.java
         
-        JSONObject json;
-        
-        if (notNull(uBean.findByX("Alias", name))) { // username taken
+            return setResponseStatus("invalidUser");     
+        }
+        else if (notNull(uBean.findByX("Alias", name))) { // username taken
             
-            json = setResponseStatus("usernameTaken");     
-            // TODO: notify user on client with this info
+            return setResponseStatus("aliasTaken");
         } 
         else if (notNull(uBean.findByX("Email", email))) { // email taken
         
-            json = setResponseStatus("emailTaken"); 
-            // TODO: notify user on client with this info
+            return setResponseStatus("emailTaken");
         } 
-        else { // email and username are both available        
+        else { // email and username are both available and every field is valid       
             User u = new User();
             u.setEmail(email);
             u.setAlias(name);
@@ -70,16 +69,15 @@ public class LoginService {
             u.setAdmin(0); // 0 by default; 0 = regular user, 1 = admin, 2 = superadmin. (admins can only be added manually through MariaDB)
             uBean.insertToDb(u);
             
-            json = new JSONObject();
-            putJson(json, "status", "loggedIn");
-            putJson(json, "id", uBean.findByX("Alias", name).getId());
-            putJson(json, "email", email);
-            putJson(json, "alias", name);
-            putJson(json, "admin", 0);        
-                             
+            JSONObject j = new JSONObject();
+            putJson(j, "status", "loggedIn");
+            putJson(j, "id", uBean.findByX("Alias", name).getId());
+            putJson(j, "email", email);
+            putJson(j, "alias", name);
+            putJson(j, "admin", 0);                        
+            return j;               
             // TODO: on the client, since you are now registered and logged in, alter the login/register page to contain only 'logout' button
-        }     
-        return json;   
+        }      
     } // end signUp()
     
     // fetch form data from the login form and try to log in with an existing user
@@ -89,29 +87,31 @@ public class LoginService {
     @Produces(MediaType.APPLICATION_JSON) 
     public JSONObject logIn(@FormParam("loginUsername") String name, @FormParam("loginPassword") String pw) {
     
-        // TODO: call method that validates form arguments
+        if (!validUser(name, pw)) {
         
-        JSONObject json;
+            return setResponseStatus("invalidUser");
+        }
+        
         User u = uBean.findByX("Alias", name); // check user existence by name
         
         if (notNull(u) && u.getPw().equals(pw)) {
             
             // TODO: since you are now logged in, alter the login/register page to contain only 'logout' button
             
-            json = new JSONObject();
-            putJson(json, "status", "loggedIn");
-            putJson(json, "id", u.getId());
-            putJson(json, "email", u.getEmail());
-            putJson(json, "alias", name);
-            putJson(json, "admin", u.getAdmin());
+            JSONObject j = new JSONObject();
+            putJson(j, "status", "loggedIn");
+            putJson(j, "id", u.getId());
+            putJson(j, "email", u.getEmail());
+            putJson(j, "alias", name);
+            putJson(j, "admin", u.getAdmin());
+            return j;
         } 
         else if (notNull(u) && !(u.getPw().equals(pw))) {
         
-            json = setResponseStatus("wrongPw"); 
+            return setResponseStatus("wrongPw"); 
         } 
         else {    
-             json = setResponseStatus("wrongUsername");       
+             return setResponseStatus("wrongUsername");       
         }
-        return json;
     } // end logIn()  
 } // end class
