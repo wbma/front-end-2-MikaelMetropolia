@@ -413,7 +413,7 @@ body {
 }
 #start-box-2 {
     height: 90%;
-    border: 1px solid white;
+    border: 1px;
     text-justify: auto;
     color: #fff;
     overflow: hidden;
