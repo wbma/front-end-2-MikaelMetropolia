@@ -517,7 +517,6 @@ body {
 #left-side {
     flex: 0 0 35%;
     height: 700px;
-    border: 1px solid #fff;
 }
 
 #right-side {
@@ -721,7 +720,6 @@ body {
     margin-left: 4%;
     flex: 0 0 20%;
     height: 287px;
-    border: 1px solid #fff;
 }
 
 .fileContainer {
@@ -821,6 +819,7 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
     flex: 0 0 100%;
     height: 20%;
+    border-radius: 0 0 15px 15px;
 }
 .stat-img {
     position: relative;

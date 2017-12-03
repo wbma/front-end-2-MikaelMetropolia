@@ -19,7 +19,7 @@ pepeButton.onclick = function () {
     if (myElement.style.display == 'none') {
         myElement.style.display = 'inline';
   } else {
-     myElement.classList.toggle = 'pepe-menu-closed';
+     myElement.style.display = 'none';
     }
 };
 
