@@ -60,7 +60,7 @@
 				<input type="text" class="inputfield" name="title" placeholder="Composition name" maxlength="50"><br>
 				<input type="text" class="inputfield" name="author" placeholder="Author" maxlength="50" pattern="[A-Za-z]{3}"> <br>
 				<input type="text" class="inputfield" name="length" id="number" placeholder="Duration (min)" maxlength="3"><br>
-				<input type="text" class="inputfield" name="year" id="number-1" placeholder="Year of composition"><br>
+				<input type="text" class="inputfield" name="year" id="number-1" placeholder="Year of composition" maxlength="4"><br>
 				<select class="inputfield" name="pages" id="list-20"><br>
 					<option selected hidden value="0">Number of pages</option>
 				</select>
@@ -78,7 +78,7 @@
 				<input type="text" class="inputfield" name="sheet" id="sheet-form" placeholder="Sheet">
 				<label class="fileContainer">
 					File..
-					<input name="sheet" type="file" class="upload-file">
+					<input name="sheet" type="file" class="upload-file" id="sheet-upload" accept="image/*, application/pdf">
 				</label>
 				<p id="hint"> Hint: Only .pdf and image files!</p>
 				<input type="submit" value="Publish"> <br>

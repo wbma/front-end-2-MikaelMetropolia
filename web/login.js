@@ -31,6 +31,7 @@ buttonSubmit.addEventListener('click', () => {
     var rester1 = patternPassword.test(signupPw2Input);
     const match = 0;
 
+
     if (signupPwInput == signupPw2Input) {
         const match = 1;
     }

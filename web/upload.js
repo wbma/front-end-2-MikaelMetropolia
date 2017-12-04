@@ -10,7 +10,34 @@ pepeButton.addEventListener('click', () => {
   } else {
      myElement.style.display = 'none';
     }
+
+    var fileInput = document.getElementById('sheet-upload');
+    var filename = fileInput.files[0].name;
+    console.log(filename);
+
 });
+
+
+document.getElementById('sheet-upload').onchange = uploadOnChange;
+
+function uploadOnChange() {
+    var filename = this.value;
+    var lastIndex = filename.lastIndexOf("\\");
+    if (lastIndex >= 0) {
+        filename = filename.substring(lastIndex + 1);
+    }
+    document.getElementById('sheet-form').value = filename;
+}
+
+
+
+
+/* ---------------GETTING SHEET NAME ---------------*/
+
+
+
+
+
 /* ----- Page options -------*/
   for (var i = 1; i <= 10; i++) {
         if (i === 1){
@@ -23,6 +50,8 @@ pepeButton.addEventListener('click', () => {
         sel.options[sel.options.length] = new Option(name,i);
         }
 }
+
+
 /* ------- VALIDATION ---------*/
 
 
@@ -31,6 +60,7 @@ const number1 = document.getElementById('number-1');
 const newComposition = document.getElementsByClassName("inputfield");
 
 number.onkeypress = number.onpaste = checkInput;
+number1.onkeypress = number.onpaste = checkInput;
 
 function checkInput (e) {
         var e = e || event;
@@ -41,9 +71,6 @@ function checkInput (e) {
             return false;
         }
 }
-
-
-
 
 
 test1234.addEventListener('click', () => {
@@ -61,16 +88,16 @@ const validateFields = () => {
     const video = newComposition[6].value;
     const sheet = newComposition[7].value;
 
+    const patternUsername = new RegExp("^[a-zA-Z0-9]+$");
+    const patternYoutubeURL = new RegExp("^https\\:\\/\\/www\\.youtube\\.com\\/\\S+$");
+    const testTitle = patternUsername.test(title);
+    const testAuthor = patternUsername.test(author);
+    const testYoutubeURL = patternYoutubeURL.test(video);
 
-
-    console.log(title);
-    console.log(author);
-    console.log(length);
-    console.log(year);
-    console.log(pages);
-    console.log(diff);
-    console.log(video);
-    console.log(sheet);
+if (testTitle && testAuthor && testYoutubeURL && length <= 600 && year <= 2020 && year >= 1500 && pages !== 0 && diff !== 'null') {
+    console.log("Working");
+    addComp();
+}
 
 };
 
