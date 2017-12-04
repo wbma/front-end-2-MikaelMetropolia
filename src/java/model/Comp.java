@@ -48,7 +48,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Comp.findByPages", query = "SELECT c FROM Comp c WHERE c.pages = :pages")
     , @NamedQuery(name = "Comp.findByVideo", query = "SELECT c FROM Comp c WHERE c.video = :video")
     , @NamedQuery(name = "Comp.findByAddtime", query = "SELECT c FROM Comp c WHERE c.addtime = :addtime")
-    , @NamedQuery(name = "Comp.findByAdderId", query = "SELECT c FROM Comp c WHERE c.adderid = :adderid")
+    , @NamedQuery(name = "Comp.findByAdderId", query = "SELECT c FROM Comp c WHERE c.adderidUser = :adderidUser")
     , @NamedQuery(name = "Comp.deleteComp", query = "DELETE FROM Comp c WHERE c.id = :id")})
 public class Comp implements Serializable {
 
@@ -98,14 +98,12 @@ public class Comp implements Serializable {
     @ManyToMany(mappedBy = "compCollection1") // why is this here twice??
     private Collection<User> userCollection1; // why is this here twice??
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compid2") // one comp can have many comments
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compidComp") // one comp can have many comments
     private Collection<Comment> commentCollection; // one comp can have many comments
     
     @JoinColumn(name = "ADDERID", referencedColumnName = "ID") // Comp has an adderid stat that references id column in 'User' table (foreign key user.id)
     @ManyToOne(optional = false)
-    private User adderid2; // it's a User object that CONTAINS the id... But to use int here produces an error and fails to deploy the app!
-    
-    private int adderid; // this may be highly unwise, but 'adderid' is needed for a User type object (fails to deploy with error otherwise)...
+    private User adderidUser;
 
     public Comp() {
     }
@@ -114,7 +112,7 @@ public class Comp implements Serializable {
         this.id = id;
     }
 
-    public Comp(String title, String author, Integer length, Integer year, int diff, Integer pages, String video, String sheet, Date addtime, int adderid, int comms) {
+    public Comp(String title, String author, Integer length, Integer year, int diff, Integer pages, String video, String sheet, Date addtime, User adderidUser, int comms) {
         this.title = title;
         this.author = author;
         this.length = length;
@@ -124,7 +122,7 @@ public class Comp implements Serializable {
         this.video = video;
         this.sheet = sheet;
         this.addtime = addtime;
-        this.adderid = adderid;
+        this.adderidUser = adderidUser;
         this.comms = comms;
     }
 
@@ -243,12 +241,12 @@ public class Comp implements Serializable {
         this.commentCollection = commentCollection;
     }
 
-    public int getAdderid() {
-        return adderid;
+    public User getAdderidUser() {
+        return adderidUser;
     }
 
-    public void setAdderid(int adderid) {
-        this.adderid = adderid;
+    public void setAdderidUser(User adderidUser) {
+        this.adderidUser = adderidUser;
     }
 
     @Override

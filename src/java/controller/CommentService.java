@@ -1,29 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controller;
 
 import java.sql.Date;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PUT;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import model.Comment;
 import model.Comp;
-import org.json.JSONObject;
-import static utils.Utils.putJson;
-import static utils.Utils.setResponseStatus;
+import utils.ResponseString;
+import static utils.Utils.statusResponse;
 import static utils.Validation.validComment;
 
 /**
@@ -39,6 +30,9 @@ public class CommentService {
     
     @EJB
     private CompBean compBean;
+    
+    @EJB
+    private UserBean uBean;
 
     public CommentService() {
     }
@@ -48,7 +42,7 @@ public class CommentService {
     @Path("AddComment")
     //@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     @Produces(MediaType.APPLICATION_JSON) 
-    public JSONObject addComment(
+    public Response addComment(
             @FormParam("content") String content, 
             @FormParam("compid") int compid
             ) {
@@ -57,17 +51,17 @@ public class CommentService {
         
         if (!validComment(content)) {
         
-            return setResponseStatus("invalidComment");
+            return statusResponse("invalidComment");
         }
         
         int userId = 99; // PLACEHOLDER (needs to come from the request header)
         Date addTime = new Date(System.currentTimeMillis()); // server time when it should be client... meh, who cares.    
         
         Comment c = new Comment();
-        c.setUserid(userId);
+        c.setUseridUser(uBean.findById(userId));
         c.setContent(content);
         c.setAddtime(addTime);
-        c.setCompid(compid);
+        c.setCompidComp(compBean.findByIntX("Id", compid));
         commBean.insertToDb(c);
         
         // increase number of comments on the relevant composition by 1. 
@@ -76,24 +70,25 @@ public class CommentService {
         alteredComp.setComms(alteredComp.getComms()+1);
         compBean.updateDbEntry(alteredComp);
         
-        JSONObject j = new JSONObject();
-        putJson(j, "status", "addedComment");
-        putJson(j, "content", content); // not strictly necessary, I guess... meh, let's send it anyway      
-        putJson(j, "compId", compid);
-        return j;
+        ResponseString s = new ResponseString();
+        s.add("status", "addedComment");
+        s.add("content", content); // not strictly necessary, I guess... meh, let's send it anyway      
+        s.add("compId", compid+"");
+        s.pack();
+        return Response.ok(s.toString()).build();
     } // end addComment()
     
     @POST
     @Path("EditComment")
     @Produces(MediaType.APPLICATION_JSON) 
-    public JSONObject editComment(@QueryParam("id") int commId, @FormParam("content") String newContent) { // the id comes from clicking on the comment to edit
+    public Response editComment(@QueryParam("id") int commId, @FormParam("content") String newContent) { // the id comes from clicking on the comment to edit
         
         // TODO: check that you have the right to edit it (admin or adder)... this should probably be done somewhere else
         // TODO: there could be a time check as well... it could be hard to implement though
         
         if (!validComment(newContent)) {
         
-            return setResponseStatus("invalidComment");
+            return statusResponse("invalidComment");
         }
         
         Comment c = commBean.findByIntX("Id", commId);
@@ -101,40 +96,42 @@ public class CommentService {
         c.setContent(newContent);
         commBean.updateDbEntry(c);
         
-        return setResponseStatus("editedComment"); 
+        return statusResponse("editedComment"); 
     } // end editComp()
     
     @POST
     @Path("RemoveComment")
     @Produces(MediaType.APPLICATION_JSON) 
-    public JSONObject removeComment(@QueryParam("id") int id) { // the id comes from clicking on the comment to delete
+    public Response removeComment(@QueryParam("id") int id) { // the id comes from clicking on the comment to delete
         
         // TODO: check that you have the right to remove it (admin or adder)
         
         Comment c = commBean.findByIntX("Id", id);
         commBean.deleteFromDb(c);
         
-        Comp alteredComp = compBean.findByIntX("Id", c.getCompid()); // the composition that the the comment was attached to
+        // TODO: check that this is correct...
+        Comp alteredComp = compBean.findByIntX("Id", c.getCompidComp().getId()); // the composition that the the comment was attached to
         
         int newComms = (alteredComp.getComms() > 0) ? alteredComp.getComms()-1 : 0; // if there's at least one comment, decrease the number of comments by one
         
         alteredComp.setComms(newComms);
         compBean.updateDbEntry(alteredComp);
         
-        return setResponseStatus("removedComment"); 
+        return statusResponse("removedComment"); 
     } // end removeComp()
     
     // NOTE: not sure if this method should be part of CompService or this class
     @POST
     @Path("GetAllCommentsOnComp")
     @Produces(MediaType.APPLICATION_JSON) 
-    public JSONObject getAllCommsByCompId(@QueryParam("id") int compId) { // the id comes from clicking on the composition
+    public Response getAllCommsByCompId(@QueryParam("id") int compId) { // the id comes from clicking on the composition
                
         List<Comment> cList = (List<Comment>)commBean.findByIntX("CompId", compId);
       
-        JSONObject j = new JSONObject();
-        putJson(j, "status", "gotCommentsByCompId");
-        putJson(j, "commentList", cList);
-        return j;
+        ResponseString s = new ResponseString();
+        s.add("status", "gotCommentsByCompId");
+        //s.add("commentList", cList); DISABLING FOR NOW... FIX THIS ASAP !!!
+        s.pack();
+        return Response.ok(s.toString()).build();
     } // end getAllCommsByCompId()
 } // end class()

@@ -36,10 +36,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Comment.findAll", query = "SELECT c FROM Comment c")
     , @NamedQuery(name = "Comment.findById", query = "SELECT c FROM Comment c WHERE c.id = :id")
     , @NamedQuery(name = "Comment.findByAddtime", query = "SELECT c FROM Comment c WHERE c.addtime = :addtime")
-    , @NamedQuery(name = "Comment.findByUserId", query = "SELECT c FROM Comment c WHERE c.userid = :userid")
-    , @NamedQuery(name = "Comment.findByCompId", query = "SELECT c FROM Comment c WHERE c.compid = :compid")
+    , @NamedQuery(name = "Comment.findByUserId", query = "SELECT c FROM Comment c WHERE c.useridUser = :useridUser")
+    , @NamedQuery(name = "Comment.findByCompId", query = "SELECT c FROM Comment c WHERE c.compidComp = :compidComp")
     , @NamedQuery(name = "Comment.deleteComment", query = "DELETE FROM Comment c WHERE c.id = :id")
-    , @NamedQuery(name = "Comment.countCommsOnComp", query = "SELECT COUNT(c) FROM Comment c WHERE c.compid = :compid")})
+    , @NamedQuery(name = "Comment.countCommsOnComp", query = "SELECT COUNT(c) FROM Comment c WHERE c.compidComp = :compidComp")})
 public class Comment implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -61,13 +61,10 @@ public class Comment implements Serializable {
     private Date addtime;
     @JoinColumn(name = "USERID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private User userid2;
+    private User useridUser;
     @JoinColumn(name = "COMPID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private Comp compid2;
-    
-    private int userid; // this can't be the correct way of doing things...
-    private int compid;
+    private Comp compidComp;
 
     public Comment() {
     }
@@ -76,11 +73,11 @@ public class Comment implements Serializable {
         this.id = id;
     }
 
-    public Comment(String content, Date addtime, int userid, int compid) { // are foreign keys added automatically ??
+    public Comment(String content, Date addtime, User useridUser, Comp compidComp) { // are foreign keys added automatically ??
         this.content = content;
         this.addtime = addtime;
-        this.userid = userid;
-        this.compid = compid;
+        this.useridUser = useridUser;
+        this.compidComp = compidComp;
     }
 
     public Integer getId() {
@@ -107,20 +104,20 @@ public class Comment implements Serializable {
         this.addtime = addtime;
     }
 
-    public int getUserid() {
-        return userid;
+    public User getUseridUser() {
+        return useridUser;
     }
 
-    public void setUserid(int userid) {
-        this.userid = userid;
+    public void setUseridUser(User useridUser) {
+        this.useridUser = useridUser;
     }
 
-    public int getCompid() {
-        return compid;
+    public Comp getCompidComp() {
+        return compidComp;
     }
 
-    public void setCompid(int compid) {
-        this.compid = compid;
+    public void setCompidComp(Comp compidComp) {
+        this.compidComp = compidComp;
     }
 
     @Override

@@ -51,10 +51,10 @@ public class User implements Serializable {
     @ManyToMany
     private Collection<Comp> compCollection1;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userid2")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "useridUser")
     private Collection<Comment> commentCollection;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "adderid2")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "adderidUser")
     private Collection<Comp> compCollection2;
 
     private static final long serialVersionUID = 1L;

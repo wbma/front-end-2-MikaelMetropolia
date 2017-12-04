@@ -2,28 +2,21 @@
 package controller;
 
 import javax.ejb.EJB;
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PUT;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import model.User;
-import static utils.Utils.setResponseStatus;
 import org.json.JSONObject;
+import utils.ResponseString;
 import static utils.Utils.putJson;
-import static utils.Utils.setResponseStatus;
+import static utils.Utils.statusResponse;
 import static utils.Validation.validAlias;
 import static utils.Validation.validEmail;
 import static utils.Validation.validPw;
-import static utils.Validation.validUser;
 
 /**
  * REST Web Service
@@ -42,7 +35,7 @@ public class ProfileService {
     @POST
     @Path("AlterUserStats")
     @Produces(MediaType.APPLICATION_JSON)
-    public JSONObject alterUserStats(
+    public Response alterUserStats(
             @FormParam("newAlias") String newName, 
             @FormParam("newEmail") String newEmail, 
             @FormParam("newPw") String newPw, 
@@ -74,22 +67,23 @@ public class ProfileService {
                         
         uBean.updateDbEntry(u);
     
-        JSONObject j = new JSONObject();
-        putJson(j, "status", "alteredUserStats");
-        putJson(j, "alias", alias);
-        putJson(j, "email", email);
-        putJson(j, "pw", pw);
-        return j;
+        ResponseString s = new ResponseString();
+        s.add("status", "alteredUserStats");
+        s.add("alias", alias);
+        s.add("email", email);
+        s.add("pw", pw);
+        s.pack();
+        return Response.ok(s.toString()).build();  
     } // end alterUserStats()
     
     @POST
     @Path("RemoveOwnUser")
     @Produces(MediaType.APPLICATION_JSON)
-    public JSONObject removeOwnUser(@QueryParam("removeOwnUser") int id) { // id should be gotten from the request header...
+    public Response removeOwnUser(@QueryParam("removeOwnUser") int id) { // id should be gotten from the request header...
         
         uBean.deleteFromDb(uBean.findById(id));
         
-        return setResponseStatus("removedOwnUser");   
+        return statusResponse("removedOwnUser");   
         // TODO: logout (via return value caught in fetch on client) 
     } // end removeOwnUser()
 } // end class

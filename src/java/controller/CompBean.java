@@ -74,6 +74,7 @@ public class CompBean {
     // delete composition from the database (hopefully...)
     public void deleteFromDb(Comp c) {
         
-        em.createNamedQuery("Comp.deleteComp").setParameter("id", c.getId()).getSingleResult();
+        em.remove(em.merge(c));
+        //em.createNamedQuery("Comp.deleteComp").setParameter("id", c.getId()).getSingleResult();
     }    
 } // end class

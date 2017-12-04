@@ -3,6 +3,7 @@ package utils;
 
 import org.json.JSONObject;
 import org.json.JSONArray;
+import javax.ws.rs.core.Response;
 
 /**
  * Class containing useful utility functions, for use in all possible places...
@@ -17,14 +18,9 @@ public class Utils {
     }
     
     // helper method to easily set a single-line status field for a json (response) object
-    public static JSONObject setResponseStatus(String statusMsg) {
-        
-        try {
-            return new JSONObject()
-           .put("status", statusMsg);
-        } catch (Exception e) {
-            return null;
-        }
+    public static Response statusResponse(String statusMsg) {
+
+        return Response.ok("{\"status\": \"" + statusMsg + "\"}").build();    
     }
     
     // A way to tuck the pesky mandatory try-catch statement away from the actual class files...

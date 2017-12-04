@@ -46,7 +46,8 @@ public class CommentBean {
     // delete user from the database (hopefully...)
     public void deleteFromDb(Comment c) {
         
-        em.createNamedQuery("Comment.deleteComment").setParameter("id", c.getId()).getSingleResult();
+        em.remove(em.merge(c));
+        //em.createNamedQuery("Comment.deleteComment").setParameter("id", c.getId()).getSingleResult();
     }
 
    // A 'findByX' method that works for ints instead of Strings (analogical to 'findById()' in UserBean.java, but here more int stats are needed)

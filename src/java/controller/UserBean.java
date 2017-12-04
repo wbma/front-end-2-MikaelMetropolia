@@ -42,7 +42,8 @@ public class UserBean {
     // delete user from the database (hopefully...)
     public void deleteFromDb(User u) {
         
-        em.createNamedQuery("User.deleteUser").setParameter("id", u.getId()).getSingleResult();
+        em.remove(em.merge(u));
+        //em.createNamedQuery("User.deleteUser").setParameter("id", u.getId()).getSingleResult();
     }    
         
    public User findById(int id) {

@@ -10,8 +10,6 @@ const signupEmailInput = signUpForm.elements[1];
 const signupPwInput = signUpForm.elements[2];
 const signupPw2Input = signUpForm.elements[3];
 
-
-
 loginForm.addEventListener("submit", function(evt) {
         evt.preventDefault();
         login();
@@ -72,8 +70,11 @@ function signup() {
     };
     
     fetch('App/UserService/SignUp', request).then((response) => {
-        return response.json();
-        // TODO: need to catch a possible network error here...
+        if(response.ok) {
+            return response.json();
+        }
+        throw new Error('Network response was not ok.');
+        
     }).then((myJson) => {
 
         if (myJson.status === 'loggedIn') {
@@ -92,5 +93,7 @@ function signup() {
             
             // TODO: display a msg about taken email
         }
+    }).catch(function(error) {
+        console.log('There has been a problem with your fetch operation: ' + error.message);
     }); // end fetch()
 } // end signup()
