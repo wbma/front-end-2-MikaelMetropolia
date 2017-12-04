@@ -1,7 +1,7 @@
 'use strict';
 
-const leftForm = document.querySelector('#leftForm');
-const rightForm = document.querySelector('#rightForm');
+const leftForm = document.querySelector('#upload-left');
+const rightForm = document.querySelector('#upload-right');
 
 rightForm.addEventListener("submit", function(evt) {
         evt.preventDefault();

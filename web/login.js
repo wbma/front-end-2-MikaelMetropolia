@@ -1,4 +1,4 @@
-'use strict';
+
 
 const loginForm = document.querySelector('#loginForm');
 const signUpForm = document.querySelector('#signUpForm');
@@ -10,17 +10,53 @@ const signupEmailInput = signUpForm.elements[1];
 const signupPwInput = signUpForm.elements[2];
 const signupPw2Input = signUpForm.elements[3];
 
+const SPECIALS = "\\!\\$\\&\\%\\+\\#\\\\\\{\\}\\@\\/\\[\\]\\*\\;\\^\\'\\~\\<\\>\\|\\\"\\=\\`\\(\\)";
+/*---------------SERVER SIDE VALIDATION---------------- */
+
+const buttonSubmit = document.getElementById('submit-values');
+
+buttonSubmit.addEventListener('click', () => {
+    const signUpForm = document.querySelector('#signUpForm');
+    const signupAliasInput = signUpForm.elements[0].value;
+    const signupEmailInput = signUpForm.elements[1].value;
+    const signupPwInput = signUpForm.elements[2].value;
+    const signupPw2Input = signUpForm.elements[3].value;
+
+    var patternUsername = new RegExp("^[a-zA-Z0-9]+$");
+    var patternEmail = new RegExp("^[^"+SPECIALS+"\\d\\s+][a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]{2,3}$");
+    var patternPassword = new RegExp("^(?=.*["+SPECIALS+"]{2,})(?!.*\\s+)(?=.*[a-z]{2,})(?=.*[A-Z]{2,})(?=.*\\d{2,}).*$");
+    var res = patternUsername.test(signupAliasInput);
+    var rest = patternEmail.test(signupEmailInput);
+    var rester = patternPassword.test(signupPwInput);
+    var rester1 = patternPassword.test(signupPw2Input);
+    const match = 0;
+
+
+    if (signupPwInput == signupPw2Input) {
+        const match = 1;
+    }
+
+    if (res && rest && rester && match === 1) {
+        signup();
+        console.log("Working");
+    }
+    console.log(res);
+    console.log(rest);
+    console.log(rester);
+    console.log(match);
+});
+
 loginForm.addEventListener("submit", function(evt) {
         evt.preventDefault();
         login();
 });
 
-
+/*
 signUpForm.addEventListener("submit", function(evt) {
         evt.preventDefault();
         signup();
 });
-
+*/
 function login() {
 
     const request = { 
@@ -30,7 +66,7 @@ function login() {
         body: `loginUsername=${loginAliasInput.value}&loginPassword=${loginPwInput.value}`
     };
     
-    fetch('App/UserService/LogIn', request).then((response) => {   
+    fetch('App/LoginService/LogIn', request).then((response) => {   
         if(response.ok) {
             return response.json();
         }
@@ -69,7 +105,7 @@ function signup() {
         body: `username=${signupAliasInput.value}&email=${signupEmailInput.value}&password=${signupPwInput.value}&password2=${signupPw2Input.value}`
     };
     
-    fetch('App/UserService/SignUp', request).then((response) => {
+    fetch('App/LoginService/SignUp', request).then((response) => {
         if(response.ok) {
             return response.json();
         }
