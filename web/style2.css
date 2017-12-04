@@ -662,7 +662,7 @@ body {
 #upload-left .inputfield,
 #upload-right .inputfield,
 #right-side-settings .inputfield{
-    font-family: 'Tangerine', serif;
+    font-family: italic;
     color: #000;
     font-size: 30px;
     padding: 12px 20px;
@@ -676,22 +676,9 @@ body {
     background: rgba(255, 255, 255, 0.2);
     width: 90%;
 }
-#sheet-form {
+#upload-right #sheet-form {
     width: 70%;
-    font-family: 'Tangerine', serif;
-    color: #000;
-    font-size: 30px;
-    padding: 12px 20px;
-    margin: 20px 0;
-    margin-left: 5%;
-    margin-right: 2%;
-    display: inline-block;
-    border: transparent;
-    border-radius: 8px;
-    box-sizing: border-box;
-    background: rgba(255, 255, 255, 0.2);
 }
-
 
 #hint {
     user-select: none;

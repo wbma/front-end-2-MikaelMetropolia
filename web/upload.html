@@ -57,18 +57,25 @@
 		</div>
 		<section id="upload-left">
 			<form action="">
-				<input type="text" class="inputfield" name="title" placeholder="Composition name"> <br>
-				<input type="text" class="inputfield" name="author" placeholder="Author"> <br>
-				<input type="text" class="inputfield" name="length" placeholder="Duration"> <br>
-				<input type="text" class="inputfield" name="year" placeholder="Year of composition"> <br>
-				<input type="text" class="inputfield" name="pages" placeholder="Number of pages"> <br>
+				<input type="text" class="inputfield" name="title" placeholder="Composition name" maxlength="50"><br>
+				<input type="text" class="inputfield" name="author" placeholder="Author" maxlength="50" pattern="[A-Za-z]{3}"> <br>
+				<input type="text" class="inputfield" name="length" id="number" placeholder="Duration (min)" maxlength="3"><br>
+				<input type="text" class="inputfield" name="year" id="number-1" placeholder="Year of composition"><br>
+				<select class="inputfield" name="pages" id="list-20"><br>
+					<option selected hidden value="0">Number of pages</option>
+				</select>
 			</form>
 		</section>
 		<section id="upload-right">
 			<form>
-				<input type="text" class="inputfield" name="diff" placeholder="Level"> <br>
-				<input type="text" class="inputfield" name="video" placeholder="Video link"> <br>
-				<input type="text" name="Sheet" id="sheet-form" placeholder="Sheet">
+				<select class="inputfield" name="diff" required> HELLO
+					<option selected hidden value="null">Difficulty</option>
+					<option value="0">Beginner</option>
+					<option value="1">Intermediate</option>
+					<option value="2">Advanced</option>
+				</select><br>
+				<input type="text" class="inputfield" name="video" placeholder="Video link"><br>
+				<input type="text" class="inputfield" name="sheet" id="sheet-form" placeholder="Sheet">
 				<label class="fileContainer">
 					File..
 					<input name="sheet" type="file" class="upload-file">
@@ -79,9 +86,9 @@
 		</section>
 	</div>
 </main>
+<input type="submit" value="Publish" id="test1234"> <br>
 <script src="upload.js"> </script>
 <script src="navbar.js"> </script>
-<script src="comp.js"> </script>
 </body>
 </html>
 
