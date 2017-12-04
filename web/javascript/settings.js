@@ -24,14 +24,14 @@ pepeButton.onclick = function () {
 };
 
 removeButton.addEventListener('click', () => {
-    pepeProfileImg.src = "default.jpg";
+    pepeProfileImg.src = "resources/default.jpg";
     console.log(pepeProfileImg.src);
-    pepeSquareImg.src = "default.jpg";
+    pepeSquareImg.src = "resources/default.jpg";
 });
 
 addButton.addEventListener('click', () => {
-    pepeProfileImg.src = "pepe.png";
-    pepeSquareImg.src = "pepe.png";
+    pepeProfileImg.src = "resources/pepe.png";
+    pepeSquareImg.src = "resources/pepe.png";
 });
 
 saveButton.addEventListener('click', () => {

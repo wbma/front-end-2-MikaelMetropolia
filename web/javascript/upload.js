@@ -17,6 +17,7 @@ pepeButton.addEventListener('click', () => {
 
 });
 
+/* ---------------GETTING SHEET NAME ---------------*/
 
 document.getElementById('sheet-upload').onchange = uploadOnChange;
 
@@ -28,13 +29,6 @@ function uploadOnChange() {
     }
     document.getElementById('sheet-form').value = filename;
 }
-
-
-
-
-/* ---------------GETTING SHEET NAME ---------------*/
-
-
 
 
 
