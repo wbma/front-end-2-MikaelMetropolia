@@ -78,10 +78,14 @@ function login() {
             
             // NOTE: might need to convert the id from int to String !
             document.cookie = "id=" + myJson.id + "; path=/"; // store the user's id in a global cookie for the duration of the session
+            console.log("Cookie: " + document.cookie);
             // TODO: display a msg about successfully logging in
             // TODO: make the login/register buttons invisible and replace with a 'logout' button
             // TODO: possibly store the other values in the cookie as well (alias etc)... more potential for erros that way.
             // Yet without that, we'll have to do a database operation each time the user enters the profile page, etc.
+            
+            window.location.href = "index.html";
+            
         }
         else if (myJson.status === 'wrongUsername') {
             

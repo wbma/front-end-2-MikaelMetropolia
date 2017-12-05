@@ -14,6 +14,8 @@ mainMenu.style.display = 'none';
 submenu1.style.display = 'none';
 submenu2.style.display = 'none';
 
+console.log("Cookie: " + document.cookie);
+
 headerButton.addEventListener('click', () => {
  if (mainMenu.style.display == 'none') {
         mainMenu.style.display = 'inline-block';
