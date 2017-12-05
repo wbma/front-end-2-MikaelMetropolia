@@ -11,31 +11,31 @@ var favoriteCount;
 
 thumbButton.addEventListener('click', () => {
     likeCount = thumbElement.innerHTML.toString();
-    if (thumbButton.getAttribute("src") == 'thumb-white.png') {
+    if (thumbButton.getAttribute("src") == 'resources/thumb-white.png') {
         likeCount++;
         likeCount.toString;
         thumbElement.innerHTML = likeCount;
-        thumbButton.src = 'thumb-green.png';
+        thumbButton.src = 'resources/thumb-green.png';
     } else {
        likeCount--;
        likeCount.toString;
        thumbElement.innerHTML = likeCount;
-       thumbButton.src = 'thumb-white.png';
+       thumbButton.src = 'resources/thumb-white.png';
     }
    });
 
 favoriteButton.addEventListener('click', () => {
     favoriteCount = favoriteElement.innerHTML.toString();
-    if (favoriteButton.getAttribute("src") == 'favorite-white.png') {
+    if (favoriteButton.getAttribute("src") == 'resources/favorite-white.png') {
         favoriteCount++;
         favoriteCount.toString;
         favoriteElement.innerHTML = favoriteCount;
-        favoriteButton.src = 'favorite-red.png';
+        favoriteButton.src = 'resources/favorite-red.png';
     } else {
        favoriteCount--;
        favoriteCount.toString;
        favoriteElement.innerHTML = favoriteCount;
-       favoriteButton.src = 'favorite-white.png';
+       favoriteButton.src = 'resources/favorite-white.png';
     }
    });
 
