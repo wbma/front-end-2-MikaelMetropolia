@@ -473,7 +473,7 @@ body {
 #start-navi-bar {
     flex: 0 0 auto;
     margin-left: 5%;
-    width: 70%;
+    width: 80%;
     height: 10%;
     margin-top: 20px;
     background: rgba(85, 85, 85,.6);
@@ -484,9 +484,8 @@ body {
 .learn-piano {
     user-select: none;
     display: inline-block;
-    font-size: 40px;
+    font-size: 160%;
     color: #fff;
-    padding-right: 5%;
     margin-top: 0%;
     cursor: pointer;
 }
@@ -509,6 +508,7 @@ body {
     border-radius: 0.3em 0 0 0.3em;
     background: #242830;
 }
+
 
 .right {
     border: solid #fff;
