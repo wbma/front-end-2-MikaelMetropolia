@@ -442,7 +442,7 @@ body {
     margin: 0 auto;
 }
 
-.piano p{
+.start-box p,h3{
     margin-left: 1em;
     margin-right: 1em;
     text-indent: 1em;
