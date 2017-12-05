@@ -65,6 +65,12 @@ public class Validation {
         return pw.matches("^(?=.*["+SPECIALS+"]{2,})(?!.*\\s+)(?=.*[a-z]{2,})(?=.*[A-Z]{2,})(?=.*\\d{2,}).*$");
     } // end validPw()
     
+    
+    public static boolean validPic(String pic) {
+    
+        return !isEmpty(pic);
+    }
+    
     public static boolean validComp(String title, String author, int length, int year, int diff, int pages, String video, String sheet) {
     
         if (lengthOver(title, 50) || isEmpty(title)) {
