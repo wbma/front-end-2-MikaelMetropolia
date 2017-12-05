@@ -13,7 +13,6 @@ import javax.ws.rs.core.Response;
 import model.User;
 import static utils.Utils.notNull;
 import static utils.Utils.statusResponse;
-import org.json.JSONObject;
 import utils.ResponseString;
 
 /**
@@ -94,7 +93,6 @@ public class AdminService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response removeAnyUser(@FormParam("userToRemove") String alias) {
         
-        JSONObject json;
         User u = uBean.findByX("Alias", alias);
         
         if (notNull(u)) {

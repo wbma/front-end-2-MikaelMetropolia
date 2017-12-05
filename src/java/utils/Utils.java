@@ -1,8 +1,6 @@
 
 package utils;
 
-import org.json.JSONObject;
-import org.json.JSONArray;
 import javax.ws.rs.core.Response;
 
 /**
@@ -22,17 +20,6 @@ public class Utils {
 
         return Response.ok("{\"status\": \"" + statusMsg + "\"}").build();    
     }
-    
-    // A way to tuck the pesky mandatory try-catch statement away from the actual class files...
-    public static JSONObject putJson(JSONObject j, String key, Object value) {
-        
-        try {
-            return new JSONObject()
-           .put(key, value);
-        } catch (Exception e) {
-            return null;
-        }
-    } // end putJson()
     
     // check whether something is empty or not (zero length or contains pure whitespace)
     public static boolean isEmpty(String str) {
