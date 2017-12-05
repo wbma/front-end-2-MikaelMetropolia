@@ -5,12 +5,14 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.ws.rs.CookieParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 import model.Comp;
 import static utils.Utils.statusResponse;
@@ -93,14 +95,14 @@ public class CompService {
         
         List<Comp> comps = cBean.findAllByIntX("Diff", diff);
        
-        ResponseString s = new ResponseString();
-        s.add("status", "gotCompsByDiff");
-        s.add("diff", diff+"");
-        //s.add("compList", comps); // FIX THIS ASAP !!!!!!!!!!!!!!!!!!
-        s.pack();
-        return Response.ok(s.toString()).build();   
+        try {
+            return Response.ok(comps).build();   
+        } catch (Exception e) {
+            return null;
+        }
     } // end getCompsByDiff()
     
+    // where is this needed ???
     @POST
     @Path("GetCompById")
     @Produces(MediaType.APPLICATION_JSON) 
@@ -127,29 +129,28 @@ public class CompService {
     
     // used for getting your own compositions
     @POST
-    @Path("GetCompsByAdderId")
+    @Path("GetCompsByOwnd")
     @Produces(MediaType.APPLICATION_JSON) 
-    public Response getCompsByAdderId(@QueryParam("adderid") int adderId) {
+    public Response getCompsByOwnId(@CookieParam("id") int adderId) {
         
         List<Comp> comps = cBean.findAllByIntX("AdderId", adderId);
         
-        ResponseString s = new ResponseString();
-        s.add("status", "gotCompsByAdderId");
-        s.add("adderId", adderId+"");
-        //s.add("compList", comps); FIX THIS ASAP !!!
-        s.pack();
-        return Response.ok(s.toString()).build();   
+        try {
+            return Response.ok(comps).build();   
+        } catch (Exception e) {
+            return null;
+        } 
     } // end getCompsById()
     
     // TODO: there is an issue with removal due to the Likes and Favorite tables referencing the Comp table; fix this asap!
     @POST
     @Path("RemoveComp")
     @Produces(MediaType.APPLICATION_JSON) 
-    public Response removeComp(@QueryParam("id") int id) { // the id comes from clicking on the composition to delete
+    public Response removeComp(@CookieParam("id") int ownId, @QueryParam("id") int userid) { // the id comes from clicking on the composition to delete
         
         // TODO: check that you have the right to remove it (admin or adder)
         
-        Comp c = cBean.findByIntX("Id", id);
+        Comp c = cBean.findByIntX("Id", userid);
         cBean.deleteFromDb(c);
         
         ResponseString s = new ResponseString();
@@ -190,11 +191,11 @@ public class CompService {
             }       
         }
                 
-        ResponseString s = new ResponseString();
-        s.add("status", "searchCompleted");
-        //s.add("compList", resultComps); FIX THIS ASAP !!!!!!!!!!!!!!!!!!!
-        s.pack();
-        return Response.ok(s.toString()).build();
+         try {
+            return Response.ok(resultComps).build();   
+        } catch (Exception e) {
+            return null;
+        }
     } // end titleSearch()
 
     // There are a million billion stats that it's possible to change... This method should take care of all of them
@@ -203,11 +204,10 @@ public class CompService {
     @POST
     @Path("EditComp")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response editComp(@QueryParam("id") int compId, @QueryParam("newStat") String statName, @QueryParam("newVal") String statValue) {
+    public Response editComp(@CookieParam("id") int ownId, @QueryParam("id") int compId, @QueryParam("newStat") String statName, @QueryParam("newVal") String statValue) {
         
         // TODO: remove the overlap between utils.Validation.validComp() and this validation...
-        
-        int ownId = 1; // PLACEHOLDER! Needs to come from the request header!      
+             
         // TODO: check credentials (admin / adder ?)
         
         Comp c = cBean.findByIntX("Id", compId); 

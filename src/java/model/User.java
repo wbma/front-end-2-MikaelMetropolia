@@ -76,15 +76,19 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "ADMIN")
     private int admin;
+    @Basic(optional = false)
+    @Column(name = "PIC", length = 255)
+    private String pic;
 
     public User() {
     }
 
-    public User(String email, String alias, String pw, int admin) {
+    public User(String email, String alias, String pw, int admin, String pic) {
         this.email = email;
         this.alias = alias;
         this.pw = pw;
         this.admin = admin;
+        this.pic = pic;
     }
 
     public int getId() {
@@ -125,6 +129,14 @@ public class User implements Serializable {
 
     public void setAdmin(int admin) {
         this.admin = admin;
+    }
+    
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
     }
 
     @Override

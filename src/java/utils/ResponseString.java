@@ -33,6 +33,6 @@ public class ResponseString {
     public String toString() {
     
         return this.str;
-    }
+    }    
     
 } // end class

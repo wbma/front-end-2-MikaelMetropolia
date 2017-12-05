@@ -4,6 +4,7 @@ package controller;
 import java.sql.Date;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.ws.rs.CookieParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
@@ -44,7 +45,8 @@ public class CommentService {
     @Produces(MediaType.APPLICATION_JSON) 
     public Response addComment(
             @FormParam("content") String content, 
-            @FormParam("compid") int compid
+            @FormParam("compid") int compid, 
+            @CookieParam("id") int userId
             ) {
     
         // TODO: spam check...
@@ -54,7 +56,6 @@ public class CommentService {
             return statusResponse("invalidComment");
         }
         
-        int userId = 99; // PLACEHOLDER (needs to come from the request header)
         Date addTime = new Date(System.currentTimeMillis()); // server time when it should be client... meh, who cares.    
         
         Comment c = new Comment();
@@ -81,7 +82,7 @@ public class CommentService {
     @POST
     @Path("EditComment")
     @Produces(MediaType.APPLICATION_JSON) 
-    public Response editComment(@QueryParam("id") int commId, @FormParam("content") String newContent) { // the id comes from clicking on the comment to edit
+    public Response editComment(@CookieParam("id") int ownId, @QueryParam("id") int commId, @FormParam("content") String newContent) { // the id comes from clicking on the comment to edit
         
         // TODO: check that you have the right to edit it (admin or adder)... this should probably be done somewhere else
         // TODO: there could be a time check as well... it could be hard to implement though
@@ -102,7 +103,7 @@ public class CommentService {
     @POST
     @Path("RemoveComment")
     @Produces(MediaType.APPLICATION_JSON) 
-    public Response removeComment(@QueryParam("id") int id) { // the id comes from clicking on the comment to delete
+    public Response removeComment(@CookieParam("id") int ownId, @QueryParam("id") int id) { // the id comes from clicking on the comment to delete
         
         // TODO: check that you have the right to remove it (admin or adder)
         
@@ -126,12 +127,12 @@ public class CommentService {
     @Produces(MediaType.APPLICATION_JSON) 
     public Response getAllCommsByCompId(@QueryParam("id") int compId) { // the id comes from clicking on the composition
                
-        List<Comment> cList = (List<Comment>)commBean.findByIntX("CompId", compId);
+        List<Comment> cList = (List<Comment>)commBean.findAllByIntX("CompId", compId);
       
-        ResponseString s = new ResponseString();
-        s.add("status", "gotCommentsByCompId");
-        //s.add("commentList", cList); DISABLING FOR NOW... FIX THIS ASAP !!!
-        s.pack();
-        return Response.ok(s.toString()).build();
+         try {
+            return Response.ok(cList).build();   
+        } catch (Exception e) {
+            return null;
+        }
     } // end getAllCommsByCompId()
 } // end class()
