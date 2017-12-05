@@ -1,21 +1,6 @@
 'use strict';
-const myElement = document.getElementById("pepe-menu-id");
-const pepeButton = document.getElementById("pepe");
 const submitButton = document.getElementById("test1234");
-myElement.style.display = 'none';
 
-pepeButton.addEventListener('click', () => {
-    if (myElement.style.display == 'none') {
-        myElement.style.display = 'inline';
-  } else {
-     myElement.style.display = 'none';
-    }
-
-    var fileInput = document.getElementById('sheet-upload');
-    var filename = fileInput.files[0].name;
-    console.log(filename);
-
-});
 
 /* ---------------GETTING SHEET NAME ---------------*/
 

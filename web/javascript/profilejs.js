@@ -19,15 +19,12 @@ const dropElement = document.getElementById('dropdown');
 const dropElement2 = document.getElementById('dropdown2');
 const dropElement3 = document.getElementById('dropdown3');
 const dropElement4 = document.getElementById('dropdown4');
-const myElement = document.querySelector("#pepe-menu-id");
 
 const button3 = document.getElementById("uploads");
 const button4 = document.getElementById("uploads2");
 const button5 = document.getElementById("uploads3");
 const button6 = document.getElementById("uploads4");
-const pepeButton = document.getElementById("pepe");
 
-myElement.style.display = 'none';
 
 const popUp = document.querySelector(".pop-up");
 const popUpButton = document.getElementsByClassName('not-a-link');
@@ -65,14 +62,6 @@ button5.addEventListener('click', () => {
 button6.addEventListener('click', () => {
     hideMenu(right8, element4, dropElement4);
 });
-
-pepeButton.onclick = function () {
-    if (myElement.style.display == 'none') {
-        myElement.style.display = 'inline';
-  } else {
-     myElement.style.display = 'none';
-    }
-};
 
 const hideMenu =  (arrow, element, dropElement) => {
         arrow = window.getComputedStyle(element).getPropertyValue('transform');

@@ -48,3 +48,69 @@ submenu2Button.addEventListener('click', () => {
     }
 });
 
+
+/*----------------If you are logged in run this----------------------*/
+
+if (document.cookie.length > 0) {
+    console.log(document.querySelectorAll('div'));
+    document.getElementById('user-icon').innerHTML = `<img src="resources/pepe.png" class="img-circle" id="pepe"></a>
+            <ul class="pepe-menu" id="pepe-menu-id">
+            <li><a href="profile.html">My profile</a></li>
+            <li><a href="settings.html">Settings</a></li>
+            <li><a href="upload.html">Upload</a></li>
+            <li id="log-out-button">Log out</li>
+        </ul>`;
+    
+    
+/*-----------PROFILE ICON MENU--------------*/
+
+
+const profileElement = document.querySelector("#pepe-menu-id");
+const pepeButton = document.getElementById("pepe");
+
+
+profileElement.style.display = 'none';
+
+pepeButton.onclick = function () {
+    if (profileElement.style.display === 'none') {
+        profileElement.style.display = 'inline';
+  } else {
+     profileElement.style.display = 'none';
+    }
+};
+
+/*------------------REMOVING COOKIE ----------------*/
+const logOutButton = document.getElementById("log-out-button");
+
+logOutButton.addEventListener('click', () => {
+    console.log("clicked");
+    deleteCookies();
+});
+
+function deleteCookies() {
+    console.log("Cookies deleted");   
+    
+    var cookies = document.cookie.split("; ");
+    for (var c = 0; c < cookies.length; c++) {
+        var d = window.location.hostname.split(".");
+        while (d.length > 0) {
+            var cookieBase = encodeURIComponent(cookies[c].split(";")[0].split("=")[0]) + '=; expires=Thu, 01-Jan-1970 00:00:01 GMT; domain=' + d.join('.');
+            var p = location.pathname.split('/');
+            document.cookie = cookieBase + '/';
+            while (p.length > 0) {
+                document.cookie = cookieBase + p.join('/');
+                p.pop();
+            };
+            d.shift();
+        }
+    }
+
+    window.location.href = "index.html";
+
+    console.log("deleting...");
+    console.log(document.cookie);
+    console.log(document.cookie);
+    console.log(document.cookie);
+}
+
+}

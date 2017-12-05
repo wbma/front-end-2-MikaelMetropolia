@@ -1,6 +1,4 @@
 'use strict';
-const myElement = document.querySelector("#pepe-menu-id");
-const pepeButton = document.getElementById("pepe");
 const pepeProfileImg = document.getElementById("profile-img");
 const pepeSquareImg = document.getElementById("pepe");
 const usernameInput = document.getElementById("username-input");
@@ -12,16 +10,8 @@ const saveButton = document.getElementById("save-settings");
 
 const settingsForm = document.querySelector("#settingsForm");
 
-myElement.style.display = 'none';
 console.log(usernameInput.value);
 
-pepeButton.onclick = function () {
-    if (myElement.style.display == 'none') {
-        myElement.style.display = 'inline';
-  } else {
-     myElement.style.display = 'none';
-    }
-};
 
 removeButton.addEventListener('click', () => {
     pepeProfileImg.src = "resources/default.jpg";

@@ -77,7 +77,7 @@ function login() {
         if (myJson.status === 'loggedIn') {
             
             // NOTE: might need to convert the id from int to String !
-            document.cookie = "id=" + myJson.id + "; path=/"; // store the user's id in a global cookie for the duration of the session
+            document.cookie = "id=" + myJson.id; // store the user's id in a global cookie for the duration of the session
             console.log("Cookie: " + document.cookie);
             // TODO: display a msg about successfully logging in
             // TODO: make the login/register buttons invisible and replace with a 'logout' button
@@ -120,7 +120,7 @@ function signup() {
         if (myJson.status === 'loggedIn') {
             
             // NOTE: might need to convert the id from int to String !
-            document.cookie = "id=" + myJson.id + "; path=/"; // store the user's id in a global cookie for the duration of the session
+            document.cookie = "id=" + myJson.id; // store the user's id in a global cookie for the duration of the session
             // TODO: display a msg about successfully logging in
             // TODO: make the login/register buttons invisible and replace with a 'logout' button
             // TODO: possibly store the other values in the cookie as well (alias etc)... more potential for erros that way.

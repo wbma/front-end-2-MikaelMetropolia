@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css?family=Tangerine" rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Great+Vibes' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Merienda+One' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="style2.css" type="text/css">
+	<title>Upload</title>
+
+</head>
+<body>
+<nav>
+    <div class="nav-wrapper">
+        <div class="nav-button">
+            <img src="resources/dropdownmenuiconrofl.png" alt="Menu icon" width="100" height="100" id="menu-button">
+            <ul class="sub-menu" id="main-menu">
+                <li><a id="sub-menu-button-1"> <i class="right" id="right"></i> Where to start? </a>
+                    <ul class="start-sub-menu" id="start-sub-menu-1">
+                        <li class="sub-menu-1"><a href="Start.html">- Piano keyboard </a></li>
+                        <li class="sub-menu-1"><a href="Start.html">- Music sheet 1</a></li>
+                        <li class="sub-menu-1"><a href="Start.html">- Music sheet 2</a></li>
+                    </ul>
+                </li>
+                <li><a id="sub-menu-button-2"><i class="right" id="right2"></i> Compositions </a>
+                    <ul class="start-sub-menu" id="start-sub-menu-2">
+                        <li class="sub-menu-1"><a href="Beginner.html"> - Beginner</a></li>
+                        <li class="sub-menu-1"><a href="Intermediate.html"> - Intermediate</a></li>
+                        <li class="sub-menu-1"><a href="Advanced.html"> - Advanced</a></li>
+                    </ul>
+                </li>
+                <li><a href="profile.html"> Profile </a></li>
+                <li id="sub-menu-last"><a href=""> TBD</a></li>
+            </ul>
+        </div>
+        <header class="banner"><a href="index.html"> <img src="resources/LOGO.png" alt="logo" class="logo" width="425" height="50"> </a></header>
+        <div id="search-bar" class="search-box-wrapper"><input type="text" class="search-box-input">
+            <button class="search-box-button"> &#128269;</button>
+        </div>
+        <div class="log-in-icon" id="user-icon"><a href="LogInPage.html"><img src="resources/loginpic.PNG" class="log-in-img"></a></div>
+    </div>
+</nav>
+<main id="wrapper-upload">
+	<div id="upload-box" class="upload-form">
+		<div id="upload-title">
+			<h1 id="upload-header">
+				Upload a new composition
+			</h1>
+		</div>
+		<section id="upload-left">
+			<form action="">
+				<input type="text" class="inputfield" name="title" placeholder="Composition name" maxlength="50"><br>
+				<input type="text" class="inputfield" name="author" placeholder="Author" maxlength="50" pattern="[A-Za-z]{3}"> <br>
+				<input type="text" class="inputfield" name="length" id="number" placeholder="Duration (min)" maxlength="3"><br>
+				<input type="text" class="inputfield" name="year" id="number-1" placeholder="Year of composition" maxlength="4"><br>
+				<select class="inputfield" name="pages" id="list-20"><br>
+					<option selected hidden value="0">Number of pages</option>
+				</select>
+			</form>
+		</section>
+		<section id="upload-right">
+			<form>
+				<select class="inputfield" name="diff" required> HELLO
+					<option selected hidden value="null">Difficulty</option>
+					<option value="0">Beginner</option>
+					<option value="1">Intermediate</option>
+					<option value="2">Advanced</option>
+				</select><br>
+				<input type="text" class="inputfield" name="video" placeholder="Video link"><br>
+				<input type="text" class="inputfield" name="sheet" id="sheet-form" placeholder="Sheet">
+				<label class="fileContainer">
+					File..
+					<input name="sheet" type="file" class="upload-file" id="sheet-upload" accept="image/*, application/pdf">
+				</label>
+				<p id="hint"> Hint: Only .pdf and image files!</p>
+				<input type="submit" value="Publish"> <br>
+			</form>
+		</section>
+	</div>
+</main>
+<input type="submit" value="Publish" id="test1234"> <br>
+<script src="javascript/upload.js"> </script>
+<script src="javascript/navbar.js"> </script>
+</body>
+</html>
+
+
