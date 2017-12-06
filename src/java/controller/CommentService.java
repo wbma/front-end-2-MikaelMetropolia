@@ -45,7 +45,7 @@ public class CommentService {
     @Produces(MediaType.APPLICATION_JSON) 
     public Response addComment(
             @FormParam("content") String content, 
-            @FormParam("compid") int compid, 
+            @QueryParam("compid") int compid, // do we use QueryParam here or something else??
             @CookieParam("id") int userId
             ) {
     
@@ -73,19 +73,19 @@ public class CommentService {
         
         ResponseString s = new ResponseString();
         s.add("status", "addedComment");
-        s.add("content", content); // not strictly necessary, I guess... meh, let's send it anyway      
+        s.add("content", content);     
         s.add("compId", compid+"");
         s.pack();
         return Response.ok(s.toString()).build();
     } // end addComment()
     
+    // the edit button should only be visible to admins and the comment adder
     @POST
     @Path("EditComment")
     @Produces(MediaType.APPLICATION_JSON) 
     public Response editComment(@CookieParam("id") int ownId, @QueryParam("id") int commId, @FormParam("content") String newContent) { // the id comes from clicking on the comment to edit
         
-        // TODO: check that you have the right to edit it (admin or adder)... this should probably be done somewhere else
-        // TODO: there could be a time check as well... it could be hard to implement though
+        // TODO: add a time check... if we have the time :p
         
         if (!validComment(newContent)) {
         
@@ -98,14 +98,12 @@ public class CommentService {
         commBean.updateDbEntry(c);
         
         return statusResponse("editedComment"); 
-    } // end editComp()
+    } // end editComment()
     
     @POST
-    @Path("RemoveComment")
+    @Path("DeleteComment")
     @Produces(MediaType.APPLICATION_JSON) 
-    public Response removeComment(@CookieParam("id") int ownId, @QueryParam("id") int id) { // the id comes from clicking on the comment to delete
-        
-        // TODO: check that you have the right to remove it (admin or adder)
+    public Response deleteComment(@CookieParam("id") int ownId, @QueryParam("id") int id) { // the id comes from clicking on the comment to delete
         
         Comment c = commBean.findByIntX("Id", id);
         commBean.deleteFromDb(c);
@@ -119,20 +117,36 @@ public class CommentService {
         compBean.updateDbEntry(alteredComp);
         
         return statusResponse("removedComment"); 
-    } // end removeComp()
+    } // end removeComment()
     
     // NOTE: not sure if this method should be part of CompService or this class
+    // used in a double-fetch when clicking on a composition in the larger list view
     @POST
-    @Path("GetAllCommentsOnComp")
+    @Path("GetCommentsByCompId")
     @Produces(MediaType.APPLICATION_JSON) 
-    public Response getAllCommsByCompId(@QueryParam("id") int compId) { // the id comes from clicking on the composition
+    public Response getCommsByCompId(@QueryParam("id") int compId) { // the id comes from clicking on the composition
                
         List<Comment> cList = (List<Comment>)commBean.findAllByIntX("CompId", compId);
       
          try {
             return Response.ok(cList).build();   
         } catch (Exception e) {
-            return null;
+            return statusResponse("failedToGetComments");
         }
-    } // end getAllCommsByCompId()
+    } // end getCommsByCompId()
+    
+    // used for displaying your own comments in the profile view
+    @POST
+    @Path("GetCommentsByUserId")
+    @Produces(MediaType.APPLICATION_JSON) 
+    public Response getCommsByUserId(@CookieParam("id") int userId) { // the id comes from clicking on the composition
+               
+        List<Comment> cList = (List<Comment>)commBean.findAllByIntX("UserId", userId);
+      
+         try {
+            return Response.ok(cList).build();   
+        } catch (Exception e) {
+            return statusResponse("failedToGetComments");
+        }
+    } // end getCommsByUserId()
 } // end class()

@@ -7,11 +7,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import model.User;
 import utils.ResponseString;
+import static utils.Utils.notNull;
 import static utils.Utils.statusResponse;
 import static utils.Validation.validAlias;
 import static utils.Validation.validEmail;
@@ -32,7 +32,7 @@ public class ProfileService {
     public ProfileService() {
     }
     
-    // for displaying your own profile stats
+    // for displaying your own profile stats (on opening the profile page)
     @POST
     @Path("GetUserStats")
     @Produces(MediaType.APPLICATION_JSON)
@@ -51,15 +51,15 @@ public class ProfileService {
         return Response.ok(s.toString()).build();  
     }
     
+    // TODO: make an admin function (in AdminService) that does the same to any user...
     @POST
-    @Path("AlterUserStats")
+    @Path("AlterOwnUserStats")
     @Produces(MediaType.APPLICATION_JSON)
     public Response alterUserStats(
             @FormParam("newAlias") String newName, 
             @FormParam("newEmail") String newEmail, 
             @FormParam("newPw") String newPw, 
             @FormParam("newPw2") String newPw2,
-            @FormParam("newPic") String newPic,
             @CookieParam("id") int ownId) {
     
         User u = uBean.findById(ownId);
@@ -68,30 +68,28 @@ public class ProfileService {
         String pw = "noChange";
         String pic = "noChange";
         
-        // TODO: check if user/email/etc already exists !!!!!!!!!!!
-        
         if (validAlias(newName)) {
             
-            u.setAlias(newName);
-            alias = newName;
+            if (!notNull(uBean.findByX("Alias", newName))) { // new name should not be already taken
+            
+                u.setAlias(newName);
+                alias = newName;
+            }
         }
         
         if (validEmail(newEmail)) {
             
-            u.setEmail(newEmail);  
-            email = newEmail;
+            if (!notNull(uBean.findByX("Alias", newEmail))) {
+            
+                u.setEmail(newEmail);  
+                email = newEmail;
+            }
         }
                 
         if (validPw(newPw) && newPw.equals(newPw2)) {
             
             u.setPw(newPw);   
             pw = newPw;
-        }
-        
-        if (validPic(newPic)) {
-        
-            u.setPic(newPic);
-            pic = newPic;
         }
                         
         uBean.updateDbEntry(u);
@@ -107,13 +105,46 @@ public class ProfileService {
     } // end alterUserStats()
     
     @POST
+    @Path("UpdatePic")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updatePic(@CookieParam("id") int ownId, @FormParam("newPic") String newPic) {
+
+        if (validPic(newPic)) {
+        
+            User u = uBean.findById(ownId);
+            u.setPic(newPic);
+            uBean.updateDbEntry(u);
+            
+            ResponseString s = new ResponseString();
+            s.add("status", "updatedPic");
+            s.add("pic", newPic);
+            s.pack();
+            return Response.ok(s.toString()).build();  
+        } 
+        else {  
+            return statusResponse("failedToUpdatePic");
+        }
+    } // end updatePic()
+    
+    @POST
+    @Path("DeletePic")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deletePic(@CookieParam("id") int ownId) {
+
+        User u = uBean.findById(ownId);
+        u.setPic("");
+        uBean.updateDbEntry(u);
+
+        return statusResponse("deletedPic");
+    }
+ 
+    @POST
     @Path("RemoveOwnUser")
     @Produces(MediaType.APPLICATION_JSON)
     public Response removeOwnUser(@CookieParam("id") int id) {
         
         uBean.deleteFromDb(uBean.findById(id));
         
-        return statusResponse("removedOwnUser");   
-        // TODO: logout (via return value caught in fetch on client) 
+        return statusResponse("removedOwnUser");
     } // end removeOwnUser()
 } // end class

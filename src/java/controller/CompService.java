@@ -55,7 +55,8 @@ public class CompService {
             @FormParam("diff") int diff, 
             @FormParam("pages") int pages, 
             @FormParam("video") String video, 
-            @FormParam("sheet") String sheet
+            @FormParam("sheet") String sheet,
+            @CookieParam("id") int adderId
             ) {
     
         if (!validComp(title, author, length, year, diff, pages, video, sheet)) {
@@ -63,26 +64,29 @@ public class CompService {
             return statusResponse("invalidComp");
         }
           
-        // TODO: check for duplicate entries... what should be the criteria ??
-        
-        int adderId = 99; // PLACEHOLDER (needs to come from the request header)
-        Date addTime = new Date(System.currentTimeMillis()); // server time when it should be client... meh, who cares.    
-        
-        Comp c = new Comp();
-        c.setTitle(title);
-        c.setAuthor(author);
-        c.setLength(length);
-        c.setYear(year);
-        c.setDiff(diff);
-        c.setPages(pages);
-        c.setVideo(video);
-        c.setSheet(sheet);
-        c.setAddtime(addTime);
-        c.setAdderidUser(uBean.findById(adderId));
-        c.setComms(0);
-        cBean.insertToDb(c);
+        // TODO: check for duplicate Comp entries... what should be the criteria ??
+       
+        try {
+            Date addTime = new Date(System.currentTimeMillis()); // server time when it should be client... meh, who cares.    
 
-        return statusResponse("addedComp"); // NOTE: more may need to be returned, depending on what we want to do after adding the composition
+            Comp c = new Comp();
+            c.setTitle(title);
+            c.setAuthor(author);
+            c.setLength(length);
+            c.setYear(year);
+            c.setDiff(diff);
+            c.setPages(pages);
+            c.setVideo(video);
+            c.setSheet(sheet);
+            c.setAddtime(addTime);
+            c.setAdderidUser(uBean.findById(adderId));
+            c.setComms(0);
+            cBean.insertToDb(c);
+
+            return statusResponse("addedComp"); // NOTE: more may need to be returned, depending on what we want to do after adding the composition
+        } catch (Exception e) {
+            return statusResponse("failedToAddComp");
+        }
     } // end addComp()
     
     // called when you click on the difficulty tab to display a list of compositions
@@ -98,38 +102,44 @@ public class CompService {
         try {
             return Response.ok(comps).build();   
         } catch (Exception e) {
-            return null;
+            return statusResponse("failedToGetComps");
         }
     } // end getCompsByDiff()
     
-    // where is this needed ???
+    // used in a double-fetch when clicking on a composition in the larger list view
     @POST
     @Path("GetCompById")
     @Produces(MediaType.APPLICATION_JSON) 
-    public Response getCompById(@QueryParam("id") int id) {
+    public Response getCompById(@QueryParam("id") int compId) {
         
-        Comp c = cBean.findByIntX("Id", id);
         
-        ResponseString s = new ResponseString();
-        s.add("status", "gotCompById");
-        s.add("title", c.getTitle());
-        s.add("author", c.getAuthor());
-        s.add("length", c.getLength()+"");
-        s.add("year", c.getYear()+"");
-        s.add("diff", c.getDiff()+"");
-        s.add("pages", c.getPages()+"");
-        s.add("video", c.getVideo());
-        s.add("sheet", c.getSheet());
-        s.add("addTime", c.getAddtime()+"");
-        s.add("adderId", c.getAdderidUser().getId()+"");
-        s.add("comms", c.getComms()+"");
-        s.pack();
-        return Response.ok(s.toString()).build();    
+        try {
+            Comp c = cBean.findByIntX("Id", compId);
+
+            ResponseString s = new ResponseString();
+            s.add("status", "gotCompById");
+            s.add("title", c.getTitle());
+            s.add("author", c.getAuthor());
+            s.add("length", c.getLength()+"");
+            s.add("year", c.getYear()+"");
+            s.add("diff", c.getDiff()+"");
+            s.add("pages", c.getPages()+"");
+            s.add("video", c.getVideo());
+            s.add("sheet", c.getSheet());
+            s.add("addTime", c.getAddtime()+"");
+            s.add("adderId", c.getAdderidUser().getId()+"");
+            s.add("comms", c.getComms()+"");
+            s.pack();
+            return Response.ok(s.toString()).build();  
+        } catch (Exception e) {
+            
+            return statusResponse("failedToGetComp");
+        }
     } // end getCompById()
     
     // used for getting your own compositions
     @POST
-    @Path("GetCompsByOwnd")
+    @Path("GetCompsByOwnId")
     @Produces(MediaType.APPLICATION_JSON) 
     public Response getCompsByOwnId(@CookieParam("id") int adderId) {
         
@@ -138,31 +148,26 @@ public class CompService {
         try {
             return Response.ok(comps).build();   
         } catch (Exception e) {
-            return null;
+            return statusResponse("failedToGetComps");
         } 
     } // end getCompsById()
     
     // TODO: there is an issue with removal due to the Likes and Favorite tables referencing the Comp table; fix this asap!
     @POST
-    @Path("RemoveComp")
+    @Path("DeleteComp")
     @Produces(MediaType.APPLICATION_JSON) 
-    public Response removeComp(@CookieParam("id") int ownId, @QueryParam("id") int userid) { // the id comes from clicking on the composition to delete
+    public Response deleteComp(@CookieParam("id") int ownId, @QueryParam("id") int userid) { // the id comes from clicking on the composition to delete
         
-        // TODO: check that you have the right to remove it (admin or adder)
-        
-        Comp c = cBean.findByIntX("Id", userid);
-        cBean.deleteFromDb(c);
-        
-        ResponseString s = new ResponseString();
-        s.add("status", "removedComp");
-        s.add("title", c.getTitle());
-        s.add("author", c.getAuthor());
-        s.add("length", c.getLength()+"");
-        s.add("year", c.getYear()+"");
-        s.add("diff", c.getDiff()+"");
-        // not all stats are necessary to display after deletion
-        s.pack();
-        return Response.ok(s.toString()).build();  
+        try {
+            Comp c = cBean.findByIntX("Id", userid);
+            cBean.deleteFromDb(c);
+
+            return statusResponse("deletedComp");
+        } catch (Exception e) {
+            
+            return statusResponse("failedToDeleteComp");
+        } 
+        // we could display stats after deletion
     } // end removeComp()
     
     // search through all compositions by their name (alphabetically)
@@ -194,7 +199,7 @@ public class CompService {
          try {
             return Response.ok(resultComps).build();   
         } catch (Exception e) {
-            return null;
+            return statusResponse("searchFailed");
         }
     } // end titleSearch()
 
