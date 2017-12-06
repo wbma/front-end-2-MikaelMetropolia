@@ -81,10 +81,13 @@ public class CompService {
             c.setAddtime(addTime);
             c.setAdderidUser(uBean.findById(adderId));
             c.setComms(0);
+            System.out.println("cBean: " + cBean.toString());
+            System.out.println("c : " + c.toString());
             cBean.insertToDb(c);
 
             return statusResponse("addedComp"); // NOTE: more may need to be returned, depending on what we want to do after adding the composition
         } catch (Exception e) {
+            e.printStackTrace();
             return statusResponse("failedToAddComp");
         }
     } // end addComp()
