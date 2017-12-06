@@ -1,4 +1,10 @@
 'use strict';
+
+
+if (document.cookie.length === 0) {
+    window.location.href = "LogInPage.html";
+}
+
 const pepeProfileImg = document.getElementById("profile-img");
 const pepeSquareImg = document.getElementById("pepe");
 const usernameInput = document.getElementById("username-input");
