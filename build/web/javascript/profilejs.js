@@ -1,4 +1,9 @@
 'use strict';
+
+if (document.cookie.length === 0) {
+    window.location.href = "LogInPage.html";
+}
+
 const element = document.getElementById('arrow5'),
 style = window.getComputedStyle(element),
 right5 = style.getPropertyValue('transform');
