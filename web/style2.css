@@ -930,6 +930,13 @@ body {
     cursor: pointer;
 }
 
+#profile-link,
+#admin-panel {
+    display: none;
+}
+
+
+
 /* ------------- ANIMATIONS ------------- */
 
 

@@ -1,6 +1,9 @@
 'use strict';
 const submitButton = document.getElementById("test1234");
 
+if (document.cookie.length === 0) {
+    window.location.href = "LogInPage.html";
+}
 let title;
 let author;
 let length;
