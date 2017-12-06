@@ -33,11 +33,10 @@ buttonSubmit.addEventListener('click', () => {
     const testEmail = patternEmail.test(signupEmailInput);
     const testPassword = patternPassword.test(signupPwInput);
     const testPassword2 = patternPassword.test(signupPw2Input);
-    const match = 0;
+    let match = 0;
 
-
-    if (signupPwInput == signupPw2Input) {
-        const match = 1;
+    if (signupPwInput === signupPw2Input) {
+        match = 1;
     }
 
     if (testUser && testEmail && testEmail && testPassword && match === 1) {
@@ -61,6 +60,7 @@ signUpForm.addEventListener("submit", function(evt) {
         signup();
 });
 */
+
 function login() {
 
     const request = { 
@@ -80,12 +80,10 @@ function login() {
 
         if (myJson.status === 'loggedIn') {
             
-            // NOTE: might need to convert the id from int to String !
             document.cookie = "id=" + myJson.id; // store the user's id in a global cookie for the duration of the session
             console.log("Cookie: " + document.cookie);
             // TODO: display a msg about successfully logging in
-            // TODO: make the login/register buttons invisible and replace with a 'logout' button
-            // TODO: possibly store the other values in the cookie as well (alias etc)... more potential for erros that way.
+            // TODO: possibly store the other values in the cookie as well (alias etc)... more potential for errors that way.
             // Yet without that, we'll have to do a database operation each time the user enters the profile page, etc.
             
             window.location.href = "index.html";
@@ -123,10 +121,8 @@ function signup() {
 
         if (myJson.status === 'loggedIn') {
             
-            // NOTE: might need to convert the id from int to String !
-            document.cookie = "id=" + myJson.id; // store the user's id in a global cookie for the duration of the session
+            document.cookie = "id=" + myJson.id; 
             // TODO: display a msg about successfully logging in
-            // TODO: make the login/register buttons invisible and replace with a 'logout' button
             // TODO: possibly store the other values in the cookie as well (alias etc)... more potential for erros that way.
             // Yet without that, we'll have to do a database operation each time the user enters the profile page, etc.
         }

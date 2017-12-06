@@ -59,33 +59,25 @@ public class Comp implements Serializable {
     @Column(name = "ID")
     private Integer id;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "TITLE")
+    @Column(name = "TITLE", length = 255)
     private String title;
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "AUTHOR")
+    @Column(name = "AUTHOR", length = 255)
     private String author;
     @Column(name = "LENGTH")
     private Integer length;
     @Column(name = "YEAR")
     private Integer year;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "DIFF")
     private int diff;
     @Column(name = "PAGES")
     private Integer pages;
-    @Size(max = 255)
-    @Column(name = "VIDEO")
+    @Column(name = "VIDEO", length = 255)
     private String video;
-    @Size(min = 1, max = 255)
-    @Column(name = "SHEET")
+    @Column(name = "SHEET", length = 255)
     private String sheet;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "ADDTIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date addtime;
@@ -271,6 +263,7 @@ public class Comp implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Comp[ id=" + id + " ]";
+        
+        return "model.Comp[ id=" + id + " ]\n" + "[ title=" + title + " ]\n" + "[ author=" + author + " ]\n" + "[ length=" + length + " ]\n" + "[ year=" + year + " ]\n" + "[ adderidUser=" + adderidUser.toString() + " ]\n";
     }
 } // end class

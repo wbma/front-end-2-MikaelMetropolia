@@ -52,12 +52,13 @@ submenu2Button.addEventListener('click', () => {
 /*----------------If you are logged in run this----------------------*/
 
 if (document.cookie.length > 0) {
+
+    document.getElementById("profile-link").style.display = 'list-item';
     console.log(document.querySelectorAll('div'));
     document.getElementById('user-icon').innerHTML = `<img src="resources/pepe.png" class="img-circle" id="pepe"></a>
             <ul class="pepe-menu" id="pepe-menu-id">
             <li><a href="profile.html">My profile</a></li>
             <li><a href="settings.html">Settings</a></li>
-            <li><a href="upload.html">Upload</a></li>
             <li id="log-out-button">Log out</li>
         </ul>`;
     
