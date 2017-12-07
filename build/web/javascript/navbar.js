@@ -51,13 +51,16 @@ submenu2Button.addEventListener('click', () => {
 
 /*----------------If you are logged in run this----------------------*/
 
-if (document.cookie.length > 0) {
+const c = readCookies();
+
+if (c.includes("id=")) {
+
+    document.getElementById("profile-link").style.display = 'list-item';
     console.log(document.querySelectorAll('div'));
     document.getElementById('user-icon').innerHTML = `<img src="resources/pepe.png" class="img-circle" id="pepe"></a>
             <ul class="pepe-menu" id="pepe-menu-id">
             <li><a href="profile.html">My profile</a></li>
             <li><a href="settings.html">Settings</a></li>
-            <li><a href="upload.html">Upload</a></li>
             <li id="log-out-button">Log out</li>
         </ul>`;
     
@@ -114,3 +117,24 @@ function deleteCookies() {
 }
 
 }
+
+function readCookies() {
+    
+       let cookies = document.cookie;
+       let key;
+       let value;
+
+       // Get all the cookies pairs in an array
+       const cookieArr  = cookies.split(';');
+
+       // Now take key value pair out of this array
+       for(let i=0; i<cookieArr.length; i++){
+          key = cookieArr[i].split('=')[0];
+          value = cookieArr[i].split('=')[1];
+          
+          if (key === "id") {
+              return key + "=" + value;
+          }   
+       }
+       return "noIdFound";
+    } // end readCookies()

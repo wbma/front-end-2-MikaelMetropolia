@@ -1,7 +1,10 @@
 'use strict';
 
-if (document.cookie.length > 0) {
-    window.location.href = "Index.html";
+const co = readCookies();
+
+if (co.includes("id=")) {
+
+    window.location.href = "index.html";
 }
 
 const loginForm = document.querySelector('#loginForm');
@@ -33,11 +36,10 @@ buttonSubmit.addEventListener('click', () => {
     const testEmail = patternEmail.test(signupEmailInput);
     const testPassword = patternPassword.test(signupPwInput);
     const testPassword2 = patternPassword.test(signupPw2Input);
-    const match = 0;
+    let match = 0;
 
-
-    if (signupPwInput == signupPw2Input) {
-        const match = 1;
+    if (signupPwInput === signupPw2Input) {
+        match = 1;
     }
 
     if (testUser && testEmail && testEmail && testPassword && match === 1) {
@@ -61,10 +63,11 @@ signUpForm.addEventListener("submit", function(evt) {
         signup();
 });
 */
+
 function login() {
 
     const request = { 
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded'},
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         method: 'POST',
         credentials: 'same-origin',
         body: `loginUsername=${loginAliasInput.value}&loginPassword=${loginPwInput.value}`
@@ -80,12 +83,10 @@ function login() {
 
         if (myJson.status === 'loggedIn') {
             
-            // NOTE: might need to convert the id from int to String !
             document.cookie = "id=" + myJson.id; // store the user's id in a global cookie for the duration of the session
             console.log("Cookie: " + document.cookie);
             // TODO: display a msg about successfully logging in
-            // TODO: make the login/register buttons invisible and replace with a 'logout' button
-            // TODO: possibly store the other values in the cookie as well (alias etc)... more potential for erros that way.
+            // TODO: possibly store the other values in the cookie as well (alias etc)... more potential for errors that way.
             // Yet without that, we'll have to do a database operation each time the user enters the profile page, etc.
             
             window.location.href = "index.html";
@@ -123,10 +124,8 @@ function signup() {
 
         if (myJson.status === 'loggedIn') {
             
-            // NOTE: might need to convert the id from int to String !
-            document.cookie = "id=" + myJson.id; // store the user's id in a global cookie for the duration of the session
+            document.cookie = "id=" + myJson.id; 
             // TODO: display a msg about successfully logging in
-            // TODO: make the login/register buttons invisible and replace with a 'logout' button
             // TODO: possibly store the other values in the cookie as well (alias etc)... more potential for erros that way.
             // Yet without that, we'll have to do a database operation each time the user enters the profile page, etc.
         }
@@ -141,3 +140,24 @@ function signup() {
         console.log('There has been a problem with your fetch operation: ' + error.message);
     }); // end fetch()
 } // end signup()
+
+function readCookies() {
+    
+       let cookies = document.cookie;
+       let key;
+       let value;
+
+       // Get all the cookies pairs in an array
+       const cookieArr  = cookies.split(';');
+
+       // Now take key value pair out of this array
+       for(let i=0; i<cookieArr.length; i++){
+          key = cookieArr[i].split('=')[0];
+          value = cookieArr[i].split('=')[1];
+          
+          if (key === "id") {
+              return key + "=" + value;
+          }   
+       }
+       return "noIdFound";
+    } // end readCookies()

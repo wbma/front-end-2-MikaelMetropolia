@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.servlet.annotation.MultipartConfig;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.CookieParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.FormParam;
@@ -16,7 +18,6 @@ import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 import model.Comp;
 import static utils.Utils.statusResponse;
-//import org.json.JSONObject;
 import utils.ResponseString;
 import static utils.Utils.isEmpty;
 import static utils.Utils.lengthOver;
@@ -45,7 +46,7 @@ public class CompService {
     // create new composition (based on form data)
     @POST
     @Path("AddComp")
-    //@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    //@Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON) 
     public Response addComp(
             @FormParam("title") String title, 
@@ -58,7 +59,7 @@ public class CompService {
             @FormParam("sheet") String sheet,
             @CookieParam("id") int adderId
             ) {
-    
+
         if (!validComp(title, author, length, year, diff, pages, video, sheet)) {
         
             return statusResponse("invalidComp");
@@ -81,10 +82,13 @@ public class CompService {
             c.setAddtime(addTime);
             c.setAdderidUser(uBean.findById(adderId));
             c.setComms(0);
+            System.out.println("cBean: " + cBean.toString());
+            System.out.println("c : " + c.toString());
             cBean.insertToDb(c);
 
             return statusResponse("addedComp"); // NOTE: more may need to be returned, depending on what we want to do after adding the composition
         } catch (Exception e) {
+            e.printStackTrace();
             return statusResponse("failedToAddComp");
         }
     } // end addComp()

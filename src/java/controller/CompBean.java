@@ -61,6 +61,7 @@ public class CompBean {
             em.persist(c);
         } 
         catch (Exception e) {
+            e.printStackTrace();
             c = null;
         }
         return c;

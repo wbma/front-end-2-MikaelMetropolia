@@ -145,8 +145,7 @@ button2.onclick = function () {
     if (startBox2.className !== "sheet-2") {
         startBox2.className = "sheet-2";
         startBox1.innerHTML = "Pick Up the Beat";
-        startBox2.innerHTML = `
-        <p>In order to play music, you need to know its meter, the beat you use when dancing, clapping or tapping your foot along with a song. When reading music, the meter is presented similar to a fraction, with a top number and a bottom number, we call this the song’s time signature. The top number tells you how many beats to a measure, the space of staff in between each vertical line (called a bar). The bottom number tells you the note value for a single beat, the pulse your foot taps along with while listening.</p>
+        startBox2.innerHTML = `<p>In order to play music, you need to know its meter, the beat you use when dancing, clapping or tapping your foot along with a song. When reading music, the meter is presented similar to a fraction, with a top number and a bottom number, we call this the song’s time signature. The top number tells you how many beats to a measure, the space of staff in between each vertical line (called a bar). The bottom number tells you the note value for a single beat, the pulse your foot taps along with while listening.</p>
         <img src="tutorials_img/3rd_tut/Twinkle.jpg" class="tutorial_img"></br>
         <iframe class="tutorial_img" src="https://www.youtube.com/watch?v=QzfaE3RAQlM" ></iframe>
         <p>In the example above, the time signature is 4/4, meaning there are 4 beats per bar and that every quarter note gets one beat.</p>
@@ -163,11 +162,15 @@ button2.onclick = function () {
 button3.onclick = function () {
     if (startBox2.className !== "sheet-2") {
         startBox2.className = "sheet-2";
-        startBox1.innerHTML = "Pick Up the Beat";
-        startBox2.innerHTML = `<p>There’s one more symbol to learn regarding semitones, and that’s the natural, denoted by a ♮. If a note is sharp or flat, that sharp or flat extends throughout the measure, unless there’s a natural symbol. A natural  cancels a sharp or flat within a measure or a song. Here’s what playing C to E would look like with natural symbols.There’s one more symbol to learn regarding semitones, and that’s the natural, denoted by a ♮. If a note is sharp or flat, that sharp or flat extends throughout the measure, unless there’s a natural symbol. A natural  cancels a sharp or flat within a measure or a song. Here’s what playing C to E would look like with natural symbols.</p>
-        <img >
+        startBox1.innerHTML = "Play a melody";
+        startBox2.innerHTML = `<p>There’s one more symbol to learn regarding semitones, and that’s the natural, denoted by a ♮. If a note is sharp or flat, that sharp or flat extends throughout the measure, unless there’s a natural symbol. A natural  cancels a sharp or flat within a measure or a song. Here’s what playing C to E would look like with natural symbols.There’s one more symbol to learn regarding semitones, and that’s the natural, denoted by a ♮. If a note is sharp or flat, that sharp or flat extends throughout the measure, unless there’s a natural symbol. A natural  cancels a sharp or flat within a measure or a song. Here’s what playing C to E would look like with natural symbols.</p>        
+        <img src="tutorials_img/4th_tut/Naturals.jpg" class="tutorial_img" >
         <p>Finally, in order to read music, you’ll need to understand key signatures. You actually already know one key signature, the key of C! The C major scale you learned above was in the key of C. Scales are named after their tonic, the preeminent note within the scale, and the tonic determines what key you play in. You can start a major scale on any note, so long as you follow the whole-whole-half-whole-whole-whole-half pattern. Now, following that pattern in keys other than the key of C will require you to use sharps and flats. Since that’s the case, we place the sharps or flats for your song’s key signature right before the meter, after the clef, on your sheet music. That tells you to maintain those sharps or flats throughout the music, unless of course there’s a natural symbol to override it. You will begin to recognize the key signatures of pieces based on what sharps or flats are shown. Here’s a quick glimpse at some key signatures using sharps and flats:</p>
-        <img >  
+        <div class = "img_place">
+        <img src="tutorials_img/4th_tut/Sharps.jpg" class="tutorial_img"> </br>
+        <img src="tutorials_img/4th_tut/Flats.jpg" class="tutorial_img">
+        <p style="clear: both;">
+        </div>
         `;
     }
 };
