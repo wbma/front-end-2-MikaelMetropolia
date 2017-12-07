@@ -1,10 +1,11 @@
 'use strict';
 const submitButton = document.getElementById("test1234");
-
+const submitButton1 = document.getElementById("test123");
+/*  ENABLE THIS WHEN DONE TESTING
 if (document.cookie.length === 0) {
     window.location.href = "LogInPage.html";
 }
-
+*/
 /* ---------------GETTING SHEET NAME ---------------*/
 
 document.getElementById('sheet-upload').onchange = uploadOnChange;
@@ -55,7 +56,13 @@ function checkInput (e) {
 }
 
 
-test1234.addEventListener('click', () => {
+
+submitButton.addEventListener('click', () => {
+    validateFields();
+});
+
+submitButton1.addEventListener('click', () => {
+    event.preventDefault();
     validateFields();
 });
 
@@ -80,7 +87,7 @@ if (testTitle && testAuthor && testYoutubeURL && length <= 600 && year <= 2020 &
     console.log("Working");
     addComp();
 }
-
+console.log("something is wrong");
 };
 
 

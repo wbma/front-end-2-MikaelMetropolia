@@ -2,19 +2,19 @@
 
 const leftForm = document.querySelector('#upload-left');
 const rightForm = document.querySelector('#upload-right');
-
+/*
 rightForm.addEventListener("submit", function(evt) {
-        evt.preventDefault();
+        event.preventDefault();
         addComp();
 });
- 
+ */
 function addComp() {
     
     const title = leftForm.elements[0].value;
     const author = leftForm.elements[1].value;
     const length = leftForm.elements[2].value;
     const pages = leftForm.elements[3].value;
-    const year = rightForm.elements[0].value;
+    const year = rightForm.elements[0] .value;
     const diff = rightForm.elements[1].value;
     const video = rightForm.elements[2].value;
     const sheet = rightForm.elements[3].value;
