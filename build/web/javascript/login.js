@@ -1,7 +1,10 @@
 'use strict';
 
-if (document.cookie.length > 0) {
-    window.location.href = "Index.html";
+const co = readCookies();
+
+if (co.includes("id=")) {
+
+    window.location.href = "index.html";
 }
 
 const loginForm = document.querySelector('#loginForm');
@@ -64,7 +67,7 @@ signUpForm.addEventListener("submit", function(evt) {
 function login() {
 
     const request = { 
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded'},
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         method: 'POST',
         credentials: 'same-origin',
         body: `loginUsername=${loginAliasInput.value}&loginPassword=${loginPwInput.value}`
@@ -137,3 +140,24 @@ function signup() {
         console.log('There has been a problem with your fetch operation: ' + error.message);
     }); // end fetch()
 } // end signup()
+
+function readCookies() {
+    
+       let cookies = document.cookie;
+       let key;
+       let value;
+
+       // Get all the cookies pairs in an array
+       const cookieArr  = cookies.split(';');
+
+       // Now take key value pair out of this array
+       for(let i=0; i<cookieArr.length; i++){
+          key = cookieArr[i].split('=')[0];
+          value = cookieArr[i].split('=')[1];
+          
+          if (key === "id") {
+              return key + "=" + value;
+          }   
+       }
+       return "noIdFound";
+    } // end readCookies()

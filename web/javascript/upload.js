@@ -85,16 +85,50 @@ const validateFields = () => {
     const testYoutubeURL = patternYoutubeURL.test(video);
 
     if (testTitle && testAuthor && testYoutubeURL && length <= 600 && year <= 2020 && year >= 1500 && pages > 0 && diff !== 'null') {
+        
         console.log("Working");
-        addComp();
+        addFile();     
+        addComp(); // do NOT reverse the order of these two !!
     }
 };
+
+// there might be a better way to do this, but we're running out of time... we'll just use a WebServlet for 
+// uploading the file itself
+function addFile() {
+    
+    const fileField = document.querySelector('#sheet-upload');
+    const imageData = new FormData();
+    
+    imageData.append('imgFile', fileField.files[0]);
+    console.log("imageData: " + imageData);
+    
+    const request = { 
+        method: 'POST',
+        credentials: 'same-origin',
+        body: imageData
+    };
+    
+    fetch('http://10.114.32.22:8080/Experience3/ImageUploadServlet', request).then((response) => {
+        if(response.ok) {
+            return response.json();
+        }
+        throw new Error('Network response was not ok.'); 
+        
+    }).then((myJson) => {
+        
+        console.log(myJson.src);
+        sheet = myJson.src; // it's already been validated at this point... fix asap!
+        
+    }).catch(function(error) {
+        console.log('There has been a problem with your fetch operation: ' + error.message);
+    }); // end fetch(); 
+} // end addFile()
 
 function addComp() {
     
     const request = { 
         headers: { 'Content-Type': 'application/x-www-form-urlencoded',  
-        'Cookie': document.cookie}, // not sure if this is how this works...
+        'Cookie': document.cookie},
         method: 'POST',
         credentials: 'same-origin',
         body: `title=${title}&author=${author}&length=${length}&pages=${pages}&year=${year}&diff=${diff}&video=${video}&sheet=${sheet}`
